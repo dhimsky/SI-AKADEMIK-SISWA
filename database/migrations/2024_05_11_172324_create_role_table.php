@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('level');
             $table->string('level2');
+            $table->string('level4');
             $table->timestamps();
         });
     }
