@@ -17,12 +17,8 @@ return new class extends Migration
             $table->string('level2');
             $table->string('level3');
             $table->string('level4');
-<<<<<<< HEAD
-
             $table->string('level6');
-=======
             $table->string('level5');
->>>>>>> 7498ed6b607ac4fcb6ffcfd46a5fb1a8ae98246b
             $table->timestamps();
         });
     }
