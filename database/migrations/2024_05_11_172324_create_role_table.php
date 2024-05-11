@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('level');
             $table->string('level2');
-<<<<<<< Updated upstream
             $table->string('level3');
-=======
             $table->string('level4');
->>>>>>> Stashed changes
+
+            $table->string('level6');
             $table->timestamps();
         });
     }
