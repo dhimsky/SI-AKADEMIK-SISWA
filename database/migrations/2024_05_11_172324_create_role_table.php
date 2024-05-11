@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('level4');
             $table->string('level6');
             $table->string('level5');
+            $table->string('level7');
+            $table->string('level8');
+
             $table->timestamps();
         });
     }
