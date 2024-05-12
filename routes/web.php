@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//AUTH
-Route::get('/login', function () {
-    return view('auth.login');
-});
 
 //STAFF TU
 Route::get('/dashboardstafftu', function () {
@@ -31,6 +29,17 @@ Route::get('/akun', function () {
 Route::get('/jurusan', function () {
     return view('stafftu.jurusan.index');
 });
+
+//Authentication
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/actionlogin', [AuthController::class, 'actionlogin'])->name('actionlogin');
+
+
+//Stafftu
+Route::prefix('stafftu')->middleware('isStafftu')->group(function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('st.dashboard');
+});
+
 
 //SISWA
 

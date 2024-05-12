@@ -21,7 +21,13 @@
         <div class="brand">
             <a class="link" href="index.html">SIAKAD</a>
         </div>
-        <form id="login-form" action="/dashboardstafftu" method="post">
+        @if (session('failed'))
+            <div class="alert alert-danger">
+                {{ session('failed') }}
+            </div>
+        @endif
+        <form id="login-form" action="{{ route('actionlogin') }}" method="post">
+            @csrf
             <h2 class="login-title">Log in</h2>
             <div class="form-group">
                 <div class="input-group-icon right">
@@ -60,7 +66,8 @@
     <script src="{{ asset('/') }}assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
     <script src="{{ asset('/') }}assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- PAGE LEVEL PLUGINS -->
-    <script src="{{ asset('/') }}assets/vendors/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="{{ asset('/') }}assets/vendors/jquery-validation/dist/jquery.validate.min.js" type="text/javascript">
+    </script>
     <!-- CORE SCRIPTS-->
     <script src="{{ asset('/') }}assets/js/app.js" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
@@ -75,6 +82,15 @@
                     },
                     password: {
                         required: true
+                    }
+                },
+                messages: {
+                    email: {
+                        required: "Email tidak boleh kosong!",
+                        email: "Gunakan Email yang benar!"
+                    },
+                    password: {
+                        required: "Password tidak boleh kosong!"
                     }
                 },
                 highlight: function(e) {

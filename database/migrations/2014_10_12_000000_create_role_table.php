@@ -14,14 +14,6 @@ return new class extends Migration
         Schema::create('role', function (Blueprint $table) {
             $table->id();
             $table->string('level');
-            $table->string('level2');
-            $table->string('level3');
-            $table->string('level4');
-            $table->string('level6');
-            $table->string('level5');
-            $table->string('level7');
-            $table->string('level8');
-
             $table->timestamps();
         });
     }
