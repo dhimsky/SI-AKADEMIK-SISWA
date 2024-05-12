@@ -13,6 +13,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//AUTH
+Route::get('/login', function () {
+    return view('auth.login');
 });
+
+//STAFF TU
+Route::get('/dashboardstafftu', function () {
+    return view('stafftu.dashboard.index');
+});
+Route::get('/role', function () {
+    return view('stafftu.role.index');
+});
+Route::get('/akun', function () {
+    return view('stafftu.akun.index');
+});
+Route::get('/jurusan', function () {
+    return view('stafftu.jurusan.index');
+});
+
+//SISWA
+
+
+//WALI KELAS
+
+
+//GURU MAPEL
