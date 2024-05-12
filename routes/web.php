@@ -17,9 +17,9 @@ use App\Http\Controllers\DashboardController;
 
 
 //STAFF TU
-Route::get('/dashboardstafftu', function () {
-    return view('stafftu.dashboard.index');
-});
+// Route::get('/dashboardstafftu', function () {
+//     return view('stafftu.dashboard.index');
+// });
 Route::get('/role', function () {
     return view('stafftu.role.index');
 });
@@ -41,10 +41,14 @@ Route::prefix('stafftu')->middleware('isStafftu')->group(function() {
 });
 
 
+
+
 //SISWA
 
 
 //WALI KELAS
-
+Route::prefix('walikelas')->middleware('isWalikelas')->group(function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('wk.dashboard');
+});
 
 //GURU MAPEL

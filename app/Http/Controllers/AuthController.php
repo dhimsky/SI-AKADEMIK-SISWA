@@ -11,8 +11,9 @@ class AuthController extends Controller
 {
     
     public function login() {
-        $id = User::all();
-        // dd($id);
+
+        // $id = User::all();
+        //     dd($id);
         return view('auth.login');
     }
 
@@ -29,7 +30,7 @@ class AuthController extends Controller
                 return redirect()->route('st.dashboard');
             }
             else if (auth()->user()->role_id == 2) {
-                return redirect()->route('st.dashboard');
+                return redirect()->route('wk.dashboard');
             }
         }
         else {
