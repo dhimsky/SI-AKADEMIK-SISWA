@@ -42,7 +42,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
             if ($user->role_id == '1') {
-                return redirect()->intended()->route('stafftu.dashboard')->with('toast_success','Selamat, anda berhasil masuk.');
+                return redirect()->route('stafftu.dashboard')->with('toast_success','Selamat, anda berhasil masuk.');
             } elseif ($user->role_id == '2') {
                 return redirect()->intended('home')->with('toast_success','Selamat, anda berhasil masuk.');
             }
