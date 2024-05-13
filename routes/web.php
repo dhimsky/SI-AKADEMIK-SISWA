@@ -31,24 +31,21 @@ Route::get('/jurusan', function () {
 });
 
 //Authentication
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/actionlogin', [AuthController::class, 'actionlogin'])->name('actionlogin');
+Route::get('/', [AuthController::class, 'index'])->name('/');
+Route::post('/loginsession', [AuthController::class, 'login']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::middleware('CekUserLogin:1')->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    });
+    Route::middleware('CekUserLogin:2')->group(function () {
+    });
+});
 
 
 //Stafftu
-Route::prefix('stafftu')->middleware('isStafftu')->group(function() {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('st.dashboard');
-});
 
 
-
-
-//SISWA
-
-
-//WALI KELAS
-Route::prefix('walikelas')->middleware('isWalikelas')->group(function() {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('wk.dashboard');
-});
+// //SISWA
 
 //GURU MAPEL

@@ -17,6 +17,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $primaryKey = 'nisn';
+    public $incrementing = false; // Karena kolom 'nim' bukan auto-increment
+    public $timestamps = true;
+    
     protected $fillable = [
         'nama_lengkap',
         'role_id',

@@ -26,7 +26,7 @@
                 {{ session('failed') }}
             </div>
         @endif
-        <form id="login-form" action="{{ route('actionlogin') }}" method="post">
+        <form id="login-form" action="/loginsession" method="post">
             @csrf
             <h2 class="login-title">Log in</h2>
             <div class="form-group">
