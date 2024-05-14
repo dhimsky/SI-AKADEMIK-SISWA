@@ -5,9 +5,10 @@ use App\Http\Controllers\Admin\AkunController as AdminAkunController;
 use App\Http\Controllers\Admin\JurusanController as AdminJurusanController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\RombelController as AdminRombelController;
+use App\Http\Controllers\Admin\KelasController as AdminKelasController;
+use App\Http\Controllers\Admin\AngkatanController as AdminAngkatanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Siswa\DashboardController as SiswaDashboardController;
 use App\Http\Controllers\Walikelas\DashboardController as WalikelasDashboardController;
 
@@ -23,10 +24,6 @@ use App\Http\Controllers\Walikelas\DashboardController as WalikelasDashboardCont
 */
 
 
-//STAFF TU
-// Route::get('/dashboardstafftu', function () {
-//     return view('stafftu.dashboard.index');
-// });
 
 //Authentication
 Route::get('/', [AuthController::class, 'index'])->name('/');
@@ -43,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('jurusan', [AdminJurusanController::class, 'index'])->name('jurusan');
         Route::get('role', [AdminRoleController::class, 'index'])->name('role');
         Route::get('rombel', [AdminRombelController::class, 'index'])->name('rombel');
+        Route::get('kelas', [AdminKelasController::class, 'index'])->name('kelas');
+        Route::get('angkatan', [AdminAngkatanController::class, 'index'])->name('angkatan');
     });
 
     // Route prefix untuk walikelas

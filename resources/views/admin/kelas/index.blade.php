@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('tittle', 'Rombel')
+@section('tittle', 'Kelas')
 @section('content')
 <div class="page-content fade-in-up">
     <div class="ibox">
         <div class="ibox-head">
             <div class="ibox-title">Data Table Rombel</div>
             <div class="col-md-2 text-right ">
-                <a href="" data-toggle="modal" data-target=".tambahRombel" class="btn btn-info" title="Tambah Rombel">
+                <a href="" data-toggle="modal" data-target=".tambahKelas" class="btn btn-info" title="Tambah Rombel">
                 <i class="fa fa-plus"></i></a>
             </div>
         </div>
@@ -14,17 +14,20 @@
             <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>KODE ROMBEL</th>
-                        <th>NAMA ROMBEL</th>
-                        <th>AKSI</th>
+                        <th>NAMA KELAS</th>
+                        <th>TINGKAT</th>
+                        <th>JURUSAN</th>
+                        <th>ROMBEL</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="text-center">
-                        <td>JMK</td>
-                        <td>JOMOK</td>
+                        <td>11-TKJ-2</td>
+                        <td>11</td>
+                        <td>Teknik Komputer Jaringan</td>
+                        <td>2</td>
                         <td>
-                            <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target=".editRombel" title="Edit rombel"><i class="fa fa-pencil font-14"></i></button>
+                            <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target=".editKelas" title="Edit rombel"><i class="fa fa-pencil font-14"></i></button>
                             <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
                         </td>
                     </tr>
@@ -34,7 +37,7 @@
     </div>
 </div>
 
-<div class="modal fade tambahRombel" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade tambahKelas" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-sm">
     <div class="modal-content">
         <div class="modal-header">
@@ -46,18 +49,35 @@
             <form action="" method="POST">
             @csrf
             <div class="form-group mb-3">
-                <label class="required-label faded-label" for="id_rombel" >Kode Rombel</label>
-                <input type="text" name="id_rombel" class="form-control @error('id_rombel') is-invalid @enderror" placeholder="Masukan Kode">
-                @error('id_rombel')
+                <label class="required-label faded-label" for="tingkat" >Tingkat</label>
+                <select class="form-control input-sm">
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                </select>
+                @error('tingkat')
                 <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
                 </span>
                 @enderror
             </div>
             <div class="form-group mb-3">
-                <label class="required-label faded-label" for="nama_rombel" >Nama Rombel</label>
-                <input type="text" name="nama_rombel" class="form-control @error('nama_rombel') is-invalid @enderror" placeholder="Masukan nama rombel">
-                @error('nama_rombel')
+                <label class="required-label faded-label" for="jurusan_id" >Jurusan</label>
+                <select class="form-control input-sm" name="jurusan_id">
+                    <option value="">Teknik Komputer Jaringan</option>
+                </select>
+                @error('jurusan_id')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="form-group mb-3">
+                <label class="required-label faded-label" for="rombel_id" >Rombel</label>
+                <select class="form-control input-sm" name="rombel_id">
+                    <option value="">2</option>
+                </select>
+                @error('rombel_id')
                 <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
                 </span>
@@ -72,7 +92,7 @@
 </div>
 </div>
 
-<div class="modal fade editRombel" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade editKelas" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -85,18 +105,35 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group mb-3">
-                    <label class="required-label faded-label" for="id_rombel" >Kode Rombel</label>
-                    <input type="text" name="id_rombel" class="form-control @error('id_rombel') is-invalid @enderror" value="JMK">
-                    @error('id_rombel')
+                    <label class="required-label faded-label" for="tingkat" >Tingkat</label>
+                    <select class="form-control input-sm">
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                    </select>
+                    @error('tingkat')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
                 <div class="form-group mb-3">
-                    <label class="required-label faded-label" for="nama_rombel" >Nama Rombel</label>
-                    <input type="text" name="nama_rombel" class="form-control @error('nama_rombel') is-invalid @enderror" value="JOMOK" placeholder="Masukan nama role">
-                    @error('nama_rombel')
+                    <label class="required-label faded-label" for="jurusan_id" >Nama Jurusan</label>
+                    <select class="form-control input-sm" name="jurusan_id">
+                        <option value="">Teknik Komputer Jaringan</option>
+                    </select>
+                    @error('jurusan_id')
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="form-group mb-3">
+                    <label class="required-label faded-label" for="rombel_id" >Rombel</label>
+                    <select class="form-control input-sm" name="rombel_id">
+                        <option value="">2</option>
+                    </select>
+                    @error('rombel_id')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                     </span>
@@ -111,5 +148,4 @@
         </div>
     </div>
 </div>
-
 @endsection
