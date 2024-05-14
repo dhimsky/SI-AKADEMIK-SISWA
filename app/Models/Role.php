@@ -10,6 +10,7 @@ class Role extends Model
     use HasFactory;
 
     protected $primaryKey = 'id';
+    protected $table = 'role';
     public $incrementing = true;
     public $timestamps = true;
 

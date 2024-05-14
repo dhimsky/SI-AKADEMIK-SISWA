@@ -37,8 +37,14 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->name('admin.')->middleware('CekUserLogin:1')->group(function () {
         Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::get('akun', [AdminAkunController::class, 'index'])->name('akun');
+        // ============================== ROLE ===========================================
         Route::get('jurusan', [AdminJurusanController::class, 'index'])->name('jurusan');
+        Route::post('tambah-jurusan', [AdminJurusanController::class, 'store_jurusan'])->name('store-jurusan');
+        Route::put('update-jurusan/{kode_jurusan}', [AdminJurusanController::class, 'update_jurusan'])->name('update-jurusan');
+        Route::delete('delete-jurusan/{kode_jurusan}', [AdminJurusanController::class, 'delete_jurusan'])->name('delete-jurusan');
+        // ============================== ROLE ===========================================
         Route::get('role', [AdminRoleController::class, 'index'])->name('role');
+        Route::put('update-role/{id}', [AdminRoleController::class, 'update_role'])->name('update-role');
         Route::get('rombel', [AdminRombelController::class, 'index'])->name('rombel');
         Route::get('kelas', [AdminKelasController::class, 'index'])->name('kelas');
         Route::get('angkatan', [AdminAngkatanController::class, 'index'])->name('angkatan');

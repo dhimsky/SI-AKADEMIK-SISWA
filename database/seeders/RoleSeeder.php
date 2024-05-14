@@ -21,5 +21,9 @@ class RoleSeeder extends Seeder
             'id' => '2',
             'level' => 'Wali Kelas',
         ]);
+        Role::create([
+            'id' => '3',
+            'level' => 'siswa',
+        ]);
     }
 }
