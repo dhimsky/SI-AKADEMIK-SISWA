@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\AkunController as AdminAkunController;
+use App\Http\Controllers\Admin\JurusanController as AdminJurusanController;
+use App\Http\Controllers\Admin\RoleController as AdminRoleController;
+use App\Http\Controllers\Admin\RombelController as AdminRombelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -23,15 +27,6 @@ use App\Http\Controllers\Walikelas\DashboardController as WalikelasDashboardCont
 // Route::get('/dashboardstafftu', function () {
 //     return view('stafftu.dashboard.index');
 // });
-Route::get('/role', function () {
-    return view('stafftu.role.index');
-});
-Route::get('/akun', function () {
-    return view('stafftu.akun.index');
-});
-Route::get('/jurusan', function () {
-    return view('stafftu.jurusan.index');
-});
 
 //Authentication
 Route::get('/', [AuthController::class, 'index'])->name('/');
@@ -42,17 +37,21 @@ Route::delete('/logoutsession', [AuthController::class, 'logout'])->name('action
 
 Route::middleware(['auth'])->group(function () {
     // Route prefix untuk admin
-    Route::prefix('admin')->middleware('CekUserLogin:1')->group(function () {
-        Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::prefix('admin')->name('admin.')->middleware('CekUserLogin:1')->group(function () {
+        Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::get('akun', [AdminAkunController::class, 'index'])->name('akun');
+        Route::get('jurusan', [AdminJurusanController::class, 'index'])->name('jurusan');
+        Route::get('role', [AdminRoleController::class, 'index'])->name('role');
+        Route::get('rombel', [AdminRombelController::class, 'index'])->name('rombel');
     });
 
     // Route prefix untuk walikelas
-    Route::prefix('walikelas')->middleware('CekUserLogin:2')->group(function () {
-        Route::get('dashboard', [WalikelasDashboardController::class, 'index'])->name('walikelas.dashboard');
+    Route::prefix('walikelas')->name('walikelas.')->middleware('CekUserLogin:2')->group(function () {
+        Route::get('dashboard', [WalikelasDashboardController::class, 'index'])->name('dashboard');
     });
 
     //Route prefix untuk siswa
-    Route::prefix('siswa')->middleware('CekUserLogin:3')->group(function () {
-        Route::get('dashboard', [SiswaDashboardController::class, 'index'])->name('siswa.dashboard');
+    Route::prefix('siswa')->name('siswa.')->middleware('CekUserLogin:3')->group(function () {
+        Route::get('dashboard', [SiswaDashboardController::class, 'index'])->name('dashboard');
     });
 });
