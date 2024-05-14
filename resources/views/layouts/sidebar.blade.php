@@ -8,6 +8,7 @@
                 <div class="font-strong">Nama User</div><small>Level User</small></div>
         </div>
         <ul class="side-menu metismenu">
+            @if (Auth::user()->role_id == '1')
             <li>
                 <a class="active" href="/dashboardstafftu"><i class="sidebar-item-icon fa fa-th-large"></i>
                     <span class="nav-label">Dashboard</span>
@@ -37,6 +38,15 @@
                     </li>
                 </ul>
             </li>
+            @endif
+
+            @if (Auth::user()->role_id == '2')
+                
+            @endif
+
+            @if (Auth::user()->role_id == '3')
+                
+            @endif
         </ul>
     </div>
 </nav>

@@ -14,9 +14,11 @@ class AuthController extends Controller
         $user = Auth::user();
         if ($user) {
             if ($user->role_id == '1') {
-                return redirect()->route('stafftu.dashboard');
+                return redirect()->route('admin.dashboard');
             } elseif ($user->role_id == '2') {
-                return redirect()->intended('home');
+                return redirect()->intended('walikelas.dashboard');
+            } elseif ($user->role_id == '3') {
+                return redirect()->intended('siswa.dashboard');
             }
         }
         return view('auth.login');
@@ -42,18 +44,20 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
             if ($user->role_id == '1') {
-                return redirect()->route('stafftu.dashboard')->with('toast_success','Selamat, anda berhasil masuk.');
+                return redirect()->route('admin.dashboard');
             } elseif ($user->role_id == '2') {
-                return redirect()->intended('home')->with('toast_success','Selamat, anda berhasil masuk.');
+                return redirect()->intended('walikelas.dashboard');
+            } elseif ($user->role_id == '3') {
+                return redirect()->intended('siswa.dashboard');
             }
         }
-        return redirect('/')->with('toast_error','email atau Password yang dimasukkan tidak sesuai');
+        return redirect('/');
     }
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('toast_success', 'Berhasil Keluar');
+        return redirect('/');
     }
 }
