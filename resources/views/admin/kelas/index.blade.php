@@ -4,9 +4,9 @@
 <div class="page-content fade-in-up">
     <div class="ibox">
         <div class="ibox-head">
-            <div class="ibox-title">Data Table Rombel</div>
+            <div class="ibox-title">Data Table Kelas</div>
             <div class="col-md-2 text-right ">
-                <a href="" data-toggle="modal" data-target=".tambahKelas" class="btn btn-info" title="Tambah Rombel">
+                <a href="" data-toggle="modal" data-target=".tambahKelas" class="btn btn-info" title="Tambah Kelas">
                 <i class="fa fa-plus"></i></a>
             </div>
         </div>
@@ -18,6 +18,7 @@
                         <th>TINGKAT</th>
                         <th>JURUSAN</th>
                         <th>ROMBEL</th>
+                        <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,7 +28,7 @@
                         <td>Teknik Komputer Jaringan</td>
                         <td>2</td>
                         <td>
-                            <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target=".editKelas" title="Edit rombel"><i class="fa fa-pencil font-14"></i></button>
+                            <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target=".editKelas" title="Edit Kelas"><i class="fa fa-pencil font-14"></i></button>
                             <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
                         </td>
                     </tr>
@@ -41,7 +42,7 @@
 <div class="modal-dialog modal-sm">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Tambah Rombel</h5>
+            <h5 class="modal-title">Tambah Kelas</h5>
             <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
             </button>
         </div>
@@ -96,7 +97,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Rombel</h5>
+                <h5 class="modal-title">Edit Kelas</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>Admincast bootstrap 4 &amp; angular 5 admin template, Шаблон админки | Login</title>
+    <title>SIAKAD | Login</title>
     <!-- GLOBAL MAINLY STYLES-->
     <link href="{{ asset('/') }}assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ asset('/') }}assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -41,17 +41,14 @@
                     <input class="form-control" type="password" name="password" placeholder="Password">
                 </div>
             </div>
-            <div class="form-group d-flex justify-content-between">
+            {{-- <div class="form-group d-flex justify-content-between">
                 <label class="ui-checkbox ui-checkbox-info">
                     <input type="checkbox">
                     <span class="input-span"></span>Remember me</label>
                 <a href="forgot_password.html">Forgot password?</a>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <button class="btn btn-info btn-block" type="submit">Login</button>
-            </div>
-            <div class="text-center">Not a member?
-                <a class="color-blue" href="register.html">Create accaunt</a>
             </div>
         </form>
     </div>

@@ -65,7 +65,7 @@
                                                     <label class="required-label faded-label" for="nama_jurusan">Nama Jurusan</label>
                                                     <input type="text" name="nama_jurusan"
                                                         class="form-control @error('nama_jurusan') is-invalid @enderror" value="{{ $item->nama_jurusan }}"
-                                                        placeholder="Masukan nama role">
+                                                        placeholder="Masukan nama jurusan">
                                                     @error('nama_jurusan')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -137,7 +137,7 @@
                             <label class="required-label faded-label" for="nama_jurusan">Nama Jurusan</label>
                             <input type="text" name="nama_jurusan"
                                 class="form-control @error('nama_jurusan') is-invalid @enderror"
-                                placeholder="Masukan nama role">
+                                placeholder="Masukan nama jurusan">
                             @error('nama_jurusan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

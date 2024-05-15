@@ -42,6 +42,12 @@
                     <li>
                         <a href="{{ route('admin.angkatan') }}">Angkatan</a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.mapel') }}">Mapel</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.walikelas') }}">Wali Kelas</a>
+                    </li>
                 </ul>
             </li>
             <li>
