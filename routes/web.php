@@ -42,10 +42,15 @@ Route::middleware(['auth'])->group(function () {
         Route::post('tambah-jurusan', [AdminJurusanController::class, 'store_jurusan'])->name('store-jurusan');
         Route::put('update-jurusan/{kode_jurusan}', [AdminJurusanController::class, 'update_jurusan'])->name('update-jurusan');
         Route::delete('delete-jurusan/{kode_jurusan}', [AdminJurusanController::class, 'delete_jurusan'])->name('delete-jurusan');
-        // ============================== ROLE ===========================================
+        // ============================== JURUSAN ===========================================
         Route::get('role', [AdminRoleController::class, 'index'])->name('role');
         Route::put('update-role/{id}', [AdminRoleController::class, 'update_role'])->name('update-role');
+        // ============================== ROMBEL ===========================================
         Route::get('rombel', [AdminRombelController::class, 'index'])->name('rombel');
+        Route::post('tambah-rombel', [AdminRombelController::class, 'store_rombel'])->name('store-rombel');
+        Route::put('update-rombel/{kode_rombel}', [AdminRombelController::class, 'update_rombel'])->name('update-rombel');
+        Route::delete('delete-rombel/{kode_rombel}', [AdminRombelController::class, 'delete_rombel'])->name('delete-rombel');
+        // ============================== KELAS ===========================================
         Route::get('kelas', [AdminKelasController::class, 'index'])->name('kelas');
         Route::get('angkatan', [AdminAngkatanController::class, 'index'])->name('angkatan');
     });

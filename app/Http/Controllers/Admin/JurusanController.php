@@ -17,7 +17,6 @@ class JurusanController extends Controller
 
     public function store_jurusan(Request $request)
     {
-        dd($request);
         $rules = [
             'kode_jurusan' => 'required',
             'nama_jurusan' => 'required',
