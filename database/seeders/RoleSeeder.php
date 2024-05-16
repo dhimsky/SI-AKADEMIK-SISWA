@@ -15,7 +15,7 @@ class RoleSeeder extends Seeder
     {
         Role::create([
             'id' => '1',
-            'level' => 'stafftu',
+            'level' => 'admin',
         ]);
         Role::create([
             'id' => '2',

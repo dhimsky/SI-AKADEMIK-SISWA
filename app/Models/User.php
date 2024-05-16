@@ -17,14 +17,15 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $primaryKey = 'nisn';
+    protected $primaryKey = 'kode_identitas';
     public $incrementing = false; // Karena kolom 'nim' bukan auto-increment
     public $timestamps = true;
     
     protected $fillable = [
+        'kode_identitas',
+        'email',
         'nama_lengkap',
         'role_id',
-        'email',
         'password',
     ];
 
@@ -45,6 +46,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'kode_identitas' => 'string',
     ];
 
     public function Role() {

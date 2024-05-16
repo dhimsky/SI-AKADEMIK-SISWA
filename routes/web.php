@@ -44,6 +44,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         // ============================== AKUN ===========================================
         Route::get('akun', [AdminAkunController::class, 'index'])->name('akun');
+        Route::post('tambah-akun', [AdminAkunController::class, 'store_akun'])->name('store-akun');
+        Route::put('update-akun/{id}', [AdminAkunController::class, 'update_akun'])->name('update-akun');
+        Route::delete('delete-akun/{id}', [AdminAkunController::class, 'delete_akun'])->name('delete-akun');
         // ============================== ROLE ===========================================
         Route::get('jurusan', [AdminJurusanController::class, 'index'])->name('jurusan');
         Route::post('tambah-jurusan', [AdminJurusanController::class, 'store_jurusan'])->name('store-jurusan');
