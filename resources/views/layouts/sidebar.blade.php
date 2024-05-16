@@ -55,7 +55,7 @@
                     <span class="nav-label">Siswa</span><i class="fa fa-angle-left arrow"></i></a>
                 <ul class="nav-2-level collapse">
                     <li>
-                        <a href="{{ route('admin.jurusan') }}">Siswa Aktif</a>
+                        <a href="{{ route('admin.siswa') }}">Siswa Aktif</a>
                     </li>
                     <li>
                         <a href="{{ route('admin.rombel') }}">Siswa Lulus</a>

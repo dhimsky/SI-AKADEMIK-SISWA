@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\KelasController as AdminKelasController;
 use App\Http\Controllers\Admin\AngkatanController as AdminAngkatanController;
 use App\Http\Controllers\Admin\MapelController as AdminMapelController;
 use App\Http\Controllers\Admin\WalikelasController as AdminWalikelasController;
+use App\Http\Controllers\Admin\SiswaController as AdminSiswaController;
 
 use App\Http\Controllers\Siswa\DashboardController as SiswaDashboardController;
 
@@ -64,6 +65,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('mapel', [AdminMapelController::class, 'index'])->name('mapel');
         // ============================== WALIKELAS ===========================================
         Route::get('walikelas', [AdminWalikelasController::class, 'index'])->name('walikelas');
+        // ============================== SISWA ===========================================
+        Route::get('siswa', [AdminSiswaController::class, 'index'])->name('siswa');
     });
     
     // Route prefix untuk walikelas
