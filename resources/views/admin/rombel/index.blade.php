@@ -25,7 +25,7 @@
                             <td>{{ $item->kode_rombel }}</td>
                             <td>{{ $item->nama_rombel }}</td>
                             <td class="d-flex justify-content-center">
-                                <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target=".editRombel" title="Edit rombel"><i class="fa fa-pencil font-14"></i></button>
+                                <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target="#editRombel{{ $item->kode_rombel }}" title="Edit rombel"><i class="fa fa-pencil font-14"></i></button>
                                 <form id="deleteForm{{ $item->kode_rombel }}" action="{{ route('admin.delete-rombel', ['kode_rombel' => $item->kode_rombel]) }}" method="POST">
                                     @csrf
                                     @method('delete')
@@ -35,7 +35,7 @@
                         </tr>
 
                         {{-- MODAL EDIT --}}
-                        <div class="modal fade editRombel" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal fade" id="editRombel{{ $item->kode_rombel }}" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header">

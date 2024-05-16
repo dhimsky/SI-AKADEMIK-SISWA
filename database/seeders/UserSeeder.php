@@ -16,20 +16,20 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'nisn' => 1,
-            'nama_lengkap' => 'macan putih',
-            'role_id' => 1,
+            'kode_identitas' => 1,
             'email' => 'macan@gmail.com',
+            'nama_lengkap' => 'Macan Tutul',
             'password' => Hash::make('macan'),
+            'role_id' => 1, 
             'remember_token' => Str::random(60),
         ]);
 
         User::create([
-            'nisn' => 2,
-            'nama_lengkap' => 'Pak abdau',
+            'kode_identitas' => 2,
+            'email' => 'harun@gmail.com',
+            'nama_lengkap' => 'Harun Worker',
+            'password' => Hash::make('harun'),
             'role_id' => 2,
-            'email' => 'abdau@gmail.com',
-            'password' => Hash::make('macan'),
             'remember_token' => Str::random(60),
         ]);
         
