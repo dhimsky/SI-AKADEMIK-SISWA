@@ -22,16 +22,111 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td>11-TKJ-2</td>
-                        <td>11</td>
-                        <td>Teknik Komputer Jaringan</td>
-                        <td>2</td>
-                        <td>
-                            <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target=".editKelas" title="Edit Kelas"><i class="fa fa-pencil font-14"></i></button>
-                            <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
-                        </td>
-                    </tr>
+                    @foreach ($kelas as $item)
+                        <tr class="text-center">
+                            <td>{{ $item->nama_kelas }}</td>
+                            <td>{{ $item->tingkat }}</td>
+                            <td>{{ $item->jurusan->nama_jurusan }}</td>
+                            <td>{{ $item->rombel->nama_rombel }}</td>
+                            <td class="d-flex justify-content-center">
+                                <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target="#editKelas{{ $item->nama_jurusan }}" title="Edit Kelas"><i class="fa fa-pencil font-14"></i></button>
+                                <form id="deleteForm{{ $item->nama_kelas }}" action="{{ route('admin.delete-kelas', ['nama_kelas' => $item->nama_kelas]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{-- MODAL EDIT --}}
+                        <div class="modal fade" id="editKelas{{ $item->nama_jurusan }}" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit Kelas</h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('admin.update-kelas', ['nama_kelas' => $item->nama_kelas]) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="form-group mb-3">
+                                            <label class="required-label faded-label" for="tingkat" >Tingkat</label>
+                                            <select class="form-control input-sm" name="tingkat">
+                                                <option value="">-- Pilih Tingkat --</option>
+                                                <option value="11" @if ($item->tingkat == '11') selected @endif>11</option>
+                                                <option value="12" @if ($item->tingkat == '12') selected @endif>12</option>
+                                                <option value="13" @if ($item->tingkat == '13') selected @endif>13</option>
+                                            </select>
+                                            @error('tingkat')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label class="required-label faded-label" for="jurusan_id" >Nama Jurusan</label>
+                                            <select class="form-control input-sm" name="jurusan_kode">
+                                                <option value="">-- Pilih Jurusan --</option>
+                                                @foreach ($jurusan as $j)
+                                                    <option value="{{ $j->kode_jurusan }}" @if ($j->kode_jurusan == $item->jurusan_kode ) selected @endif >{{ $j->nama_jurusan }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('jurusan_id')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label class="required-label faded-label" for="rombel_id" >Rombel</label>
+                                            <select class="form-control input-sm" name="rombel_kode">
+                                                <option value="">-- Pilih Rombel --</option>
+                                                @foreach ($rombel as $r)
+                                                    <option value="{{ $r->kode_rombel }}" @if ($r->kode_rombel == $item->rombel_kode) selected @endif>{{ $r->nama_rombel }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('rombel_id')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- VALIDASI DELETE --}}
+                        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                        <script>
+                            $(document).ready(function(){
+                                $('#deleteForm{{ $item->nama_kelas }}').submit(function(e){
+                                    e.preventDefault();
+                                    Swal.fire({
+                                        title: 'Apakah Anda yakin?',
+                                        text: "Anda tidak akan dapat mengembalikan ini!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Ya, hapus saja!'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // Submit form manually
+                                            this.submit();
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -47,11 +142,12 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="" method="POST">
+            <form action="{{ route('admin.store-kelas') }}" method="POST">
             @csrf
             <div class="form-group mb-3">
                 <label class="required-label faded-label" for="tingkat" >Tingkat</label>
-                <select class="form-control input-sm">
+                <select class="form-control input-sm" name="tingkat">
+                    <option value="">-- Pilih Tingkat --</option>
                     <option value="11">11</option>
                     <option value="12">12</option>
                     <option value="13">13</option>
@@ -63,22 +159,28 @@
                 @enderror
             </div>
             <div class="form-group mb-3">
-                <label class="required-label faded-label" for="jurusan_id" >Jurusan</label>
-                <select class="form-control input-sm" name="jurusan_id">
-                    <option value="">Teknik Komputer Jaringan</option>
+                <label class="required-label faded-label" for="jurusan_kode" >Jurusan</label>
+                <select class="form-control input-sm" name="jurusan_kode">
+                    <option value="">-- Pilih Jurusan --</option>
+                        @foreach ($jurusan as $item)
+                            <option value="{{ $item->kode_jurusan }}">{{ $item->nama_jurusan }}</option>
+                        @endforeach
                 </select>
-                @error('jurusan_id')
+                @error('jurusan_kode')
                 <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
                 </span>
                 @enderror
             </div>
             <div class="form-group mb-3">
-                <label class="required-label faded-label" for="rombel_id" >Rombel</label>
-                <select class="form-control input-sm" name="rombel_id">
-                    <option value="">2</option>
+                <label class="required-label faded-label" for="rombel_kode" >Rombel</label>
+                <select class="form-control input-sm" name="rombel_kode">
+                    <option value="">-- Pilih Rombel --</option>
+                        @foreach ($rombel as $item)
+                            <option value="{{ $item->kode_rombel }}">{{ $item->nama_rombel }}</option>
+                        @endforeach
                 </select>
-                @error('rombel_id')
+                @error('rombel_kode')
                 <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
                 </span>
@@ -92,61 +194,6 @@
     </div>
 </div>
 </div>
-
-<div class="modal fade editKelas" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Kelas</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="form-group mb-3">
-                    <label class="required-label faded-label" for="tingkat" >Tingkat</label>
-                    <select class="form-control input-sm">
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                    </select>
-                    @error('tingkat')
-                    <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="form-group mb-3">
-                    <label class="required-label faded-label" for="jurusan_id" >Nama Jurusan</label>
-                    <select class="form-control input-sm" name="jurusan_id">
-                        <option value="">Teknik Komputer Jaringan</option>
-                    </select>
-                    @error('jurusan_id')
-                    <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="form-group mb-3">
-                    <label class="required-label faded-label" for="rombel_id" >Rombel</label>
-                    <select class="form-control input-sm" name="rombel_id">
-                        <option value="">2</option>
-                    </select>
-                    @error('rombel_id')
-                    <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-            </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+@include('validasi.validasi-edit')
+@include('validasi.notifikasi-berhasil')
 @endsection

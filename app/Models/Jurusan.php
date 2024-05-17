@@ -17,4 +17,9 @@ class Jurusan extends Model
         'nama_jurusan',
     ];
     public $timestamps = true;
+
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class, 'jurusan_kode', 'kode_jurusan');
+    }
 }

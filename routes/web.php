@@ -62,6 +62,9 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete-rombel/{kode_rombel}', [AdminRombelController::class, 'delete_rombel'])->name('delete-rombel');
         // ============================== KELAS ===========================================
         Route::get('kelas', [AdminKelasController::class, 'index'])->name('kelas');
+        Route::post('tambah-kelas', [AdminKelasController::class, 'store_kelas'])->name('store-kelas');
+        Route::put('update-kelas/{nama_kelas}', [AdminKelasController::class, 'update_kelas'])->name('update-kelas');
+        Route::delete('delete-kelas/{nama_kelas}', [AdminKelasController::class, 'delete_kelas'])->name('delete-kelas');
         // ============================== ANGKATAN ===========================================
         Route::get('angkatan', [AdminAngkatanController::class, 'index'])->name('angkatan');
         // ============================== MAPEL ===========================================

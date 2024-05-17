@@ -9,9 +9,13 @@ class Siswa extends Model
 {
     use HasFactory;
 
-<<<<<<< HEAD
+    protected $primaryKey = 'nisn';
+    protected $table = 'siswa';
+    protected $casts = ['kode_rombel' => 'string'];
+    public $timestamps = true;
+
     protected $fillable = [
-        'nim',
+        'nisn',
         'jurusan_id',
         'nip_id',
         'nama_siswa',
@@ -72,14 +76,4 @@ class Siswa extends Model
         'status_siswa',
     ];
 }
-=======
-    protected $primaryKey = 'nisn';
-    protected $table = 'siswa';
-    protected $fillable = [
-        'nisn',
-        'nama_lengkap',
-    ];
-    protected $casts = ['kode_rombel' => 'string'];
-    public $timestamps = true;
-}
->>>>>>> f604c7269db633ec11e5e4b39842773dd90237ee
+

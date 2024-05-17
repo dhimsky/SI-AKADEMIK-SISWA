@@ -17,4 +17,9 @@ class Rombel extends Model
     ];
     protected $casts = ['kode_rombel' => 'string'];
     public $timestamps = true;
+
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class, 'rombel_kode', 'kode_rombel');
+    }
 }
