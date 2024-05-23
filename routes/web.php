@@ -67,8 +67,14 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete-kelas/{nama_kelas}', [AdminKelasController::class, 'delete_kelas'])->name('delete-kelas');
         // ============================== ANGKATAN ===========================================
         Route::get('angkatan', [AdminAngkatanController::class, 'index'])->name('angkatan');
+        Route::post('tambah-angkatan', [AdminAngkatanController::class, 'store_angkatan'])->name('store-angkatan');
+        Route::put('update-angkatan/{kode_angkatan}', [AdminAngkatanController::class, 'update_angkatan'])->name('update-angkatan');
+        Route::delete('delete-angkatan/{kode_angkatan}', [AdminAngkatanController::class, 'delete_angkatan'])->name('delete-angkatan');
         // ============================== MAPEL ===========================================
         Route::get('mapel', [AdminMapelController::class, 'index'])->name('mapel');
+        Route::post('tambah-mapel', [AdminMapelController::class, 'store_mapel'])->name('store-mapel');
+        Route::put('update-mapel/{kode_mapel}', [AdminMapelController::class, 'update_mapel'])->name('update-mapel');
+        Route::delete('delete-mapel/{kode_mapel}', [AdminMapelController::class, 'delete_mapel'])->name('delete-mapel');
         // ============================== WALIKELAS ===========================================
         Route::get('walikelas', [AdminWalikelasController::class, 'index'])->name('walikelas');
         // ============================== SISWA ===========================================
