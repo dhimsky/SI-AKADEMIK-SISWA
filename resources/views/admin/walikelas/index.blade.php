@@ -73,7 +73,7 @@
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label class="required-label faded-label" for="jenis_kelamin">Jenis Kelamin</label>
-                                                <select class="form-control input-sm">
+                                                <select class="form-control input-sm" name="jenis_kelamin">
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
                                                 </select>
@@ -85,7 +85,7 @@
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label class="required-label faded-label" for="kelas_id">Sebagai Wali Kelas</label>
-                                                <select class="form-control input-sm">
+                                                <select class="form-control input-sm" name="kelas_id">
                                                     <option value="11-TKJ-2">11-TKJ-2</option>
                                                 </select>
                                                 @error('kelas_id')

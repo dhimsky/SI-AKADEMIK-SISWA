@@ -22,60 +22,91 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center">
-                            <td>MTK</td>
-                            <td>Matematika</td>
-                            <td class="d-flex justify-content-center">
-                                <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
-                                    data-target=".editJurusan" title="Edit role"><i
-                                        class="fa fa-pencil font-14"></i></button>
-                                <button class="btn btn-default btn-xs" type="submit" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
-                            </td>
-                        </tr>
-
-                        {{-- MODAL EDIT --}}
-                        <div class="modal fade editJurusan" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Edit Jurusan</h5>
-                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="form-group mb-3">
-                                                <label class="required-label faded-label" for="kode_mapel">Kode Mapel</label>
-                                                <input type="text" name="kode_mapel"
-                                                    class="form-control @error('kode_mapel') is-invalid @enderror" value="MTK" placeholder="Masukan kode">
-                                                @error('kode_mapel')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label class="required-label faded-label" for="nama_mapel">Nama Mapel</label>
-                                                <input type="text" name="nama_mapel"
-                                                    class="form-control @error('nama_mapel') is-invalid @enderror" value="Matematika"
-                                                    placeholder="Masukan nama mapel">
-                                                @error('nama_mapel')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </div>
+                        @foreach ($mapel as $item)
+                            <tr class="text-center">
+                                <td>{{ $item->kode_mapel }}</td>
+                                <td>{{ $item->nama_mapel }}</td>
+                                <td class="d-flex justify-content-center">
+                                    <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
+                                        data-target="#editJurusan{{ $item->kode_mapel }}" title="Edit role"><i
+                                            class="fa fa-pencil font-14"></i></button>
+                                    <form id="deleteForm{{ $item->kode_mapel }}" action="{{ route('admin.delete-mapel', ['kode_mapel' => $item->kode_mapel]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-default btn-xs" type="submit" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
                                     </form>
+                                </td>
+                            </tr>
+
+                            {{-- MODAL EDIT --}}
+                            <div class="modal fade" id="editJurusan{{ $item->kode_mapel }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Jurusan</h5>
+                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('admin.update-mapel', ['kode_mapel' => $item->kode_mapel]) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="form-group mb-3">
+                                                    <label class="required-label faded-label" for="kode_mapel">Kode Mapel</label>
+                                                    <input type="text" name="kode_mapel"
+                                                        class="form-control @error('kode_mapel') is-invalid @enderror" value="{{ $item->kode_mapel }}" placeholder="Masukan kode">
+                                                    @error('kode_mapel')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label class="required-label faded-label" for="nama_mapel">Nama Mapel</label>
+                                                    <input type="text" name="nama_mapel"
+                                                        class="form-control @error('nama_mapel') is-invalid @enderror" value="{{ $item->nama_mapel }}"
+                                                        placeholder="Masukan nama mapel">
+                                                    @error('nama_mapel')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                            {{-- VALIDASI DELETE --}}
+                            <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                            <script>
+                                $(document).ready(function(){
+                                    $('#deleteForm{{ $item->kode_mapel }}').submit(function(e){
+                                        e.preventDefault();
+                                        Swal.fire({
+                                            title: 'Apakah Anda yakin?',
+                                            text: "Anda tidak akan dapat mengembalikan ini!",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Ya, hapus saja!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                // Submit form manually
+                                                this.submit();
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -91,7 +122,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('admin.store-mapel') }}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
                             <label class="required-label faded-label" for="kode_mapel">Kode Mapel</label>
