@@ -24,8 +24,13 @@ class Kelas extends Model
     {
         return $this->belongsTo(Jurusan::class, 'jurusan_kode', 'kode_jurusan');
     }
+    
     public function rombel()
     {
         return $this->belongsTo(Rombel::class, 'rombel_kode', 'kode_rombel');
+    }
+
+    public function walikelas() {
+        return $this->hasMany(Walikelas::class, 'kelas_id', 'nama_kelas');
     }
 }
