@@ -57,12 +57,7 @@ class AkunController extends Controller
     public function update_akun(Request $request, $id)
     {
         $akun = User::findOrFail($id);
-
-        $rules = [
-            'kode_identitas' => 'required|unique:users,kode_identitas',
-            'email' => 'required|email|unique:users,email',
-            'nama_lengkap' => 'required',
-        ];
+        
         // Definisikan aturan validasi
         $rules = [
             'kode_identitas' => [
@@ -84,7 +79,6 @@ class AkunController extends Controller
             'email.email' => 'Email tidak valid!',
             'kode_identitas.unique' => 'Kode Identitas sudah digunakan!',
             'nama_lengkap.required' => 'Nama Lengkap tidak boleh kosong!',
-            'password.required' => 'Password tidak boleh kosong!',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);

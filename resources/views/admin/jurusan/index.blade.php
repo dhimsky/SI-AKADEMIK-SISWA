@@ -28,7 +28,7 @@
                                 <td>{{ $item->nama_jurusan }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
-                                        data-target=".editJurusan" title="Edit role"><i
+                                        data-target="#editJurusan{{ $item->kode_jurusan }}" title="Edit role"><i
                                             class="fa fa-pencil font-14"></i></button>
                                     <form id="deleteForm{{ $item->kode_jurusan }}" action="{{ route('admin.delete-jurusan', ['kode_jurusan' => $item->kode_jurusan]) }}" method="POST">
                                         @csrf
@@ -39,7 +39,7 @@
                             </tr>
 
                             {{-- MODAL EDIT --}}
-                            <div class="modal fade editJurusan" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal fade" id="editJurusan{{ $item->kode_jurusan }}" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-header">

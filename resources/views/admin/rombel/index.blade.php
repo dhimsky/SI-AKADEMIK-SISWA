@@ -43,29 +43,29 @@
                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="{{ route('admin.update-rombel', ['kode_rombel' => $item->kode_rombel]) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="form-group mb-3">
-                                            <label class="required-label faded-label" for="kode_rombel" >Kode Rombel</label>
-                                            <input type="text" name="kode_rombel" class="form-control @error('kode_rombel') is-invalid @enderror" value="{{ $item->kode_rombel }}">
-                                            @error('kode_rombel')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                <form action="{{ route('admin.update-rombel', ['kode_rombel' => $item->kode_rombel]) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                        <div class="modal-body">
+                                            <div class="form-group mb-3">
+                                                <label class="required-label faded-label" for="kode_rombel" >Kode Rombel</label>
+                                                <input type="text" name="kode_rombel" class="form-control @error('kode_rombel') is-invalid @enderror" value="{{ $item->kode_rombel }}">
+                                                @error('kode_rombel')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label class="required-label faded-label" for="nama_rombel" >Nama Rombel</label>
+                                                <input type="text" name="nama_rombel" class="form-control @error('nama_rombel') is-invalid @enderror" value="{{ $item->nama_rombel }}" placeholder="Masukan nama role">
+                                                @error('nama_rombel')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="form-group mb-3">
-                                            <label class="required-label faded-label" for="nama_rombel" >Nama Rombel</label>
-                                            <input type="text" name="nama_rombel" class="form-control @error('nama_rombel') is-invalid @enderror" value="{{ $item->nama_rombel }}" placeholder="Masukan nama role">
-                                            @error('nama_rombel')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
                                             <button type="submit" class="btn btn-primary">Update</button>

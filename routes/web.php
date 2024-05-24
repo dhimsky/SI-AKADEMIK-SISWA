@@ -80,6 +80,9 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete-mapel/{kode_mapel}', [AdminMapelController::class, 'delete_mapel'])->name('delete-mapel');
         // ============================== WALIKELAS ===========================================
         Route::get('walikelas', [AdminWalikelasController::class, 'index'])->name('walikelas');
+        Route::post('tambah-walikelas', [AdminWalikelasController::class, 'store_walikelas'])->name('store-walikelas');
+        Route::put('update-walikelas/{id}', [AdminWalikelasController::class, 'update_walikelas'])->name('update-walikelas');
+        Route::delete('delete-walikelas/{id}', [AdminWalikelasController::class, 'delete_walikelas'])->name('delete-walikelas');
         // ============================== SISWA ===========================================
         Route::get('siswa', [AdminSiswaController::class, 'index'])->name('siswa');
     });

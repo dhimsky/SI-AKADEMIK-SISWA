@@ -19,10 +19,17 @@ class Walikelas extends Model
         'email',
         'password',
     ];
-    protected $casts = ['nip' => 'string'];
+    protected $casts = [
+        'nip' => 'string',
+    ];
     public $timestamps = true;
 
     public function kelas(){
         return $this->belongsTo(Kelas::class, 'kelas_id', 'nama_kelas');
+    }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'nip', 'kode_identitas');
     }
 }

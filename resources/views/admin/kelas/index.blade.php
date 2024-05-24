@@ -29,7 +29,7 @@
                             <td>{{ $item->jurusan->nama_jurusan }}</td>
                             <td>{{ $item->rombel->nama_rombel }}</td>
                             <td class="d-flex justify-content-center">
-                                <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target="#editKelas{{ $item->nama_jurusan }}" title="Edit Kelas"><i class="fa fa-pencil font-14"></i></button>
+                                <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target="#editKelas{{ $item->nama_kelas }}" title="Edit Kelas"><i class="fa fa-pencil font-14"></i></button>
                                 <form id="deleteForm{{ $item->nama_kelas }}" action="{{ route('admin.delete-kelas', ['nama_kelas' => $item->nama_kelas]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -38,7 +38,7 @@
                             </td>
                         </tr>
                         {{-- MODAL EDIT --}}
-                        <div class="modal fade" id="editKelas{{ $item->nama_jurusan }}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal fade" id="editKelas{{ $item->nama_kelas }}" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header">
