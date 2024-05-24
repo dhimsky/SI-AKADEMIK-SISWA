@@ -16,11 +16,10 @@ class Siswa extends Model
 
     protected $fillable = [
         'nisn',
-        'jurusan_id',
-        'nip_id',
         'nama_siswa',
-        'pas_foto',
         'jenis_kelamin',
+        'jurusan_id',
+        'pas_foto',
         'tempat_lahir',
         'tgl_lahir',
         'agama',
@@ -42,7 +41,6 @@ class Siswa extends Model
         'tinggal_dng',
         'jarak_kesekolah',
         'status_anak',
-        'status_anak',
         'nama_ayah_kandung',
         'tgl_lhr_ayah',
         'agama_ayah',
@@ -52,7 +50,6 @@ class Siswa extends Model
         'penghasilan_bln_ayah',
         'alamat_ayah',
         'tlp_ayah',
-        'penghasilan_bln_ayah',
         'nama_ibu_kandung',
         'tgl_lhr_ibu',
         'agama_ibu',
@@ -62,7 +59,6 @@ class Siswa extends Model
         'penghasilan_bln_ibu',
         'alamat_ibu',
         'tlp_ibu',
-        'penghasilan_bln_ibu',
         'nama_wali',
         'tgl_lhr_wali',
         'agama_wali',
@@ -72,7 +68,6 @@ class Siswa extends Model
         'penghasilan_bln_wali',
         'alamat_wali',
         'tlp_wali',
-        'penghasilan_bln_wali',
         'status_siswa',
     ];
 }

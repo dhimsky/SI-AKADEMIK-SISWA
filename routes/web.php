@@ -13,9 +13,12 @@ use App\Http\Controllers\Admin\MapelController as AdminMapelController;
 use App\Http\Controllers\Admin\WalikelasController as AdminWalikelasController;
 use App\Http\Controllers\Admin\SiswaController as AdminSiswaController;
 
+use App\Http\Controllers\Walikelas\DashboardController as WalikelasDashboardController;
+use App\Http\Controllers\Walikelas\NilaiController as WalikelasNilaiController;
+use App\Http\Controllers\Walikelas\AbsensiController as WalikelasAbsensiController;
+
 use App\Http\Controllers\Siswa\DashboardController as SiswaDashboardController;
 
-use App\Http\Controllers\Walikelas\DashboardController as WalikelasDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +82,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('walikelas')->name('walikelas.')->middleware('CekUserLogin:2')->group(function () {
         // ============================== DASHBOARD ===========================================
         Route::get('dashboard', [WalikelasDashboardController::class, 'index'])->name('dashboard');
+        // ============================== NILAI ===========================================
+        Route::get('nilai', [WalikelasNilaiController::class, 'index'])->name('nilai');
+        // ============================== DASHBOARD ===========================================
+        Route::get('absensi', [WalikelasAbsensiController::class, 'index'])->name('absensi');
     });
     
     //Route prefix untuk siswa

@@ -66,8 +66,18 @@
 
             @if (Auth::user()->role_id == '2')
             <li>
-                <a class="active" href="{{ route('walikelas.rombel') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active" href="{{ route('walikelas.dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                     <span class="nav-label">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a class="active" href="{{ route('walikelas.nilai') }}"><i class="sidebar-item-icon fa fa-pencil"></i>
+                    <span class="nav-label">Nilai</span>
+                </a>
+            </li>
+            <li>
+                <a class="active" href="{{ route('walikelas.absensi') }}"><i class="sidebar-item-icon fa fa-calendar-check-o"></i>
+                    <span class="nav-label">Absensi</span>
                 </a>
             </li>
             @endif

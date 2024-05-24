@@ -16,9 +16,9 @@ class AuthController extends Controller
             if ($user->role_id == '1') {
                 return redirect()->route('admin.dashboard');
             } elseif ($user->role_id == '2') {
-                return redirect()->intended('walikelas.dashboard');
+                return redirect()->route('walikelas.dashboard');
             } elseif ($user->role_id == '3') {
-                return redirect()->intended('siswa.dashboard');
+                return redirect()->route('siswa.dashboard');
             }
         }
         return view('auth.login');
@@ -46,9 +46,9 @@ class AuthController extends Controller
             if ($user->role_id == '1') {
                 return redirect()->route('admin.dashboard');
             } elseif ($user->role_id == '2') {
-                return redirect()->intended('walikelas.dashboard');
+                return redirect()->route('walikelas.dashboard');
             } elseif ($user->role_id == '3') {
-                return redirect()->intended('siswa.dashboard');
+                return redirect()->route('siswa.dashboard');
             }
         }
         return redirect('/');
