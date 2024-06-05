@@ -85,6 +85,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete-walikelas/{id}', [AdminWalikelasController::class, 'delete_walikelas'])->name('delete-walikelas');
         // ============================== SISWA ===========================================
         Route::get('siswa', [AdminSiswaController::class, 'index'])->name('siswa');
+        Route::post('tambah-siswa', [AdminSiswaController::class, 'store_siswa'])->name('store-siswa');
     });
     
     // Route prefix untuk walikelas
