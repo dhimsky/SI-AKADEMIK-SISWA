@@ -17,4 +17,9 @@ class Angkatan extends Model
     ];
     protected $casts = ['kode_angkatan' => 'string'];
     public $timestamps = true;
+
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class, 'angkatan_id', 'kode_angkatan');
+    }
 }

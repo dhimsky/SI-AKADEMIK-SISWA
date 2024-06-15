@@ -43,6 +43,9 @@
                         <a href="{{ route('admin.angkatan') }}">Angkatan</a>
                     </li>
                     <li>
+                        <a href="{{ route('admin.tahunpelajaran') }}">Tahun Pelajaran</a>
+                    </li>
+                    <li>
                         <a href="{{ route('admin.mapel') }}">Mapel</a>
                     </li>
                     <li>
@@ -58,7 +61,10 @@
                         <a href="{{ route('admin.siswa') }}">Siswa Aktif</a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.rombel') }}">Siswa Lulus</a>
+                        <a href="{{ route('admin.nilai') }}">Nilai Siswa</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.absensi') }}">Absensi Siswa</a>
                     </li>
                 </ul>
             </li>

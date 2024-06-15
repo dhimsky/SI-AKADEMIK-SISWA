@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('mapel', function (Blueprint $table) {
             $table->string('kode_mapel')->primary();
-            $table->string('nama_mapel');
+            $table->string('nama_mapel', 100);
             $table->timestamps();
         });
     }

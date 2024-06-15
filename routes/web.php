@@ -12,11 +12,14 @@ use App\Http\Controllers\Admin\AngkatanController as AdminAngkatanController;
 use App\Http\Controllers\Admin\MapelController as AdminMapelController;
 use App\Http\Controllers\Admin\WalikelasController as AdminWalikelasController;
 use App\Http\Controllers\Admin\SiswaController as AdminSiswaController;
-
+use App\Http\Controllers\Admin\NilaiController as AdminNilaiController;
+use App\Http\Controllers\Admin\TahunPelajaranController as AdminTahunPelajaranController;
+use App\Http\Controllers\Admin\AbsensiController as AdminAbsensiController;
+//WALIKELAS
 use App\Http\Controllers\Walikelas\DashboardController as WalikelasDashboardController;
 use App\Http\Controllers\Walikelas\NilaiController as WalikelasNilaiController;
 use App\Http\Controllers\Walikelas\AbsensiController as WalikelasAbsensiController;
-
+//SISWA
 use App\Http\Controllers\Siswa\DashboardController as SiswaDashboardController;
 
 
@@ -86,6 +89,12 @@ Route::middleware(['auth'])->group(function () {
         // ============================== SISWA ===========================================
         Route::get('siswa', [AdminSiswaController::class, 'index'])->name('siswa');
         Route::post('tambah-siswa', [AdminSiswaController::class, 'store_siswa'])->name('store-siswa');
+        // ============================== NILAI ===========================================
+        Route::get('nilai', [AdminNilaiController::class, 'index'])->name('nilai');
+        // ============================== TAHUN PELAJARAN ===========================================
+        Route::get('tahunpelajaran', [AdminTahunPelajaranController::class, 'index'])->name('tahunpelajaran');
+        // ============================== ABSENSI ===========================================
+        Route::get('absensi', [AdminAbsensiController::class, 'index'])->name('absensi');
     });
     
     // Route prefix untuk walikelas

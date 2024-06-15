@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('angkatan', function (Blueprint $table) {
-            $table->string('kode_angkatan')->primary();
-            $table->integer('tahun_angkatan');
+        Schema::create('absensi', function (Blueprint $table) {
+            $table->id();
+            $table->string('nisn_id');
+            $table->date('tanggal_absensi');
+            $table->string('status_absensi');
+            $table->integer('semester');
+            $table->string('kelas', 10);
+            $table->string('tahun_pelajaran', 15);
             $table->timestamps();
         });
     }
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('angkatan');
+        Schema::dropIfExists('absensi');
     }
 };
