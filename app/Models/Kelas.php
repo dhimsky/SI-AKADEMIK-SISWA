@@ -30,8 +30,8 @@ class Kelas extends Model
         return $this->belongsTo(Rombel::class, 'rombel_kode', 'kode_rombel');
     }
 
-    public function walikelas() {
-        return $this->hasMany(Walikelas::class, 'kelas_id', 'nama_kelas');
+    public function guru() {
+        return $this->hasMany(Guru::class, 'kelas_id', 'nama_kelas');
     }
 
     public function siswa()

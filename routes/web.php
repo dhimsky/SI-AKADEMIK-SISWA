@@ -10,15 +10,15 @@ use App\Http\Controllers\Admin\RombelController as AdminRombelController;
 use App\Http\Controllers\Admin\KelasController as AdminKelasController;
 use App\Http\Controllers\Admin\AngkatanController as AdminAngkatanController;
 use App\Http\Controllers\Admin\MapelController as AdminMapelController;
-use App\Http\Controllers\Admin\WalikelasController as AdminWalikelasController;
+use App\Http\Controllers\Admin\GuruController as AdminGuruController;
 use App\Http\Controllers\Admin\SiswaController as AdminSiswaController;
 use App\Http\Controllers\Admin\NilaiController as AdminNilaiController;
 use App\Http\Controllers\Admin\TahunPelajaranController as AdminTahunPelajaranController;
 use App\Http\Controllers\Admin\AbsensiController as AdminAbsensiController;
-//WALIKELAS
-use App\Http\Controllers\Walikelas\DashboardController as WalikelasDashboardController;
-use App\Http\Controllers\Walikelas\NilaiController as WalikelasNilaiController;
-use App\Http\Controllers\Walikelas\AbsensiController as WalikelasAbsensiController;
+//GURU
+use App\Http\Controllers\Guru\DashboardController as GuruDashboardController;
+use App\Http\Controllers\Guru\NilaiController as GuruNilaiController;
+use App\Http\Controllers\Guru\AbsensiController as GuruAbsensiController;
 //SISWA
 use App\Http\Controllers\Siswa\DashboardController as SiswaDashboardController;
 
@@ -81,16 +81,19 @@ Route::middleware(['auth'])->group(function () {
         Route::post('tambah-mapel', [AdminMapelController::class, 'store_mapel'])->name('store-mapel');
         Route::put('update-mapel/{kode_mapel}', [AdminMapelController::class, 'update_mapel'])->name('update-mapel');
         Route::delete('delete-mapel/{kode_mapel}', [AdminMapelController::class, 'delete_mapel'])->name('delete-mapel');
-        // ============================== WALIKELAS ===========================================
-        Route::get('walikelas', [AdminWalikelasController::class, 'index'])->name('walikelas');
-        Route::post('tambah-walikelas', [AdminWalikelasController::class, 'store_walikelas'])->name('store-walikelas');
-        Route::put('update-walikelas/{id}', [AdminWalikelasController::class, 'update_walikelas'])->name('update-walikelas');
-        Route::delete('delete-walikelas/{id}', [AdminWalikelasController::class, 'delete_walikelas'])->name('delete-walikelas');
+        // ============================== GURU ===========================================
+        Route::get('guru', [AdminGuruController::class, 'index'])->name('guru');
+        Route::post('tambah-guru', [AdminGuruController::class, 'store_guru'])->name('store-guru');
+        Route::put('update-guru/{id}', [AdminGuruController::class, 'update_guru'])->name('update-guru');
+        Route::delete('delete-guru/{id}', [AdminGuruController::class, 'delete_guru'])->name('delete-guru');
         // ============================== SISWA ===========================================
         Route::get('siswa', [AdminSiswaController::class, 'index'])->name('siswa');
         Route::post('tambah-siswa', [AdminSiswaController::class, 'store_siswa'])->name('store-siswa');
+        Route::delete('delete-siswa/{id}', [AdminSiswaController::class, 'delete_siswa'])->name('delete-siswa');
+        Route::post('import', [AdminSiswaController::class, 'import'])->name('import');
         // ============================== NILAI ===========================================
         Route::get('nilai', [AdminNilaiController::class, 'index'])->name('nilai');
+        Route::get('tambah-nilai', [AdminNilaiController::class, 'tambah_nilai'])->name('tambah-nilai');
         // ============================== TAHUN PELAJARAN ===========================================
         Route::get('tahunpelajaran', [AdminTahunPelajaranController::class, 'index'])->name('tahunpelajaran');
         // ============================== ABSENSI ===========================================
@@ -98,13 +101,13 @@ Route::middleware(['auth'])->group(function () {
     });
     
     // Route prefix untuk walikelas
-    Route::prefix('walikelas')->name('walikelas.')->middleware('CekUserLogin:2')->group(function () {
+    Route::prefix('guru')->name('guru.')->middleware('CekUserLogin:2')->group(function () {
         // ============================== DASHBOARD ===========================================
-        Route::get('dashboard', [WalikelasDashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [GuruDashboardController::class, 'index'])->name('dashboard');
         // ============================== NILAI ===========================================
-        Route::get('nilai', [WalikelasNilaiController::class, 'index'])->name('nilai');
+        Route::get('nilai', [GuruNilaiController::class, 'index'])->name('nilai');
         // ============================== DASHBOARD ===========================================
-        Route::get('absensi', [WalikelasAbsensiController::class, 'index'])->name('absensi');
+        Route::get('absensi', [GuruAbsensiController::class, 'index'])->name('absensi');
     });
     
     //Route prefix untuk siswa

@@ -16,14 +16,17 @@ class MapelSeeder extends Seeder
         Mapel::create([
             'kode_mapel' => 'MTK',
             'nama_mapel' => 'Matematika',
+            'jurusan_kode' => 'TM',
         ]);
         Mapel::create([
             'kode_mapel' => 'IPA',
             'nama_mapel' => 'Ilmu Pengetahuan Alam',
+            'jurusan_kode' => 'TE',
         ]);
         Mapel::create([
             'kode_mapel' => 'IPS',
             'nama_mapel' => 'Ilmu Pengetahuan Sosial',
+            'jurusan_kode' => 'TKJ',
         ]);
     }
 }

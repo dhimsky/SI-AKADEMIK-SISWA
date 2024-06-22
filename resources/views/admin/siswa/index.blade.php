@@ -5,7 +5,7 @@
         <div class="ibox">
             <div class="ibox-head">
                 <div class="ibox-title">Data Table Siswa</div>
-                <div class="col-md-9 mt-4 text-right">
+                <div class="col-md-7 mt-4 text-right">
                     <form action="" method="GET">
                         <div class="row mb-3">
                             <div class="col-md-3 mb-2">
@@ -30,10 +30,13 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-1 text-right ">
+                <div class="col-md-3 text-right ">
+                    <a href="" data-toggle="modal" data-target=".importSiswa" class="btn btn-success"
+                        title="Tambah Siswa">
+                        <i class="fa fa-file-excel-o"></i> Import</a>
                     <a href="" data-toggle="modal" data-target=".tambahSiswa" class="btn btn-info"
                         title="Tambah Siswa">
-                        <i class="fa fa-plus"></i></a>
+                        <i class="fa fa-plus"></i> Tambah</a>
                 </div>
                 
             </div>
@@ -54,21 +57,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($siswas as $s)
                         <tr class="text-center">
-                            @foreach ($siswas as $s)
                             <td>{{ $s->nisn }}</td>
                             <td>{{ $s->nama_siswa }}</td>
                             <td>{{ $s->kelas_id }}</td>
                             <td>{{ $s->kelas->jurusan->nama_jurusan }}</td>
                             <td>{{ $s->semester }}</td>
                             <td>{{ $s->angkatan->tahun_angkatan}}</td>
-                            <td>{{ $s->tahunpelajaran_id->tahun_pelajaran }}</td>
+                            <td>{{ $s->tahunpelajaran->tahun_pelajaran }}</td>
                             <td>{{ $s->status_siswa}}</td>
                             <td class="d-flex justify-content-center">
                                 <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
                                     data-target=".editSiswa" title="Edit Siswa"><i
                                         class="fa fa-pencil font-14"></i></button>
-                                <button class="btn btn-default btn-xs" type="submit" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
+                                <form id="deleteForm{{ $s->nisn }}" action="{{ route('admin.delete-siswa', ['id' => $s->nisn]) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-default btn-xs" type="submit" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
+                                </form>
                             </td>
                         </tr>
 
@@ -214,6 +221,31 @@
                                 </div>
                             </div>
                         </div>
+
+                        {{-- VALIDASI DELETE --}}
+                        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                        <script>
+                            $(document).ready(function(){
+                                $('#deleteForm{{ $s->kode_identitas }}').submit(function(e){
+                                    e.preventDefault();
+                                    Swal.fire({
+                                        title: 'Apakah Anda yakin?',
+                                        text: "Anda tidak akan dapat mengembalikan ini!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Ya, hapus saja!'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // Submit form manually
+                                            this.submit();
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
                         @endforeach
                     </tbody>
                 </table>
@@ -277,6 +309,22 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
+                                    <label class="required-label faded-label" for="tahunpelajaran_id">Angkatan</label>
+                                    <select class="form-control input-sm" name="tahunpelajaran_id" value="{{ old('tahunpelajaran_id') }}">
+                                        <option value="">-- Pilih Tahun Pelajaran --</option>
+                                        @foreach ($tahunpelajaran as $a)
+                                            <option value="{{ $a->id }}">{{ $a->tahun_pelajaran }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('tahunpelajaran_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
                                     <label class="required-label faded-label" for="kelas_id">Kelas</label>
                                     <select class="form-control input-sm" name="kelas_id" value="{{ old('kelas_id') }}">
                                         <option value="">-- Pilih Jenis Kelas --</option>
@@ -330,6 +378,39 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Tambah</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade importSiswa" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import Siswa</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <a href="{{ asset('assets/files/format_import.xlsx') }}" style="text-decoration: underline">Download format</a>
+                    </div>
+                    <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="custom-file mb-3">
+                            <label class="custom-file-label" for="excel_file" id="file_label">Excel File</label>
+                            <input type="file" class="form-control-file @error('excel_file') is-invalid @enderror" id="excel_file" name="excel_file" accept=".xls, .xlsx" onchange="updateLabel(this)">
+                            @error('excel_file')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Import</button>
                 </div>
                 </form>
             </div>

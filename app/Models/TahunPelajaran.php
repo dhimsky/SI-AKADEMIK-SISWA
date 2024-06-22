@@ -11,6 +11,7 @@ class TahunPelajaran extends Model
     protected $primaryKey = 'id';
     protected $table = 'tahunpelajaran';
     protected $fillable = [
+        'id',
         'tahun_pelajaran'
     ];
 }

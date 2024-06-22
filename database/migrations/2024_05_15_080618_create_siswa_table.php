@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('siswa', function (Blueprint $table) {
             $table->string('nisn')->primary();
             $table->string('nama_siswa', 45);
-            $table->string('kelas_id');
+            $table->string('kelas_id')->nullable();
             $table->integer('semester');
-            $table->string('angkatan_id');
-            $table->unsignedBigInteger('tahunpelajaran_id');
+            $table->string('angkatan_id')->nullable();
+            $table->unsignedBigInteger('tahunpelajaran_id')->nullable();
             $table->string('status_siswa', 15);
             $table->timestamps();
-            $table->foreign('angkatan_id')->references('kode_angkatan')->on('angkatan');
-            $table->foreign('kelas_id')->references('nama_kelas')->on('kelas');
-            $table->foreign('tahunpelajaran_id')->references('id')->on('tahunpelajaran');
+            $table->foreign('angkatan_id')->references('kode_angkatan')->on('angkatan')->onDelete('cascade');
+            $table->foreign('kelas_id')->references('nama_kelas')->on('kelas')->onDelete('cascade');
+            $table->foreign('tahunpelajaran_id')->references('id')->on('tahunpelajaran')->onDelete('cascade');
         });
     }
 

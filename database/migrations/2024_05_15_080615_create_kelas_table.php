@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('rombel_kode');
             $table->string('tingkat', 5);
             $table->timestamps();
-            $table->foreign('jurusan_kode')->references('kode_jurusan')->on('jurusan');
-            $table->foreign('rombel_kode')->references('kode_rombel')->on('rombel');
+            $table->foreign('jurusan_kode')->references('kode_jurusan')->on('jurusan')->onDelete('cascade');
+            $table->foreign('rombel_kode')->references('kode_rombel')->on('rombel')->onDelete('cascade');
         });
     }
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('tittle', 'Nilai Wali Kelas')
+@section('tittle', 'Nilai Siswa')
 @section('content')
 <div class="page-content fade-in-up">
 

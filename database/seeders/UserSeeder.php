@@ -17,19 +17,35 @@ class UserSeeder extends Seeder
     {
         User::create([
             'kode_identitas' => 1,
-            'email' => 'macan@gmail.com',
-            'nama_lengkap' => 'Macan Tutul',
-            'password' => Hash::make('macan'),
+            'email' => 'staff@gmail.com',
+            'nama_lengkap' => 'Staff TU',
+            'password' => Hash::make('123'),
             'role_id' => 1, 
             'remember_token' => Str::random(60),
         ]);
 
         User::create([
             'kode_identitas' => 2,
-            'email' => 'harun@gmail.com',
-            'nama_lengkap' => 'Harun Worker',
-            'password' => Hash::make('harun'),
+            'email' => 'guru@gmail.com',
+            'nama_lengkap' => 'Guru Mapel',
+            'password' => Hash::make('123'),
             'role_id' => 2,
+            'remember_token' => Str::random(60),
+        ]);
+        User::create([
+            'kode_identitas' => 3,
+            'email' => 'siswa@gmail.com',
+            'nama_lengkap' => 'Siswa',
+            'password' => Hash::make('123'),
+            'role_id' => 3,
+            'remember_token' => Str::random(60),
+        ]);
+        User::create([
+            'kode_identitas' => 4,
+            'email' => 'kepsek@gmail.com',
+            'nama_lengkap' => 'Kepala Sekolah',
+            'password' => Hash::make('123'),
+            'role_id' => 4,
             'remember_token' => Str::random(60),
         ]);
         

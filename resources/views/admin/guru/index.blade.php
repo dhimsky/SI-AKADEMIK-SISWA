@@ -6,7 +6,7 @@
             <div class="ibox-head">
                 <div class="ibox-title">Data Table Wali Kelas</div>
                 <div class="col-md-2 text-right ">
-                    <a href="" data-toggle="modal" data-target=".tambahWalikelas" class="btn btn-info"
+                    <a href="" data-toggle="modal" data-target=".tambahguru" class="btn btn-info"
                         title="Tambah Wali Kelas">
                         <i class="fa fa-plus"></i></a>
                 </div>
@@ -17,26 +17,26 @@
                     <thead>
                         <tr>
                             <th>NIP</th>
-                            <th>Nama Lengkap</th>
-                            <th>JENIS KELAMIN</th>
+                            <th>NAMA LENGKAP</th>
+                            <th>MATA PELAJARAN</th>
                             <th>SEBAGAI WALI KELAS</th>
-                            <th>Email</th>
+                            <th>EMAIL</th>
                             <th>AKSI</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($walikelas as $item)
+                        @foreach ($guru as $item)
                             <tr class="text-center">
                                 <td>{{ $item->nip }}</td>
-                                <td>{{ $item->nama_walikelas }}</td>
-                                <td>{{ $item->jenis_kelamin }}</td>
+                                <td>{{ $item->nama_guru }}</td>
+                                <td>{{ $item->mapel_kode }}</td>
                                 <td>{{ $item->kelas_id }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
-                                        data-target="#editWalikelas{{ $item->nip }}" title="Edit Wali Kelas"><i
+                                        data-target="#editguru{{ $item->nip }}" title="Edit Wali Kelas"><i
                                             class="fa fa-pencil font-14"></i></button>
-                                    <form id="deleteForm{{ $item->nip }}" action="{{ route('admin.delete-walikelas', ['id' => $item->nip]) }}" method="POST">
+                                    <form id="deleteForm{{ $item->nip }}" action="{{ route('admin.delete-guru', ['id' => $item->nip]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-default btn-xs" type="submit" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
@@ -45,7 +45,7 @@
                             </tr>
 
                             {{-- MODAL EDIT --}}
-                        <div class="modal fade" id="editWalikelas{{ $item->nip }}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal fade" id="editguru{{ $item->nip }}" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -54,7 +54,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('admin.update-walikelas', ['id' => $item->nip]) }}" method="POST">
+                                        <form action="{{ route('admin.update-guru', ['id' => $item->nip]) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="form-group mb-3">
@@ -68,23 +68,24 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label class="required-label faded-label" for="nama_walikelas">Nama Lengkap</label>
-                                                <input type="text" name="nama_walikelas"
-                                                    class="form-control @error('nama_walikelas') is-invalid @enderror" value="{{ $item->nama_walikelas }}"
+                                                <label class="required-label faded-label" for="nama_guru">Nama Lengkap</label>
+                                                <input type="text" name="nama_guru"
+                                                    class="form-control @error('nama_guru') is-invalid @enderror" value="{{ $item->nama_guru }}"
                                                     placeholder="Masukan Nama Lengkap">
-                                                @error('nama_walikelas')
+                                                @error('nama_guru')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label class="required-label faded-label" for="jenis_kelamin">Jenis Kelamin</label>
-                                                <select class="form-control input-sm" name="jenis_kelamin">
-                                                    <option @if ($item->jenis_kelamin == 'Laki-Laki') selected @endif value="Laki-Laki">Laki-Laki</option>
-                                                    <option @if ($item->jenis_kelamin == 'Perempuan') selected @endif value="Perempuan">Perempuan</option>
+                                                <label class="required-label faded-label" for="mapel_kode">Mata Pelajaran</label>
+                                                <select class="form-control input-sm" name="mapel_kode">
+                                                    @foreach ($mapel as $m)
+                                                        <option @if ($m->kode_mapel == $item->mapel_kode) selected @endif value="{{ $m->kode_mapel }}">{{ $m->kode_mapel }}</option>
+                                                    @endforeach
                                                 </select>
-                                                @error('jenis_kelamin')
+                                                @error('mapel_kode')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -166,7 +167,7 @@
         </div>
     </div>
 
-    <div class="modal fade tambahWalikelas" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade tambahguru" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
@@ -175,7 +176,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.store-walikelas') }}" method="POST">
+                    <form action="{{ route('admin.store-guru') }}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
                             <label class="required-label faded-label" for="nip">NIP</label>
@@ -188,23 +189,24 @@
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label class="required-label faded-label" for="nama_walikelas">Nama Lengkap</label>
-                            <input type="text" name="nama_walikelas"
-                                class="form-control @error('nama_walikelas') is-invalid @enderror"
+                            <label class="required-label faded-label" for="nama_guru">Nama Lengkap</label>
+                            <input type="text" name="nama_guru"
+                                class="form-control @error('nama_guru') is-invalid @enderror"
                                 placeholder="Masukan Nama Lengkap">
-                            @error('nama_walikelas')
+                            @error('nama_guru')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label class="required-label faded-label" for="jenis_kelamin">Jenis Kelamin</label>
-                            <select class="form-control input-sm" name="jenis_kelamin">
-                                <option value="Laki-Laki">Laki-Laki</option>
-                                <option value="Perempuan">Perempuan</option>
+                            <label class="required-label faded-label" for="mapel_kode">Mata Pelajaran</label>
+                            <select class="form-control input-sm" name="mapel_kode">
+                                @foreach ($mapel as $item)
+                                    <option value="{{ $item->kode_mapel }}">{{ $item->nama_mapel }}</option>
+                                @endforeach
                             </select>
-                            @error('jenis_kelamin')
+                            @error('mapel_kode')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

@@ -3,30 +3,32 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Guru;
 use App\Models\Kelas;
+use App\Models\Mapel;
 use App\Models\User;
-use App\Models\Walikelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class WalikelasController extends Controller
+class GuruController extends Controller
 {
     public function index(){
-        $walikelas = Walikelas::all();
-        // dd($walikelas);
+        $guru = Guru::all();
+        // dd($guru);
         $kelas = Kelas::all();
-        return view('admin.walikelas.index', compact('walikelas', 'kelas'));
+        $mapel = Mapel::all();
+        return view('admin.guru.index', compact('guru', 'kelas', 'mapel'));
     }
 
-    public function store_walikelas(Request $request)
+    public function store_guru(Request $request)
     {
         // Validasi
         $rules = [
             'nip' => 'required|unique:users,kode_identitas',
-            'nama_walikelas' => 'required',
-            'jenis_kelamin' => 'required',
+            'nama_guru' => 'required',
+            'mapel_kode' => 'required',
             'kelas_id' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required',
@@ -34,8 +36,8 @@ class WalikelasController extends Controller
         $messages = [
             'nip.required' => 'NIP tidak boleh kosong!',
             'nip.unique' => 'NIP sudah digunakan!',
-            'nama_walikelas.required' => 'Nama Lengkap tidak boleh kosong!',
-            'jenis_kelamin.required' => 'Jenis Kelamin tidak boleh kosong!',
+            'nama_guru.required' => 'Nama Lengkap tidak boleh kosong!',
+            'mapel_kode.required' => 'Mapel tidak boleh kosong!',
             'kelas_id.required' => 'Sebagai Wali Kelas tidak boleh kosong!',
             'email.required' => 'Email tidak boleh kosong!',
             'email.unique' => 'Email sudah digunakan!',
@@ -49,52 +51,51 @@ class WalikelasController extends Controller
                     ->withInput();
         }
 
-        //menambahkan akun walikelas ke table USERS
+        //menambahkan akun guru ke table USERS
         $user = new User();
         $user->kode_identitas = $request->nip;
-        $user->nama_lengkap = $request->nama_walikelas;
+        $user->nama_lengkap = $request->nama_guru;
         $user->role_id = 2;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
 
-        //insert data wali kelas ke table WALIKELAS
-        $walikelas = new Walikelas();
-        $walikelas->nip = $request->nip;
-        $walikelas->nama_walikelas = $request->nama_walikelas;
-        $walikelas->jenis_kelamin = $request->jenis_kelamin;
-        $walikelas->kelas_id = $request->kelas_id;
-        $walikelas->email = $request->email;
-        $walikelas->password = Hash::make($request->password);
-        $walikelas->save();
+        //insert data wali kelas ke table Guru
+        $guru = new Guru();
+        $guru->nip = $request->nip;
+        $guru->nama_guru = $request->nama_guru;
+        $guru->mapel_kode = $request->mapel_kode;
+        $guru->kelas_id = $request->kelas_id;
+        $guru->email = $request->email;
+        $guru->save();
 
-        return redirect()->back()->with('success', 'Wali Kelas berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Guru Kelas berhasil ditambahkan');
     }
 
-    public function update_walikelas(Request $request, $id)
+    public function update_guru(Request $request, $id)
     {
-        $akun = Walikelas::findOrFail($id);
+        $akun = Guru::findOrFail($id);
         // Validasi
         $rules = [
             'nip' => [
                 'required',
-                Rule::unique('walikelas')->ignore($akun->nip, 'nip'),
+                Rule::unique('guru')->ignore($akun->nip, 'nip'),
             ],
             'email' => [
                 'required',
                 'email',
-                Rule::unique('walikelas')->ignore($akun->email, 'email'),
+                Rule::unique('guru')->ignore($akun->email, 'email'),
             ],
-            'nama_walikelas' => 'required',
-            'jenis_kelamin' => 'required',
+            'nama_guru' => 'required',
+            'mapel_kode' => 'required',
             'kelas_id' => 'required',
         ];
 
         $messages = [
             'nip.required' => 'NIP tidak boleh kosong!',
             'nip.unique' => 'NIP sudah digunakan!',
-            'nama_walikelas.required' => 'Nama Lengkap tidak boleh kosong!',
-            'jenis_kelamin.required' => 'Jenis Kelamin tidak boleh kosong!',
+            'nama_guru.required' => 'Nama Lengkap tidak boleh kosong!',
+            'mapel_kode.required' => 'Mapel tidak boleh kosong!',
             'kelas_id.required' => 'Sebagai Wali Kelas tidak boleh kosong!',
             'email.required' => 'Email tidak boleh kosong!',
             'email.unique' => 'Email sudah digunakan!',
@@ -108,27 +109,27 @@ class WalikelasController extends Controller
                     ->withInput();
         }
 
-        $walikelas = Walikelas::findOrFail($id);
-        $walikelas->nip = $request->nip;
-        $walikelas->nama_walikelas = $request->nama_walikelas;
-        $walikelas->jenis_kelamin = $request->jenis_kelamin;
-        $walikelas->kelas_id = $request->kelas_id;
-        $walikelas->email = $request->email;
+        $guru = Guru::findOrFail($id);
+        $guru->nip = $request->nip;
+        $guru->nama_guru = $request->nama_guru;
+        $guru->mapel_kode = $request->mapel_kode;
+        $guru->kelas_id = $request->kelas_id;
+        $guru->email = $request->email;
         if (!empty($request->password_display)) {
-            $walikelas->password = Hash::make($request->password_display);
+            $guru->password = Hash::make($request->password_display);
         } else {
-            $walikelas->password = Hash::make($request->password);
+            $guru->password = Hash::make($request->password);
         }
-        $walikelas->save();
+        $guru->save();
 
-        return redirect()->back()->with('success', 'Wali Kelas berhasil diperbarui');
+        return redirect()->back()->with('success', 'Guru Kelas berhasil diperbarui');
     }
 
-    public function delete_walikelas($id)
+    public function delete_guru($id)
     {
-        $walikelas = Walikelas::findOrFail($id);
-        $walikelas->delete();
+        $guru = Guru::findOrFail($id);
+        $guru->delete();
 
-        return redirect()->back()->with('success', 'Wali Kelas berhasil dihapus');
+        return redirect()->back()->with('success', 'Guru Kelas berhasil dihapus');
     }
 }

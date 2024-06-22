@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('kelas', 10);
             $table->integer('value');
             $table->timestamps();
-            $table->foreign('nisn_id')->references('nisn')->on('siswa');
-            $table->foreign('mapel_kode')->references('kode_mapel')->on('mapel');
+            $table->foreign('nisn_id')->references('nisn')->on('siswa')->onDelete('cascade');
+            $table->foreign('mapel_kode')->references('kode_mapel')->on('mapel')->onDelete('cascade');
         });
     }
 

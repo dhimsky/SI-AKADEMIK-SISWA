@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Jurusan;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -11,7 +12,8 @@ class MapelController extends Controller
 {
     public function index(){
         $mapel = Mapel::all();
-        return view('admin.mapel.index', compact('mapel'));
+        $jurusan = Jurusan::all();
+        return view('admin.mapel.index', compact('mapel', 'jurusan'));
     }
 
     public function store_mapel(Request $request)
@@ -19,10 +21,12 @@ class MapelController extends Controller
         $rules = [
             'kode_mapel' => 'required',
             'nama_mapel' => 'required',
+            'jurusan_kode' => 'required',
         ];
         $messages = [
             'kode_mapel.required' => 'Kode Mapel tidak boleh kosong!',
             'nama_mapel.required' => 'Nama Mapel tidak boleh kosong!',
+            'jurusan_kode.required' => 'Jurusan tidak boleh kosong!',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -35,6 +39,7 @@ class MapelController extends Controller
         $mapel = new Mapel();
         $mapel->kode_mapel = $request->kode_mapel;
         $mapel->nama_mapel = $request->nama_mapel;
+        $mapel->jurusan_kode = $request->jurusan_kode;
         $mapel->save();
 
         return redirect()->back()->with('success', 'Mapel berhasil ditambahkan');
@@ -45,10 +50,12 @@ class MapelController extends Controller
         $rules = [
             'kode_mapel' => 'required',
             'nama_mapel' => 'required',
+            'jurusan_kode' => 'required',
         ];
         $messages = [
             'kode_mapel.required' => 'Kode Mapel tidak boleh kosong!',
             'nama_mapel.required' => 'Nama Mapel tidak boleh kosong!',
+            'jurusan_kode.required' => 'Jurusan tidak boleh kosong!',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -61,6 +68,7 @@ class MapelController extends Controller
         $mapel = Mapel::findOrFail($kode_mapel);
         $mapel->kode_mapel = $request->kode_mapel;
         $mapel->nama_mapel = $request->nama_mapel;
+        $mapel->jurusan_kode = $request->jurusan_kode;
         $mapel->save();
 
         return redirect()->back()->with('success', 'Mapel berhasil diperbarui');

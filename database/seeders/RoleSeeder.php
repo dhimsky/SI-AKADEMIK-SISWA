@@ -19,11 +19,15 @@ class RoleSeeder extends Seeder
         ]);
         Role::create([
             'id' => '2',
-            'level' => 'Wali Kelas',
+            'level' => 'Guru',
         ]);
         Role::create([
             'id' => '3',
             'level' => 'siswa',
+        ]);
+        Role::create([
+            'id' => '4',
+            'level' => 'Kepala Sekolah',
         ]);
     }
 }

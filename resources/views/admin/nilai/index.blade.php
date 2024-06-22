@@ -15,11 +15,10 @@
                     </form>
                 </div>
                 <div class="col-md-1 text-right ">
-                    <a href="" data-toggle="modal" data-target=".tambahNilai" class="btn btn-info"
+                    <a href="{{ route('admin.tambah-nilai') }}" class="btn btn-info"
                         title="Tambah Nilai">
                         <i class="fa fa-plus"></i></a>
                 </div>
-                
             </div>
             <div class="ibox-body">
                 <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0"
@@ -27,7 +26,7 @@
                     <thead>
                         <tr>
                             <th>NISN</th>
-                            <th>NAMA LENGKAP</th>
+                            <th>NAMA SISWA</th>
                             <th>MAPEL</th>
                             <th>SEMESTER</th>
                             <th>NILAI</th>
@@ -129,20 +128,18 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    @csrf
                 <div class="modal-body">
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label class="required-label faded-label" for="nisn_id">NISN</label>
-                                    <input type="number" name="nisn_id"
-                                        class="form-control @error('nisn_id') is-invalid @enderror" value="{{ old('nisn_id') }}" placeholder="Masukan NISN">
-                                    @error('nisn_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <label class="form-control-label">Nama Siswa</label>
+                                    <select class="form-control select2_demo_2" name="nisn_id">
+                                        @foreach ($siswa as $m)
+                                            <option value="{{ $m->nisn }}">{{ $m->nama_siswa }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -186,4 +183,8 @@
     </div>
     @include('validasi.validasi-edit')
     @include('validasi.notifikasi-berhasil')
-@endsection
+
+    
+
+    
+    @endsection

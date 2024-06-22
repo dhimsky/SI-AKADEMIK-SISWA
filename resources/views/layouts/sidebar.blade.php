@@ -4,8 +4,11 @@
             <div>
                 <img src="{{ asset('/') }}assets/images/profile.jpeg" width="45px"/>
             </div>
+            @if (Auth::check())
             <div class="admin-info">
-                <div class="font-strong">Nama User</div><small>Level User</small></div>
+                <div class="font-strong">{{ Auth::user()->nama_lengkap }}</div><small>{{ Auth::user()->role->level }}</small>
+            </div>
+            @endif
         </div>
         <ul class="side-menu metismenu">
             @if (Auth::user()->role_id == '1')
@@ -27,8 +30,8 @@
                 </ul>
             </li>
             <li>
-                <a href="javascript:;"><i class="sidebar-item-icon fa fa-users"></i>
-                    <span class="nav-label">Akademik</span><i class="fa fa-angle-left arrow"></i></a>
+                <a href="javascript:;"><i class="sidebar-item-icon fa fa-building"></i>
+                    <span class="nav-label">Master</span><i class="fa fa-angle-left arrow"></i></a>
                 <ul class="nav-2-level collapse">
                     <li>
                         <a href="{{ route('admin.jurusan') }}">Jurusan</a>
@@ -49,7 +52,7 @@
                         <a href="{{ route('admin.mapel') }}">Mapel</a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.walikelas') }}">Wali Kelas</a>
+                        <a href="{{ route('admin.guru') }}">Guru</a>
                     </li>
                 </ul>
             </li>
@@ -58,7 +61,7 @@
                     <span class="nav-label">Siswa</span><i class="fa fa-angle-left arrow"></i></a>
                 <ul class="nav-2-level collapse">
                     <li>
-                        <a href="{{ route('admin.siswa') }}">Siswa Aktif</a>
+                        <a href="{{ route('admin.siswa') }}">Daftar Siswa</a>
                     </li>
                     <li>
                         <a href="{{ route('admin.nilai') }}">Nilai Siswa</a>
@@ -72,17 +75,17 @@
 
             @if (Auth::user()->role_id == '2')
             <li>
-                <a class="active" href="{{ route('walikelas.dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active" href="{{ route('guru.dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                     <span class="nav-label">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a class="active" href="{{ route('walikelas.nilai') }}"><i class="sidebar-item-icon fa fa-pencil"></i>
+                <a class="active" href="{{ route('guru.nilai') }}"><i class="sidebar-item-icon fa fa-pencil"></i>
                     <span class="nav-label">Nilai</span>
                 </a>
             </li>
             <li>
-                <a class="active" href="{{ route('walikelas.absensi') }}"><i class="sidebar-item-icon fa fa-calendar-check-o"></i>
+                <a class="active" href="{{ route('guru.absensi') }}"><i class="sidebar-item-icon fa fa-calendar-check-o"></i>
                     <span class="nav-label">Absensi</span>
                 </a>
             </li>

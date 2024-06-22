@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Walikelas;
+namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index(){
-        return view('walikelas.dashboard.index');
+        return view('Guru.dashboard.index');
     }
 }

@@ -18,6 +18,7 @@
                         <tr>
                             <th>KODE MAPEL</th>
                             <th>NAMA MAPEL</th>
+                            <th>JURUSAN</th>
                             <th>AKSI</th>
                         </tr>
                     </thead>
@@ -26,6 +27,7 @@
                             <tr class="text-center">
                                 <td>{{ $item->kode_mapel }}</td>
                                 <td>{{ $item->nama_mapel }}</td>
+                                <td>{{ $item->jurusan->nama_jurusan }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
                                         data-target="#editJurusan{{ $item->kode_mapel }}" title="Edit role"><i
@@ -67,6 +69,20 @@
                                                         class="form-control @error('nama_mapel') is-invalid @enderror" value="{{ $item->nama_mapel }}"
                                                         placeholder="Masukan nama mapel">
                                                     @error('nama_mapel')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label class="required-label faded-label" for="jurusan_kode">Jurusan</label>
+                                                    <select class="form-control input-sm" name="jurusan_kode">
+                                                        <option value="">-- Pilih Jurusan --</option>
+                                                        @foreach ($jurusan as $j)
+                                                            <option value="{{ $j->kode_jurusan }}" @if ($j->kode_jurusan == $item->jurusan_kode ) selected @endif >{{ $j->nama_jurusan }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('jurusan_kode')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -140,6 +156,20 @@
                                 class="form-control @error('nama_mapel') is-invalid @enderror"
                                 placeholder="Masukan nama mapel">
                             @error('nama_mapel')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="required-label faded-label" for="jurusan_kode">Jurusan</label>
+                            <select class="form-control input-sm" name="jurusan_kode">
+                                <option value="">-- Pilih Jurusan --</option>
+                                    @foreach ($jurusan as $item)
+                                        <option value="{{ $item->kode_jurusan }}">{{ $item->nama_jurusan }}</option>
+                                    @endforeach
+                            </select>
+                            @error('jurusan_kode')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
