@@ -65,9 +65,8 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
-                                                        <label class="required-label faded-label" for="nisn_id">NISN</label>
-                                                        <input type="number" name="nisn_id"
-                                                            class="form-control @error('nisn_id') is-invalid @enderror" placeholder="Masukan NISN" value="{{ $s->nisn_id }}">
+                                                        <label class="form-control-label">Nama Siswa</label>
+                                                        <input disabled type="text" name="nisn_id" class="form-control @error('value') is-invalid @enderror" value="">
                                                         @error('nisn_id')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -77,11 +76,12 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
-                                                        <label class="required-label faded-label" for="mapel_kode">Angkatan</label>
-                                                        <select class="form-control input-sm @error('mapel_kode') is-invalid @enderror" name="mapel_kode">
+                                                        <label class="required-label faded-label" for="mapel_kode">Mapel</label>
+                                                        <select class="form-control select2_demo_2" name="mapel_kode">
+                                                            <option value="">--Pilih Mapel--</option>
                                                             @foreach ($mapel as $m)
-                                                            <option value="{{ $m->kode_mapel }}" {{ $m->kode_mapel === $s->mapel_kode ? 'selected' : '' }}>{{ $m->nama_mapel }}</option>
-                                                            @endforeach
+                                                                    <option value="{{ $m->kode_mapel }}" @if ($m->kode_mapel == $s->mapel_kode ) selected @endif >{{ $m->nama_mapel }}</option>
+                                                                @endforeach
                                                         </select>
                                                         @error('mapel_kode')
                                                             <span class="invalid-feedback" role="alert">
@@ -94,7 +94,7 @@
                                                     <div class="form-group mb-3">
                                                         <label class="required-label faded-label" for="value">Nilai</label>
                                                         <input type="number" name="value"
-                                                            class="form-control @error('value') is-invalid @enderror" placeholder="Masukan Nilai" value="{{ $s->value }}">
+                                                            class="form-control @error('value') is-invalid @enderror" value="" placeholder="Masukan Nilai">
                                                         @error('value')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -115,69 +115,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-
-    {{-- MODAL TAMBAH --}}
-    <div class="modal fade tambahNilai" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah Nilai</h5>
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                    </button>
-                </div>
-                <form action="" method="POST" enctype="multipart/form-data">
-                    @csrf
-                <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label class="form-control-label">Nama Siswa</label>
-                                    <select class="form-control select2_demo_2" name="nisn_id">
-                                        @foreach ($siswa as $m)
-                                            <option value="{{ $m->nisn }}">{{ $m->nama_siswa }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label class="required-label faded-label" for="mapel_kode">Mapel</label>
-                                    <select class="form-control input-sm" name="mapel_kode" value="{{ old('mapel_kode') }}">
-                                        <option value="">-- Pilih Mapel --</option>
-                                        @foreach ($mapel as $m)
-                                            <option value="{{ $m->kode_mapel }}">{{ $m->nama_mapel }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('mapel_kode')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label class="required-label faded-label" for="value">Nilai</label>
-                                    <input type="number" name="value"
-                                        class="form-control @error('value') is-invalid @enderror" value="{{ old('value') }}" placeholder="Masukan Nilai">
-                                    @error('value')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
