@@ -14,6 +14,7 @@ class Siswa extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'nis',
         'nisn',
         'nama_siswa',
         'kelas_id',

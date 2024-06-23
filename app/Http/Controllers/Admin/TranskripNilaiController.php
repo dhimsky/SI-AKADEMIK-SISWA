@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Nilai;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
-class AbsensiController extends Controller
+class TranskripNilaiController extends Controller
 {
     public function index(){
         $siswa = Siswa::all();
-        return view('admin.absensi.index', compact('siswa'));
+        $nilai = Nilai::all();
+        return view('admin.transkripnilai.index', compact('siswa', 'nilai'));
     }
 }

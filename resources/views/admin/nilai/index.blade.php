@@ -44,7 +44,13 @@
                             <td class="text-center">{{ $n->semester }}</td>
                             <td class="text-center">{{ $n->tahun_pelajaran }}</td>
                             <td class="text-center">{{ $n->kelas }}</td>
-                            <td class="text-center">{{ $n->value }}</td>
+                            <td class="text-center">
+                                @if ($n->value >= 75)
+                                    <span class="badge badge-success badge-pill m-r-5 m-b-5">{{ $n->value }}</span>
+                                @else
+                                    <span class="badge badge-warning badge-pill m-r-5 m-b-5">{{ $n->value }}</span>
+                                @endif
+                            </td>                            
                             <td class="d-flex justify-content-center">
                                 <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
                                     data-target=".editNilai{{ $n->id }}" title="Edit Siswa"><i
@@ -76,22 +82,6 @@
                                                         <label class="form-control-label">Nama Siswa</label>
                                                         <input disabled type="text" name="nisn_id" class="form-control @error('value') is-invalid @enderror" value="{{ $n->siswa->nama_siswa }}">
                                                         @error('nisn_id')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="required-label faded-label" for="mapel_kode">Mapel</label>
-                                                        <select class="form-control select2_demo_2" name="mapel_kode">
-                                                            <option value="">--Pilih Mapel--</option>
-                                                            @foreach ($mapel as $m)
-                                                                    <option value="{{ $m->kode_mapel }}" @if ($m->kode_mapel == $n->mapel_kode ) selected @endif >{{ $m->nama_mapel }}</option>
-                                                                @endforeach
-                                                        </select>
-                                                        @error('mapel_kode')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
@@ -151,10 +141,6 @@
             </div>
         </div>
     </div>
-    @include('validasi.validasi-edit')
-    @include('validasi.notifikasi-berhasil')
-
-    
-
-    
-    @endsection
+@include('validasi.validasi-edit')
+@include('validasi.notifikasi-berhasil')
+@endsection

@@ -21,16 +21,11 @@ class AkunController extends Controller
     {
         $rules = [
             'kode_identitas' => 'required|unique:users,kode_identitas',
-            'email' => 'required|email|unique:users,email',
             'nama_lengkap' => 'required',
             'password' => 'required',
         ];
         $messages = [
             'kode_identitas.required' => 'Kode Identitas tidak boleh kosong!',
-            'kode_identitas.unique' => 'Kode Identitas sudah digunakan!',
-            'email.required' => 'Email tidak boleh kosong!',
-            'email.unique' => 'Email sudah digunakan!',
-            'email.email' => 'Email tidak valid!',
             'kode_identitas.unique' => 'Kode Identitas sudah digunakan!',
             'nama_lengkap.required' => 'Nama Lengkap tidak boleh kosong!',
             'password.required' => 'Password tidak boleh kosong!',
@@ -45,7 +40,6 @@ class AkunController extends Controller
 
         $akun = new User();
         $akun->kode_identitas = $request->kode_identitas;
-        $akun->email = $request->email;
         $akun->role_id = 1;
         $akun->nama_lengkap = $request->nama_lengkap;
         $akun->password = Hash::make($request->password);
@@ -64,19 +58,10 @@ class AkunController extends Controller
                 'required',
                 Rule::unique('users')->ignore($akun->kode_identitas, 'kode_identitas'),
             ],
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('users')->ignore($akun->kode_identitas, 'kode_identitas'),
-            ],
             'nama_lengkap' => 'required',
         ];
         $messages = [
             'kode_identitas.required' => 'Kode Identitas tidak boleh kosong!',
-            'kode_identitas.unique' => 'Kode Identitas sudah digunakan!',
-            'email.required' => 'Email tidak boleh kosong!',
-            'email.unique' => 'Email sudah digunakan!',
-            'email.email' => 'Email tidak valid!',
             'kode_identitas.unique' => 'Kode Identitas sudah digunakan!',
             'nama_lengkap.required' => 'Nama Lengkap tidak boleh kosong!',
         ];

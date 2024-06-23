@@ -59,11 +59,9 @@ class NilaiController extends Controller
     public function update_nilai(Request $request, $id)
     {
         $rules = [
-            'mapel_kode' => 'required',
             'value' => 'required',
         ];
         $messages = [
-            'mapel_kode.required' => 'Nama Siswa tidak boleh kosong',
             'value.required' => 'Nama Siswa tidak boleh kosong',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -74,7 +72,6 @@ class NilaiController extends Controller
         }
 
         $nilai = Nilai::findOrFail($id);
-        $nilai->mapel_kode = $request->mapel_kode;
         $nilai->value = $request->value;
         $nilai->save();
 

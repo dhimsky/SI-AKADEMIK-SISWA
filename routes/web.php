@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+//UMUM
+use App\Http\Controllers\ProfileController;
+//ADMIN
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AkunController as AdminAkunController;
 use App\Http\Controllers\Admin\JurusanController as AdminJurusanController;
@@ -15,6 +18,7 @@ use App\Http\Controllers\Admin\SiswaController as AdminSiswaController;
 use App\Http\Controllers\Admin\NilaiController as AdminNilaiController;
 use App\Http\Controllers\Admin\TahunPelajaranController as AdminTahunPelajaranController;
 use App\Http\Controllers\Admin\AbsensiController as AdminAbsensiController;
+use App\Http\Controllers\Admin\TranskripNilaiController as AdminTranskripNilaiController;
 //GURU
 use App\Http\Controllers\Guru\DashboardController as GuruDashboardController;
 use App\Http\Controllers\Guru\NilaiController as GuruNilaiController;
@@ -44,6 +48,8 @@ Route::delete('/logoutsession', [AuthController::class, 'logout'])->name('action
 
 
 Route::middleware(['auth'])->group(function () {
+    // ============================== PROFILE ===========================================
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
     // Route prefix untuk admin
     Route::prefix('admin')->name('admin.')->middleware('CekUserLogin:1')->group(function () {
         // ============================== DASHBOARD ===========================================
@@ -53,12 +59,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('tambah-akun', [AdminAkunController::class, 'store_akun'])->name('store-akun');
         Route::put('update-akun/{id}', [AdminAkunController::class, 'update_akun'])->name('update-akun');
         Route::delete('delete-akun/{id}', [AdminAkunController::class, 'delete_akun'])->name('delete-akun');
-        // ============================== ROLE ===========================================
+        // ============================== JURUSAN ===========================================
         Route::get('jurusan', [AdminJurusanController::class, 'index'])->name('jurusan');
         Route::post('tambah-jurusan', [AdminJurusanController::class, 'store_jurusan'])->name('store-jurusan');
         Route::put('update-jurusan/{kode_jurusan}', [AdminJurusanController::class, 'update_jurusan'])->name('update-jurusan');
         Route::delete('delete-jurusan/{kode_jurusan}', [AdminJurusanController::class, 'delete_jurusan'])->name('delete-jurusan');
-        // ============================== JURUSAN ===========================================
+        // ============================== ROLE ===========================================
         Route::get('role', [AdminRoleController::class, 'index'])->name('role');
         Route::put('update-role/{id}', [AdminRoleController::class, 'update_role'])->name('update-role');
         // ============================== ROMBEL ===========================================
@@ -102,6 +108,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('tahunpelajaran', [AdminTahunPelajaranController::class, 'index'])->name('tahunpelajaran');
         // ============================== ABSENSI ===========================================
         Route::get('absensi', [AdminAbsensiController::class, 'index'])->name('absensi');
+        // ============================== TRANSKRIP NILAI ===========================================
+        Route::get('transkripnilai', [AdminTranskripNilaiController::class, 'index'])->name('transkripnilai');
     });
     
     // Route prefix untuk walikelas

@@ -10,6 +10,7 @@ use App\Models\Siswa;
 use App\Models\SiswaImport;
 use App\Models\TahunPelajaran;
 use App\Models\User;
+use App\Models\UserImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -62,20 +63,16 @@ class SiswaController extends Controller
         $request->validate([
             'excel_file' => 'required|file|mimes:xlsx,xls',
         ]);
-
-        // Ambil file Excel dari request
         $file = $request->file('excel_file');
 
-        // Proses import dengan menggunakan SiswaImport
         try {
+            Excel::import(new UserImport(), $file);
             Excel::import(new SiswaImport(), $file);
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
             $failures = $e->failures();
 
-            // Handle errors here if needed
             return back()->withFailures($failures);
         }
-
         return redirect()->back()->with('success', 'Data siswa berhasil diimpor.');
     }
 

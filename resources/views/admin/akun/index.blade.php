@@ -16,7 +16,6 @@
                     <thead>
                         <tr>
                             <th>Kode Identitas</th>
-                            <th>Email</th>
                             <th>NAMA LENGKAP</th>
                             <th>ROLE</th>
                             <th>AKSI</th>
@@ -26,7 +25,6 @@
                         @foreach ($akun as $item)
                             <tr class="text-center">
                                 <td>{{ $item->kode_identitas }}</td>
-                                <td>{{ $item->email }}</td>
                                 <td>{{ $item->nama_lengkap }}</td>
                                 <td>{{ $item->Role->level }}</td>
                                 <td class="d-flex justify-content-center">
@@ -57,15 +55,6 @@
                                                     <input type="kode_identitas" name="kode_identitas" value="{{ $item->kode_identitas }}" class="form-control @error('kode_identitas') is-invalid @enderror"
                                                         placeholder="Masukan kode_identitas">
                                                     @error('kode_identitas')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group mb-3">
-                                                    <label class="required-label faded-label" for="email">Email</label>
-                                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $item->email }}" placeholder="Masukan email">
-                                                    @error('email')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -148,16 +137,6 @@
                             <input type="kode_identitas" name="kode_identitas" class="form-control @error('kode_identitas') is-invalid @enderror"
                                 placeholder="Masukan Kode Identitas">
                             @error('kode_identitas')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="required-label faded-label" for="email">Email</label>
-                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                placeholder="Masukan email">
-                            @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
