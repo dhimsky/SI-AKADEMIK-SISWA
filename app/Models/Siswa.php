@@ -9,7 +9,7 @@ class Siswa extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'nisn';
+    protected $primaryKey = 'nis';
     protected $table = 'siswa';
     public $timestamps = true;
 
@@ -24,15 +24,19 @@ class Siswa extends Model
     ];
 
     public static $rules = [
+        'nis' => 'required|unique:siswa,nis',
         'nisn' => 'required|unique:siswa,nisn',
         'nama_siswa' => 'required',
         'kelas_id' => 'required|exists:kelas,nama_kelas',
         'angkatan_id' => 'required|exists:angkatan,kode_angkatan',
         'status_siswa' => 'required',
+        'password' => 'required',
     ];
     
     public static $messages = [
+        'nis.required' => 'NIS tidak boleh kosong!',
         'nisn.required' => 'NISN tidak boleh kosong!',
+        'nis.unique' => 'NIS sudah digunakan!',
         'nisn.unique' => 'NISN sudah digunakan!',
         'nama_siswa.required' => 'Nama siswa tidak boleh kosong!',
         'kelas_id.required' => 'Kelas tidak boleh kosong!',
@@ -40,6 +44,7 @@ class Siswa extends Model
         'angkatan_id.required' => 'Angkatan tidak boleh kosong!',
         'angkatan_id.exists' => 'Angkatan yang dipilih tidak valid!',
         'status_siswa.required' => 'Status siswa tidak boleh kosong!',
+        'password.required' => 'Password tidak boleh kosong!',
     ];
 
     public function kelas()
@@ -56,6 +61,10 @@ class Siswa extends Model
     }
     public function nilai()
     {
-        return $this->hasMany(Siswa::class, 'nisn_id', 'nisn');
+        return $this->hasMany(Nilai::class, 'nis_id', 'nis');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'nis', 'kode_identitas');
     }
 }

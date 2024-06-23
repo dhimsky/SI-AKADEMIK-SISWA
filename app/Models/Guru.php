@@ -16,8 +16,7 @@ class Guru extends Model
         'nama_guru',
         'kelas_id',
         'mapel_kode',
-        'email',
-        'password',
+        // 'password',
     ];
     protected $casts = [
         'nip' => 'string',

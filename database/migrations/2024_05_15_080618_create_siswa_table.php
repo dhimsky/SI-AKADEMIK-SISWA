@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswa', function (Blueprint $table) {
-            $table->string('nisn')->primary();
+            $table->string('nis')->primary();
+            $table->string('nisn');
             $table->string('nama_siswa', 45);
             $table->string('kelas_id')->nullable();
             $table->integer('semester');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->foreign('angkatan_id')->references('kode_angkatan')->on('angkatan')->onDelete('cascade');
             $table->foreign('kelas_id')->references('nama_kelas')->on('kelas')->onDelete('cascade');
             $table->foreign('tahunpelajaran_id')->references('id')->on('tahunpelajaran')->onDelete('cascade');
+            $table->foreign('nis')->references('kode_identitas')->on('users')->onDelete('cascade');
         });
     }
 

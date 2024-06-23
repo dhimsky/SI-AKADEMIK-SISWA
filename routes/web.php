@@ -89,11 +89,15 @@ Route::middleware(['auth'])->group(function () {
         // ============================== SISWA ===========================================
         Route::get('siswa', [AdminSiswaController::class, 'index'])->name('siswa');
         Route::post('tambah-siswa', [AdminSiswaController::class, 'store_siswa'])->name('store-siswa');
+        Route::put('update-siswa/{id}', [AdminSiswaController::class, 'update_siswa'])->name('update-siswa');
         Route::delete('delete-siswa/{id}', [AdminSiswaController::class, 'delete_siswa'])->name('delete-siswa');
         Route::post('import', [AdminSiswaController::class, 'import'])->name('import');
         // ============================== NILAI ===========================================
         Route::get('nilai', [AdminNilaiController::class, 'index'])->name('nilai');
         Route::get('tambah-nilai', [AdminNilaiController::class, 'tambah_nilai'])->name('tambah-nilai');
+        Route::post('store-nilai', [AdminNilaiController::class, 'store_nilai'])->name('store-nilai');
+        Route::put('update-nilai/{id}', [AdminNilaiController::class, 'update_nilai'])->name('update-nilai');
+        Route::delete('delete-nilai/{id}', [AdminNilaiController::class, 'delete_nilai'])->name('delete-nilai');
         // ============================== TAHUN PELAJARAN ===========================================
         Route::get('tahunpelajaran', [AdminTahunPelajaranController::class, 'index'])->name('tahunpelajaran');
         // ============================== ABSENSI ===========================================

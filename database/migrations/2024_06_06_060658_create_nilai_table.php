@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('nilai', function (Blueprint $table) {
             $table->id();
-            $table->string('nisn_id');
+            $table->string('nis_id');
             $table->string('mapel_kode');
             $table->integer('semester');
             $table->string('tahun_pelajaran', 15);
             $table->string('kelas', 10);
             $table->integer('value');
             $table->timestamps();
-            $table->foreign('nisn_id')->references('nisn')->on('siswa')->onDelete('cascade');
+            $table->foreign('nis_id')->references('nis')->on('siswa')->onDelete('cascade');
             $table->foreign('mapel_kode')->references('kode_mapel')->on('mapel')->onDelete('cascade');
         });
     }

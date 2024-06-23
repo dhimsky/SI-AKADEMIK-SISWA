@@ -11,7 +11,7 @@ class Nilai extends Model
     protected $primaryKey = 'id';
     protected $table = 'nilai';
     protected $fillable = [
-        'nisn_id',
+        'nis_id',
         'mapel_kode',
         'semester',
         'tahun_pelajaran',
@@ -20,10 +20,10 @@ class Nilai extends Model
     ];
     public function siswa()
     {
-        return $this->belongsTo(Kelas::class, 'nisn_id', 'nisn');
+        return $this->belongsTo(Siswa::class, 'nis_id', 'nis');
     }
     public function mapel()
     {
-        return $this->belongsTo(Kelas::class, 'mapel_kode', 'kode_mapel');
+        return $this->belongsTo(Mapel::class, 'mapel_kode', 'kode_mapel');
     }
 }

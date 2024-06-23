@@ -32,7 +32,7 @@
             <div class="form-group">
                 <div class="input-group-icon right">
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
-                    <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off">
+                    <input class="form-control" type="number" name="kode_identitas" placeholder="Kode Identitas" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">

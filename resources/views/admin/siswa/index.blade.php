@@ -45,6 +45,7 @@
                     width="100%">
                     <thead>
                         <tr>
+                            <th>NIS</th>
                             <th>NISN</th>
                             <th>NAMA LENGKAP</th>
                             <th>KELAS</th>
@@ -59,6 +60,7 @@
                     <tbody>
                         @foreach ($siswas as $s)
                         <tr class="text-center">
+                            <td>{{ $s->nis }}</td>
                             <td>{{ $s->nisn }}</td>
                             <td>{{ $s->nama_siswa }}</td>
                             <td>{{ $s->kelas_id }}</td>
@@ -69,9 +71,9 @@
                             <td>{{ $s->status_siswa}}</td>
                             <td class="d-flex justify-content-center">
                                 <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
-                                    data-target=".editSiswa" title="Edit Siswa"><i
+                                    data-target=".editSiswa{{ $s->nis }}" title="Edit Siswa"><i
                                         class="fa fa-pencil font-14"></i></button>
-                                <form id="deleteForm{{ $s->nisn }}" action="{{ route('admin.delete-siswa', ['id' => $s->nisn]) }}" method="POST">
+                                <form id="deleteForm{{ $s->nis }}" action="{{ route('admin.delete-siswa', ['id' => $s->nis]) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-default btn-xs" type="submit" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
@@ -80,7 +82,7 @@
                         </tr>
 
                         {{-- MODAL EDIT --}}
-                        <div class="modal fade editSiswa" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal fade editSiswa{{ $s->nis }}" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -89,14 +91,26 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('admin.update-siswa', ['id' => $s->nis]) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
+                                                        <label class="required-label faded-label" for="nisn">NIS</label>
+                                                        <input type="number" disabled name="nis"
+                                                            class="form-control @error('nis') is-invalid @enderror" placeholder="Masukan NIS" value="{{ $s->nis }}">
+                                                        @error('nis')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
                                                         <label class="required-label faded-label" for="nisn">NISN</label>
-                                                        <input type="text" name="nisn"
+                                                        <input type="number" disabled name="nisn"
                                                             class="form-control @error('nisn') is-invalid @enderror" placeholder="Masukan NISN" value="{{ $s->nisn }}">
                                                         @error('nisn')
                                                             <span class="invalid-feedback" role="alert">
@@ -227,7 +241,7 @@
                         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                         <script>
                             $(document).ready(function(){
-                                $('#deleteForm{{ $s->kode_identitas }}').submit(function(e){
+                                $('#deleteForm{{ $s->nis }}').submit(function(e){
                                     e.preventDefault();
                                     Swal.fire({
                                         title: 'Apakah Anda yakin?',
@@ -268,8 +282,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
+                                    <label class="required-label faded-label" for="nis">NIS</label>
+                                    <input type="number" name="nis"
+                                        class="form-control @error('nis') is-invalid @enderror" value="{{ old('nis') }}" placeholder="Masukan NIS">
+                                    @error('nis')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
                                     <label class="required-label faded-label" for="nisn">NISN</label>
-                                    <input type="text" name="nisn"
+                                    <input type="number" name="nisn"
                                         class="form-control @error('nisn') is-invalid @enderror" value="{{ old('nisn') }}" placeholder="Masukan NISN">
                                     @error('nisn')
                                         <span class="invalid-feedback" role="alert">
@@ -367,6 +393,17 @@
                                         <option value="6" @if(old('semester') == '6') selected @endif>6</option>
                                     </select>
                                     @error('semester')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="required-label faded-label" for="password">Password</label>
+                                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukan password baru">
+                                    @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

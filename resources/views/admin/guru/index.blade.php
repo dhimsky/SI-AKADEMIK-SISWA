@@ -20,7 +20,6 @@
                             <th>NAMA LENGKAP</th>
                             <th>MATA PELAJARAN</th>
                             <th>SEBAGAI WALI KELAS</th>
-                            <th>EMAIL</th>
                             <th>AKSI</th>
                         </tr>
                     </thead>
@@ -31,7 +30,6 @@
                                 <td>{{ $item->nama_guru }}</td>
                                 <td>{{ $item->mapel_kode }}</td>
                                 <td>{{ $item->kelas_id }}</td>
-                                <td>{{ $item->email }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
                                         data-target="#editguru{{ $item->nip }}" title="Edit Wali Kelas"><i
@@ -60,7 +58,7 @@
                                             <div class="form-group mb-3">
                                                 <label class="required-label faded-label" for="nip">NIP</label>
                                                 <input type="text" name="nip"
-                                                    class="form-control @error('nip') is-invalid @enderror" value="{{ $item->nip }}" placeholder="Masukan NIP">
+                                                    class="form-control @error('nip') is-invalid @enderror" disabled value="{{ $item->nip }}" placeholder="Masukan NIP">
                                                 @error('nip')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -105,7 +103,7 @@
                                                 @enderror
                                             </div>
                                             {{-- Masuk ke database user (Nama Lengkap Juga) --}}
-                                            <div class="form-group mb-3">
+                                            {{-- <div class="form-group mb-3">
                                                 <label class="required-label faded-label" for="email">Email</label>
                                                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $item->email }}">
                                                 @error('email')
@@ -113,12 +111,11 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group mb-3">
                                                 <label class="required-label faded-label" for="password">Password</label>
-                                                <input type="hidden" name="password" value="{{ $item->password }}">
-                                                <input type="password" name="password_display" 
-                                                    class="form-control @error('password') is-invalid @enderror"  placeholder="Masukan password baru">
+                                                <input type="password" name="password" 
+                                                    class="form-control @error('password') is-invalid @enderror" placeholder="Masukan password baru">
                                                 <small class="text-warning">*Kosongkan password jika tidak ingin mengubah.</small>
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
@@ -226,7 +223,7 @@
                             @enderror
                         </div>
                         {{-- Masuk ke database user (Nama Lengkap Juga) --}}
-                        <div class="form-group mb-3">
+                        {{-- <div class="form-group mb-3">
                             <label class="required-label faded-label" for="email">Email</label>
                             <input type="email" name="email"
                                 class="form-control @error('email') is-invalid @enderror" placeholder="Masukan email">
@@ -235,7 +232,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
+                        </div> --}}
                         <div class="form-group mb-3">
                             <label class="required-label faded-label" for="password">Password</label>
                             <input type="password" name="password"

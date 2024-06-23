@@ -53,7 +53,11 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
-    public function Walikelas(){
-        return $this->hasOne(Walikelas::class, 'nip', 'kode_identitas');
+    public function guru(){
+        return $this->hasOne(Guru::class, 'nip', 'kode_identitas');
+    }
+    public function siswa()
+    {
+        return $this->hasOne(Siswa::class, 'nis', 'kode_identitas');
     }
 }

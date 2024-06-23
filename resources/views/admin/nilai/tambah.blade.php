@@ -4,17 +4,17 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.store-nilai') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
                                         <label class="form-control-label">Nama Siswa</label>
-                                        <select class="form-control select2_demo_2" name="nisn_id">
+                                        <select class="form-control select2_demo_2" name="nis_id">
                                             <option value="">--Pilih Siswa--</option>
                                             @foreach ($siswa as $m)
-                                                <option value="{{ $m->nisn }}">{{ $m->nama_siswa }}</option>
+                                                <option value="{{ $m->nis }}">{{ $m->nama_siswa }}</option>
                                             @endforeach
                                         </select>
                                         @error('nisn_id')
@@ -55,7 +55,10 @@
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <div class="d-flex w-100">
+                            <a href="{{ route('admin.nilai') }}" class="btn btn-secondary mr-auto">Kembali</a>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                        </div>
                     </div>
                 </form>
             </div>

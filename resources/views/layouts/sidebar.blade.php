@@ -93,7 +93,8 @@
 
             @if (Auth::user()->role_id == '3')
             <li>
-                <a class="active" href="{{ route('siswa.rombel') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
+                {{-- <a class="active" href="{{ route('siswa.rombel') }}"><i class="sidebar-item-icon fa fa-th-large"></i> --}}
+                    <a class="active" href=""><i class="sidebar-item-icon fa fa-th-large"></i>
                     <span class="nav-label">Dashboard</span>
                 </a>
             </li>

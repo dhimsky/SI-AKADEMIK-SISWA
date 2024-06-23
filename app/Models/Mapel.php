@@ -23,4 +23,8 @@ class Mapel extends Model
     {
         return $this->belongsTo(Jurusan::class, 'jurusan_kode', 'kode_jurusan');
     }
+    public function nilai()
+    {
+        return $this->hasMany(Nilai::class, 'mapel_kode', 'kode_mapel');
+    }
 }

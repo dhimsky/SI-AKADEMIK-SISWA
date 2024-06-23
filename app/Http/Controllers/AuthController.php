@@ -27,18 +27,18 @@ class AuthController extends Controller
     }
     function login(Request $request)
     {
-        Session::flash('email', $request->input('email'));
+        Session::flash('kode_identitas', $request->input('kode_identitas'));
     
         $request->validate([
-            'email' => 'required',
+            'kode_identitas' => 'required',
             'password' => 'required',
         ],[
-            'email.required' => 'masukan email',
+            'kode_identitas.required' => 'masukan kode_identitas',
             'password.required' => 'masukan password'
         ]);
 
         $data = [
-            'email' => $request->input('email'),
+            'kode_identitas' => $request->input('kode_identitas'),
             'password' => $request->input('password'),
         ];
     

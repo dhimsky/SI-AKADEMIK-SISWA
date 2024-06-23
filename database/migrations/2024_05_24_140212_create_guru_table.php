@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_guru', 45);
             $table->string('kelas_id');
             $table->string('mapel_kode');
-            $table->string('email', 35);
+            // $table->string('email', 35);
             $table->timestamps();
             $table->foreign('kelas_id')->references('nama_kelas')->on('kelas')->onDelete('cascade');
             $table->foreign('mapel_kode')->references('kode_mapel')->on('mapel')->onDelete('cascade');
