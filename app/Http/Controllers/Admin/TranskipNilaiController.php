@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Nilai;
 use App\Models\Siswa;
-use Illuminate\Http\Request;
 
-class TranskripNilaiController extends Controller
+class TranskipNilaiController extends Controller
 {
     public function index(){
         $siswa = Siswa::all();
         $nilai = Nilai::all();
-        return view('admin.transkripnilai.index', compact('siswa', 'nilai'));
+        return view('admin.transkipnilai.index', compact('siswa', 'nilai'));
     }
 }

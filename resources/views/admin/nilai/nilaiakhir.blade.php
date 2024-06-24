@@ -69,6 +69,16 @@
         .table-wrapper {
             max-width: 200px;
             overflow-y: auto;
+            padding-left: 50px;
+        }
+        .table-mapel {
+            max-width: 600px;
+            overflow-y: auto;
+            padding-left: 50px;
+        }
+        .sub-text{
+            font-weight: bold;
+            text-align: left !important;
         }
     </style>
 </head>
@@ -101,32 +111,55 @@
         </div>
         <br>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Mata Pelajaran</th>
-                    <th>Nilai Akhir</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Pendidikan Agama dan Budi Pekerti</td>
-                    <td>89</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Pendidikan Agama dan Budi Pekerti</td>
-                    <td>89</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Pendidikan Agama dan Budi Pekerti</td>
-                    <td>89</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-mapel">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Mata Pelajaran</th>
+                        <th>Nilai Akhir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="sub-text" colspan="3">A. Kelompok Mata Pelajaran Umum</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Pendidikan Agama dan Budi Pekerti</td>
+                        <td>89</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Pendidikan Agama dan Budi Pekerti</td>
+                        <td>89</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Pendidikan Agama dan Budi Pekerti</td>
+                        <td>89</td>
+                    </tr>
+                    <tr>
+                        <td class="sub-text" colspan="3">B. Kelompok Mata Pelajaran Kejuruan</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Pendidikan Agama dan Budi Pekerti</td>
+                        <td>89</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Pendidikan Agama dan Budi Pekerti</td>
+                        <td>89</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Pendidikan Agama dan Budi Pekerti</td>
+                        <td>89</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <div class="table-wrapper">
             <table class="table">

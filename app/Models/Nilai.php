@@ -16,7 +16,10 @@ class Nilai extends Model
         'semester',
         'tahun_pelajaran',
         'kelas',
-        'value',
+        'ulangan_harian',
+        'uts',
+        'uas',
+        'nilai_akhir',
     ];
     public function siswa()
     {

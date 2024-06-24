@@ -18,8 +18,9 @@ use App\Http\Controllers\Admin\SiswaController as AdminSiswaController;
 use App\Http\Controllers\Admin\NilaiController as AdminNilaiController;
 use App\Http\Controllers\Admin\TahunPelajaranController as AdminTahunPelajaranController;
 use App\Http\Controllers\Admin\AbsensiController as AdminAbsensiController;
-use App\Http\Controllers\Admin\TranskripNilaiController as AdminTranskripNilaiController;
+use App\Http\Controllers\Admin\TranskipNilaiController as AdminTranskipNilaiController;
 use App\Http\Controllers\Export\NilaiAkhirPdfController as NilaiAkhirPdfController;
+use App\Http\Controllers\Export\TranskipPdfController as TranskipPdfController;
 
 //GURU
 use App\Http\Controllers\Guru\DashboardController as GuruDashboardController;
@@ -107,13 +108,14 @@ Route::middleware(['auth'])->group(function () {
         Route::put('update-nilai/{id}', [AdminNilaiController::class, 'update_nilai'])->name('update-nilai');
         Route::delete('delete-nilai/{id}', [AdminNilaiController::class, 'delete_nilai'])->name('delete-nilai');
         // Route::get('/siswa/{id}/export-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('export_pdf');
-        Route::get('/siswa/export-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('export_pdf');
+        Route::get('/siswa/nilaiakhir-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('nilaiakhir_pdf');
         // ============================== TAHUN PELAJARAN ===========================================
         Route::get('tahunpelajaran', [AdminTahunPelajaranController::class, 'index'])->name('tahunpelajaran');
         // ============================== ABSENSI ===========================================
         Route::get('absensi', [AdminAbsensiController::class, 'index'])->name('absensi');
         // ============================== TRANSKRIP NILAI ===========================================
-        Route::get('transkripnilai', [AdminTranskripNilaiController::class, 'index'])->name('transkripnilai');
+        Route::get('transkipnilai', [AdminTranskipNilaiController::class, 'index'])->name('transkipnilai');
+        Route::get('/siswa/transkipnilai-pdf', [TranskipPdfController::class, 'generatePdf'])->name('transkip_pdf');
     });
     
     // Route prefix untuk walikelas

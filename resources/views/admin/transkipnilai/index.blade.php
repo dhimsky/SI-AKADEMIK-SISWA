@@ -45,10 +45,8 @@
                                 @endif
                             </td>                            
                             <td class="d-flex justify-content-center">
-                                <button class="btn btn-warning m-r-5" data-toggle="button" aria-pressed="false">
-                                    <span class="active-hidden"><i class="fa fa-print"></i> Cetak</span>
-                                    <span class="active-visible"><i class="fa fa-check"></i> Cetak</span>
-                                </button>
+                                <a href="{{ route('admin.transkip_pdf') }}" class="btn btn-default btn-xs m-r-5" target="_blank"><i
+                                    class="fa fa-print font-14"></i></a>
                             </td>
                         </tr>
                         @endforeach

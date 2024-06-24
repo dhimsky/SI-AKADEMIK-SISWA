@@ -31,7 +31,10 @@
                             <th class="text-center">SEMESTER</th>
                             <th class="text-center">TAHUN PELAJARAN</th>
                             <th class="text-center">KELAS</th>
-                            <th class="text-center">NILAI</th>
+                            <th class="text-center">UALNGAN HARIAN</th>
+                            <th class="text-center">UTS</th>
+                            <th class="text-center">UAS</th>
+                            <th class="text-center">NILAI AKHIR</th>
                             <th class="text-center">AKSI</th>
                         </tr>
                     </thead>
@@ -44,15 +47,18 @@
                             <td class="text-center">{{ $n->semester }}</td>
                             <td class="text-center">{{ $n->tahun_pelajaran }}</td>
                             <td class="text-center">{{ $n->kelas }}</td>
+                            <td class="text-center">{{ $n->ulangan_harian }}</td>
+                            <td class="text-center">{{ $n->uts }}</td>
+                            <td class="text-center">{{ $n->uas }}</td>
                             <td class="text-center">
-                                @if ($n->value >= 75)
-                                    <span class="badge badge-success badge-pill m-r-5 m-b-5">{{ $n->value }}</span>
+                                @if ($n->nilai_akhir >= 75)
+                                    <span class="badge badge-success badge-pill m-r-5 m-b-5">{{ $n->nilai_akhir }}</span>
                                 @else
-                                    <span class="badge badge-warning badge-pill m-r-5 m-b-5">{{ $n->value }}</span>
+                                    <span class="badge badge-warning badge-pill m-r-5 m-b-5">{{ $n->nilai_akhir }}</span>
                                 @endif
                             </td>                            
                             <td class="d-flex justify-content-center">
-                                <a href="{{ route('admin.export_pdf') }}" class="btn btn-default btn-xs m-r-5" target="_blank"><i
+                                <a href="{{ route('admin.nilaiakhir_pdf') }}" class="btn btn-default btn-xs m-r-5" target="_blank"><i
                                     class="fa fa-print font-14"></i></a>
                                 <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
                                     data-target=".editNilai{{ $n->id }}" title="Edit Siswa"><i
@@ -92,10 +98,34 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
-                                                        <label class="required-label faded-label" for="value">Nilai</label>
-                                                        <input type="number" name="value"
-                                                            class="form-control @error('value') is-invalid @enderror" value="{{ $n->value }}" placeholder="Masukan Nilai">
-                                                        @error('value')
+                                                        <label class="required-label faded-label" for="ulangan_harian">Ulangan Harian</label>
+                                                        <input type="number" name="ulangan_harian"
+                                                            class="form-control @error('ulangan_harian') is-invalid @enderror" value="{{ $n->ulangan_harian }}" placeholder="Masukan Nilai">
+                                                        @error('ulangan_harian')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="required-label faded-label" for="uts">UTS</label>
+                                                        <input type="number" name="uts"
+                                                            class="form-control @error('uts') is-invalid @enderror" value="{{ $n->uts }}" placeholder="Masukan Nilai">
+                                                        @error('uts')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="required-label faded-label" for="uas">Nilai</label>
+                                                        <input type="number" name="uas"
+                                                            class="form-control @error('uas') is-invalid @enderror" value="{{ $n->uas }}" placeholder="Masukan Nilai">
+                                                        @error('uas')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>

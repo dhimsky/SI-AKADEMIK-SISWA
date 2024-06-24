@@ -70,7 +70,7 @@
                         <a href="{{ route('admin.absensi') }}">Absensi Siswa</a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.transkripnilai') }}">Transkrip Nilai</a>
+                        <a href="{{ route('admin.transkipnilai') }}">Transkip Nilai</a>
                     </li>
                 </ul>
             </li>

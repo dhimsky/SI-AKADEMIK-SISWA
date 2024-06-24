@@ -42,10 +42,34 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
-                                        <label class="required-label faded-label" for="value">Nilai</label>
-                                        <input type="number" name="value"
-                                            class="form-control @error('value') is-invalid @enderror" value="{{ old('value') }}" placeholder="Masukan Nilai">
-                                        @error('value')
+                                        <label class="required-label faded-label" for="ulangan_harian">Ualngan Harian</label>
+                                        <input type="number" name="ulangan_harian"
+                                            class="form-control @error('ulangan_harian') is-invalid @enderror" value="{{ old('ulangan_harian') }}" placeholder="Masukan Nilai">
+                                        @error('ulangan_harian')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="required-label faded-label" for="uts">UTS</label>
+                                        <input type="number" name="uts"
+                                            class="form-control @error('uts') is-invalid @enderror" value="{{ old('uts') }}" placeholder="Masukan Nilai">
+                                        @error('uts')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="required-label faded-label" for="uas">UAS</label>
+                                        <input type="number" name="uas"
+                                            class="form-control @error('uas') is-invalid @enderror" value="{{ old('uas') }}" placeholder="Masukan Nilai">
+                                        @error('uas')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
