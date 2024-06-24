@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('mapel', function (Blueprint $table) {
             $table->string('kode_mapel')->primary();
-            $table->string('jurusan_kode');
+            $table->string('jurusan_kode')->nullable();
             $table->string('nama_mapel', 100);
             $table->foreign('jurusan_kode')->references('kode_jurusan')->on('jurusan')->onDelete('cascade');
             $table->timestamps();

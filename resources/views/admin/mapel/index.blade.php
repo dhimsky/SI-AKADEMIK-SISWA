@@ -27,7 +27,13 @@
                             <tr class="text-center">
                                 <td>{{ $item->kode_mapel }}</td>
                                 <td>{{ $item->nama_mapel }}</td>
-                                <td>{{ $item->jurusan->nama_jurusan }}</td>
+                                <td>
+                                    @if ($item->jurusan)
+                                        {{ $item->jurusan->nama_jurusan }}
+                                    @else
+                                        Umum
+                                    @endif
+                                </td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
                                         data-target="#editJurusan{{ $item->kode_mapel }}" title="Edit role"><i
@@ -164,7 +170,7 @@
                         <div class="form-group mb-3">
                             <label class="required-label faded-label" for="jurusan_kode">Jurusan</label>
                             <select class="form-control input-sm" name="jurusan_kode">
-                                <option value="">-- Pilih Jurusan --</option>
+                                <option value="">Umum</option>
                                     @foreach ($jurusan as $item)
                                         <option value="{{ $item->kode_jurusan }}">{{ $item->nama_jurusan }}</option>
                                     @endforeach

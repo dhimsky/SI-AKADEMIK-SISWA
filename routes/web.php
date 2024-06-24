@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\NilaiController as AdminNilaiController;
 use App\Http\Controllers\Admin\TahunPelajaranController as AdminTahunPelajaranController;
 use App\Http\Controllers\Admin\AbsensiController as AdminAbsensiController;
 use App\Http\Controllers\Admin\TranskripNilaiController as AdminTranskripNilaiController;
+use App\Http\Controllers\Export\NilaiAkhirPdfController as NilaiAkhirPdfController;
+
 //GURU
 use App\Http\Controllers\Guru\DashboardController as GuruDashboardController;
 use App\Http\Controllers\Guru\NilaiController as GuruNilaiController;
@@ -104,6 +106,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('store-nilai', [AdminNilaiController::class, 'store_nilai'])->name('store-nilai');
         Route::put('update-nilai/{id}', [AdminNilaiController::class, 'update_nilai'])->name('update-nilai');
         Route::delete('delete-nilai/{id}', [AdminNilaiController::class, 'delete_nilai'])->name('delete-nilai');
+        // Route::get('/siswa/{id}/export-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('export_pdf');
+        Route::get('/siswa/export-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('export_pdf');
         // ============================== TAHUN PELAJARAN ===========================================
         Route::get('tahunpelajaran', [AdminTahunPelajaranController::class, 'index'])->name('tahunpelajaran');
         // ============================== ABSENSI ===========================================

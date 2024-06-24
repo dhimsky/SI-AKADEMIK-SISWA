@@ -21,12 +21,10 @@ class MapelController extends Controller
         $rules = [
             'kode_mapel' => 'required',
             'nama_mapel' => 'required',
-            'jurusan_kode' => 'required',
         ];
         $messages = [
             'kode_mapel.required' => 'Kode Mapel tidak boleh kosong!',
             'nama_mapel.required' => 'Nama Mapel tidak boleh kosong!',
-            'jurusan_kode.required' => 'Jurusan tidak boleh kosong!',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -50,12 +48,10 @@ class MapelController extends Controller
         $rules = [
             'kode_mapel' => 'required',
             'nama_mapel' => 'required',
-            'jurusan_kode' => 'required',
         ];
         $messages = [
             'kode_mapel.required' => 'Kode Mapel tidak boleh kosong!',
             'nama_mapel.required' => 'Nama Mapel tidak boleh kosong!',
-            'jurusan_kode.required' => 'Jurusan tidak boleh kosong!',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
