@@ -23,7 +23,7 @@
                     <span></span>{{ Auth::user()->nama_lengkap }}<i class="fa fa-angle-down m-l-5"></i></a>
                     @endif
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a>
+                    <a class="dropdown-item" href="{{ route('profile') }}"><i class="fa fa-user"></i>Profile</a>
                     <li class="dropdown-divider"></li>
                     <form action="{{ route('actionlogout') }}" method="POST">
                         @csrf

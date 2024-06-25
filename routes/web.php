@@ -53,6 +53,8 @@ Route::delete('/logoutsession', [AuthController::class, 'logout'])->name('action
 Route::middleware(['auth'])->group(function () {
     // ============================== PROFILE ===========================================
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('update-profile', [ProfileController::class, 'update'])->name('update-profile');
+    Route::post('update-password', [ProfileController::class, 'update_password'])->name('update-password');
     // Route prefix untuk admin
     Route::prefix('admin')->name('admin.')->middleware('CekUserLogin:1')->group(function () {
         // ============================== DASHBOARD ===========================================
@@ -108,9 +110,12 @@ Route::middleware(['auth'])->group(function () {
         Route::put('update-nilai/{id}', [AdminNilaiController::class, 'update_nilai'])->name('update-nilai');
         Route::delete('delete-nilai/{id}', [AdminNilaiController::class, 'delete_nilai'])->name('delete-nilai');
         // Route::get('/siswa/{id}/export-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('export_pdf');
-        Route::get('/siswa/nilaiakhir-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('nilaiakhir_pdf');
+        Route::get('/siswa/{id}/nilaiakhir-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('nilaiakhir_pdf');
         // ============================== TAHUN PELAJARAN ===========================================
         Route::get('tahunpelajaran', [AdminTahunPelajaranController::class, 'index'])->name('tahunpelajaran');
+        Route::post('store-tahunpelajaran', [AdminTahunPelajaranController::class, 'store'])->name('store-tahunpelajaran');
+        Route::put('update-tahunpelajaran/{id}', [AdminTahunPelajaranController::class, 'update'])->name('update-tahunpelajaran');
+        Route::delete('delete-tahunpelajaran/{id}', [AdminTahunPelajaranController::class, 'delete'])->name('delete-tahunpelajaran');
         // ============================== ABSENSI ===========================================
         Route::get('absensi', [AdminAbsensiController::class, 'index'])->name('absensi');
         // ============================== TRANSKRIP NILAI ===========================================

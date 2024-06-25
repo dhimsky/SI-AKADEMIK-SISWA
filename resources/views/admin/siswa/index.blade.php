@@ -214,6 +214,17 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
+                                                        <label class="required-label faded-label" for="email">Email</label>
+                                                        <input type="email" name="email" value="{{ $s->user->email }}" class="form-control @error('email') is-invalid @enderror" placeholder="Masukan Email baru">
+                                                        @error('email')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
                                                         <label class="required-label faded-label" for="password">Password</label>
                                                         <input type="password" name="password"
                                                             class="form-control @error('password') is-invalid @enderror"  placeholder="Masukan password baru">
@@ -320,7 +331,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label class="required-label faded-label" for="angkatan_id">Angkatan</label>
-                                    <select class="form-control input-sm" name="angkatan_id" value="{{ old('angkatan_id') }}">
+                                    <select class="form-control @error('angkatan_id') is-invalid @enderror input-sm" name="angkatan_id" value="{{ old('angkatan_id') }}">
                                         <option value="">-- Pilih Angkatan --</option>
                                         @foreach ($angkatans as $a)
                                             <option value="{{ $a->kode_angkatan }}">{{ $a->tahun_angkatan }}</option>
@@ -393,6 +404,17 @@
                                         <option value="6" @if(old('semester') == '6') selected @endif>6</option>
                                     </select>
                                     @error('semester')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="required-label faded-label" for="email">Email</label>
+                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukan Email baru">
+                                    @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

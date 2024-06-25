@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\Export;
 
 use App\Http\Controllers\Controller;
+use App\Models\Mapel;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class NilaiAkhirPdfController extends Controller
 {
-    public function generatePdf()
+    public function generatePdf($id)
     {
+        // dd($id);
         // Fetch data siswa based on ID
         // $siswa = Siswa::findOrFail($id);
-
         // Prepare data for the view
         // $data = [
         //     'nama_siswa' => $siswa->nama_siswa,
@@ -50,9 +52,19 @@ class NilaiAkhirPdfController extends Controller
         //     ]
         // ];
 
+
         // Generate PDF
-        // $pdf = PDF::loadView('admin.nilai.nilaiakhir', compact('data'));
-        $pdf = PDF::loadView('admin.nilai.nilaiakhir');
+        $siswa = Siswa::findOrFail($id);
+        $mapel = Mapel::all();
+        $mapel = DB::table('mapel')
+        ->leftJoin('nilai', function($join) use ($id) {
+            $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
+                ->where('nilai.nis_id', '=', $id);
+        })
+        ->select('mapel.nama_mapel', 'nilai.nilai_akhir')
+        ->get();
+        // dd($mapel->nilai_akhir);
+        $pdf = PDF::loadView('admin.nilai.nilaiakhir', compact('siswa', 'mapel'));
         return $pdf->stream('penilaian_siswa.pdf');
     }
 }

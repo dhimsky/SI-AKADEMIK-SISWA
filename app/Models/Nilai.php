@@ -29,4 +29,6 @@ class Nilai extends Model
     {
         return $this->belongsTo(Mapel::class, 'mapel_kode', 'kode_mapel');
     }
+
+    
 }

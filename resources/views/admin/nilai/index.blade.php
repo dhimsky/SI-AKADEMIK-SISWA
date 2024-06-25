@@ -58,7 +58,7 @@
                                 @endif
                             </td>                            
                             <td class="d-flex justify-content-center">
-                                <a href="{{ route('admin.nilaiakhir_pdf') }}" class="btn btn-default btn-xs m-r-5" target="_blank"><i
+                                <a href="{{ route('admin.nilaiakhir_pdf', ['id' => $n->nis_id]) }}" class="btn btn-default btn-xs m-r-5" target="_blank"><i
                                     class="fa fa-print font-14"></i></a>
                                 <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
                                     data-target=".editNilai{{ $n->id }}" title="Edit Siswa"><i

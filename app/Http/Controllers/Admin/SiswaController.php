@@ -41,6 +41,7 @@ class SiswaController extends Controller
         $akun->kode_identitas = $request->nis;
         $akun->nama_lengkap = $request->nama_siswa;
         $akun->role_id = 3;
+        $akun->email = $request->email;
         $akun->password = Hash::make($request->password);
         $akun->save();
 
@@ -83,6 +84,7 @@ class SiswaController extends Controller
             'kelas_id' => 'required|exists:kelas,nama_kelas',
             'angkatan_id' => 'required|exists:angkatan,kode_angkatan',
             'status_siswa' => 'required',
+            'email' => 'required|email',
         ];
         
         $messages = [
@@ -96,6 +98,8 @@ class SiswaController extends Controller
             'angkatan_id.required' => 'Angkatan tidak boleh kosong!',
             'angkatan_id.exists' => 'Angkatan yang dipilih tidak valid!',
             'status_siswa.required' => 'Status siswa tidak boleh kosong!',
+            'email.required' => 'Email tidak boleh kosong!',
+            'email.email' => 'Email harus falid',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -106,6 +110,7 @@ class SiswaController extends Controller
 
         // update ke tabel user
         $akun = User::findOrFail($id);
+        $akun->email = $request->email;
         if ($request->password == null) {
 
         }else {

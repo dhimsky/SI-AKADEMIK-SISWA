@@ -24,7 +24,7 @@
                             <td>{{ $t->tahun_pelajaran }}</td>
                             <td class="d-flex justify-content-center">
                                 <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target="#editTahunpelajaran{{ $t->id }}" title="Edit role"><i class="fa fa-pencil font-14"></i></button>
-                                <form id="deleteForm{{ $t->id }}" action="" method="POST">
+                                <form id="deleteForm{{ $t->id }}" action="{{ route('admin.delete-tahunpelajaran', ['id' => $t->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
@@ -42,12 +42,12 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="" method="POST">
+                                        <form action="{{ route('admin.update-tahunpelajaran', ['id' => $t->id]) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="form-group mb-3">
                                             <label class="required-label faded-label" for="tahun_pelajaran" >Tahun Pelajaran</label>
-                                            <input type="number" name="tahun_pelajaran" value="{{ $t->tahun_pelajaran }}" class="form-control @error('tahun_pelajaran') is-invalid @enderror" value="2024" placeholder="Masukan tahun pelajaran">
+                                            <input type="text" name="tahun_pelajaran" value="{{ $t->tahun_pelajaran }}" class="form-control @error('tahun_pelajaran') is-invalid @enderror" value="2024" placeholder="Masukan tahun pelajaran">
                                             @error('tahun_pelajaran')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -104,11 +104,11 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="" method="POST">
+            <form action="{{ route('admin.store-tahunpelajaran') }}" method="POST">
             @csrf
             <div class="form-group mb-3">
                 <label class="required-label faded-label" for="tahun_pelajaran" >Tahun Pelajaran</label>
-                <input type="number" name="tahun_pelajaran" class="form-control @error('tahun_pelajaran') is-invalid @enderror" placeholder="Masukan tahun pelajaran">
+                <input type="text" name="tahun_pelajaran" class="form-control @error('tahun_pelajaran') is-invalid @enderror" placeholder="Masukan tahun pelajaran">
                 @error('tahun_pelajaran')
                 <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

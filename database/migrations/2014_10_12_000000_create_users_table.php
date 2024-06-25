@@ -15,8 +15,8 @@ return new class extends Migration
             $table->string('kode_identitas', 15)->primary();
             $table->string('nama_lengkap', 45);
             $table->unsignedBigInteger('role_id');
-            // $table->string('email', 35)->unique();
-            // $table->timestamp('email_verified_at')->nullable();
+            $table->string('email', 35)->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

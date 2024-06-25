@@ -87,21 +87,25 @@
         <table class="no-border">
             <tr class="no-border">
                 <td>Nama Peserta Didik</td>
-                <td>: Ahmad</td>
+                <td>: {{ $siswa->nama_siswa }}</td>
                 <td>Kelas</td>
-                <td>: 11-TKJ-A</td>
+                <td>: {{ $siswa->kelas_id }}</td>
             </tr>
             <tr class="no-border">
                 <td>NIS</td>
-                <td>: 112412</td>
+                <td>: {{ $siswa->nis }}</td>
                 <td>Semester</td>
-                <td>: Genap</td>
+                @if ($siswa->semester % 2 == 0)
+                    <td>: Genap</td>
+                @else
+                    <td>: Ganjil</td>
+                @endif
             </tr>
             <tr class="no-border">
                 <td>Sekolah</td>
                 <td>: SMK Negeri 1 Cilacap</td>
                 <td>Tahun Pelajaran</td>
-                <td>: 2022/2023</td>
+                <td>: {{ $siswa->tahunpelajaran->tahun_pelajaran }}</td>
             </tr>
         </table>
 
@@ -124,21 +128,13 @@
                     <tr>
                         <td class="sub-text" colspan="3">A. Kelompok Mata Pelajaran Umum</td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Pendidikan Agama dan Budi Pekerti</td>
-                        <td>89</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Pendidikan Agama dan Budi Pekerti</td>
-                        <td>89</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Pendidikan Agama dan Budi Pekerti</td>
-                        <td>89</td>
-                    </tr>
+                    @foreach ($mapel as $index => $m)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $m->nama_mapel }}</td>
+                            <td>{{ $m->nilai_akhir }}</td>
+                        </tr>
+                    @endforeach
                     <tr>
                         <td class="sub-text" colspan="3">B. Kelompok Mata Pelajaran Kejuruan</td>
                     </tr>

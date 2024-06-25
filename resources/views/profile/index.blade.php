@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="ibox">
                 <div class="ibox-body" style="">
-                    <form action=" " method="post" class="form-horizontal">
+                    <form action="{{ route('update-profile') }}" method="post" class="form-horizontal">
                         @csrf
                         @foreach ($user as $u)
                         <div class="form-group row">
@@ -45,7 +45,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('update-password') }}">
                     @csrf
                     <div class="form-group mb-3">
                         <label for="current_password" class="required-label faded-label">Password Lama</label>

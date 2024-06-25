@@ -24,15 +24,20 @@ class NilaiController extends Controller
         return view('admin.nilai.tambah', compact('siswa', 'nilai', 'mapel'));
     }
     public function store_nilai(Request $request){
+        // dd($request);
         $rules = [
             'nis_id' => 'required',
             'mapel_kode' => 'required',
-            'value' => 'required',
+            'ulangan_harian' => 'required',
+            'uts' => 'required',
+            'uas' => 'required',
         ];
         $messages = [
             'nis_id.required' => 'Nama Siswa tidak boleh kosong',
-            'mapel_kode.required' => 'Nama Siswa tidak boleh kosong',
-            'value.required' => 'Nama Siswa tidak boleh kosong',
+            'mapel_kode.required' => 'Mata Pelajaran tidak boleh kosong',
+            'ulangan_harian.required' => 'Ulangan Harian tidak boleh kosong',
+            'uts.required' => 'UTS tidak boleh kosong',
+            'uas.required' => 'UAS tidak boleh kosong',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -49,8 +54,15 @@ class NilaiController extends Controller
         $nilai->semester = $siswa->semester;
         $nilai->tahun_pelajaran = $siswa->tahunpelajaran->tahun_pelajaran;
         $nilai->kelas = $siswa->kelas->nama_kelas;
-        $nilai->value = $request->value;
-        
+        $nilai->ulangan_harian = $request->ulangan_harian;
+        $nilai->uts = $request->uts;
+        $nilai->uas = $request->uas;
+        // Mengambil data dari request dan menghitung nilai total
+        $nilaiUlanganHarian = $request->ulangan_harian * 0.4;
+        $nilaiUts = $request->uts * 0.3;
+        $nilaiUas = $request->uas * 0.3;
+        // Menjumlahkan nilai-nilai yang sudah dihitung
+        $nilai->nilai_akhir = $nilaiUlanganHarian + $nilaiUts + $nilaiUas;
         $nilai->save();
 
         return redirect()->back()->with('success', 'Nilai berhasil ditambahkan');
@@ -59,10 +71,14 @@ class NilaiController extends Controller
     public function update_nilai(Request $request, $id)
     {
         $rules = [
-            'value' => 'required',
+            'ulangan_harian' => 'required',
+            'uts' => 'required',
+            'uas' => 'required',
         ];
         $messages = [
-            'value.required' => 'Nama Siswa tidak boleh kosong',
+            'ulangan_harian.required' => 'Ulangan Harian tidak boleh kosong',
+            'uts.required' => 'UTS tidak boleh kosong',
+            'uas.required' => 'UAS tidak boleh kosong',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -72,7 +88,12 @@ class NilaiController extends Controller
         }
 
         $nilai = Nilai::findOrFail($id);
-        $nilai->value = $request->value;
+        // Mengambil data dari request dan menghitung nilai total
+        $nilaiUlanganHarian = $request->ulangan_harian * 0.4;
+        $nilaiUts = $request->uts * 0.3;
+        $nilaiUas = $request->uas * 0.3;
+        // Menjumlahkan nilai-nilai yang sudah dihitung
+        $nilai->nilai_akhir = $nilaiUlanganHarian + $nilaiUts + $nilaiUas;
         $nilai->save();
 
         return redirect()->back()->with('success', 'Nilai berhasil diperbarui');

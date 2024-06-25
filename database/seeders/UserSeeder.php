@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'kode_identitas' => 1,
-            // 'email' => 'staff@gmail.com',
+            'email' => 'staff@gmail.com',
             'nama_lengkap' => 'Staff TU',
             'password' => Hash::make('123'),
             'role_id' => 1, 
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'kode_identitas' => 2,
-            // 'email' => 'guru@gmail.com',
+            'email' => 'guru@gmail.com',
             'nama_lengkap' => 'Guru Mapel',
             'password' => Hash::make('123'),
             'role_id' => 2,
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
         ]);
         User::create([
             'kode_identitas' => 3,
-            // 'email' => 'siswa@gmail.com',
+            'email' => 'siswa@gmail.com',
             'nama_lengkap' => 'Siswa',
             'password' => Hash::make('123'),
             'role_id' => 3,
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
         ]);
         User::create([
             'kode_identitas' => 4,
-            // 'email' => 'kepsek@gmail.com',
+            'email' => 'kepsek@gmail.com',
             'nama_lengkap' => 'Kepala Sekolah',
             'password' => Hash::make('123'),
             'role_id' => 4,

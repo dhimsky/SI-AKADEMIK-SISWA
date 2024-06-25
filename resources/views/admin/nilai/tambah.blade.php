@@ -17,7 +17,7 @@
                                                 <option value="{{ $m->nis }}">{{ $m->nama_siswa }}</option>
                                             @endforeach
                                         </select>
-                                        @error('nisn_id')
+                                        @error('nis_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
