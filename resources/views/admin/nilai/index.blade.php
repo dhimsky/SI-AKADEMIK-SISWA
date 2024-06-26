@@ -4,10 +4,25 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Data Table Siswa</div>
                 <div class="col-md-9 mt-4 text-right">
                     <form action="" method="GET">
                         <div class="row mb-3">
+                            <div class="col-md-4 mb-2">
+                                <select id="kelas_id" name="kelas_id" class="form-control">
+                                    <option selected value="">Semua Kelas</option>
+                                    @foreach ($kelas as $k)
+                                    <option value="{{ $k->nama_kelas }}">{{ $k->nama_kelas }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <select id="angkatan_id" name="angkatan_id" class="form-control">
+                                    <option selected value="">Semua Angkatan</option>
+                                    @foreach ($angkatans as $a)
+                                    <option value="{{ $a->kode_angkatan }}">{{ $a->tahun_angkatan }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="col-md-1">
                                 <button id="btnFilter" class="btn btn-whatsapp"><i class="fa fa-search"></i></button>
                             </div>
@@ -25,13 +40,12 @@
                     width="100%">
                     <thead>
                         <tr class="text-center">
-                            <th>NIS</th>
+                            <th class="text-center">NO</th>
                             <th class="text-center">NAMA SISWA</th>
                             <th class="text-center">MAPEL</th>
-                            <th class="text-center">SEMESTER</th>
                             <th class="text-center">TAHUN PELAJARAN</th>
                             <th class="text-center">KELAS</th>
-                            <th class="text-center">UALNGAN HARIAN</th>
+                            <th class="text-center">ULANGAN HARIAN</th>
                             <th class="text-center">UTS</th>
                             <th class="text-center">UAS</th>
                             <th class="text-center">NILAI AKHIR</th>
@@ -41,10 +55,9 @@
                     <tbody>
                         <tr class="text-center">
                             @foreach ($nilai as $n)
-                            <td class="text-center">{{ $n->nis_id }}</td>
-                            <td class="text-center">{{ $n->siswa->nama_siswa }}</td>
-                            <td class="text-center">{{ $n->mapel->nama_mapel }}</td>
-                            <td class="text-center">{{ $n->semester }}</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td class="text-left">{{ $n->siswa->nama_siswa }}</td>
+                            <td class="text-left">{{ $n->mapel->nama_mapel }}</td>
                             <td class="text-center">{{ $n->tahun_pelajaran }}</td>
                             <td class="text-center">{{ $n->kelas }}</td>
                             <td class="text-center">{{ $n->ulangan_harian }}</td>

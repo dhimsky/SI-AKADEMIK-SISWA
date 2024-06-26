@@ -39,7 +39,8 @@
             border: none !important;
             text-align: center !important;
             padding-bottom: 60px;
-            padding-right: 130px;
+            padding-right: 105px;
+
         }
         .no-border-footer p {
             margin-bottom: 60px;
@@ -111,7 +112,7 @@
 
         <div class="header">
             <h6>Penilaian Siswa</h6>
-            <h6>Manajemen Perkantoran dan Layanan Bisnis</h6>
+            <h6>{{ $siswa->kelas->jurusan->nama_jurusan }}</h6>
         </div>
         <br>
 
@@ -128,31 +129,23 @@
                     <tr>
                         <td class="sub-text" colspan="3">A. Kelompok Mata Pelajaran Umum</td>
                     </tr>
-                    @foreach ($mapel as $index => $m)
+                    @foreach ($mapelumum as $index => $m)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $m->nama_mapel }}</td>
-                            <td>{{ $m->nilai_akhir }}</td>
+                            <td class="text-left">{{ $m->nama_mapel }}</td>
+                            <td>{{ isset($m->nilai_akhir) ? $m->nilai_akhir : 0 }}</td>
                         </tr>
                     @endforeach
                     <tr>
                         <td class="sub-text" colspan="3">B. Kelompok Mata Pelajaran Kejuruan</td>
                     </tr>
+                    @foreach ($mapelkejuruan as $index => $m)
                     <tr>
-                        <td>1</td>
-                        <td>Pendidikan Agama dan Budi Pekerti</td>
-                        <td>89</td>
+                        <td>{{ $index + 1 }}</td>
+                        <td  class="text-left">{{ $m->nama_mapel }}</td>
+                        <td>{{ isset($m->nilai_akhir) ? $m->nilai_akhir : 0 }}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Pendidikan Agama dan Budi Pekerti</td>
-                        <td>89</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Pendidikan Agama dan Budi Pekerti</td>
-                        <td>89</td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -184,7 +177,29 @@
     </div>
 
     <div class="footer">
-        <p class="text-right">Cilacap, 21 Juni 2023</p>
+        @php
+            $bulanIndonesia = [
+                1 => 'Januari',
+                2 => 'Februari',
+                3 => 'Maret',
+                4 => 'April',
+                5 => 'Mei',
+                6 => 'Juni',
+                7 => 'Juli',
+                8 => 'Agustus',
+                9 => 'September',
+                10 => 'Oktober',
+                11 => 'November',
+                12 => 'Desember',
+            ];
+        @endphp
+        @php
+            $tanggal = \Carbon\Carbon::now();
+            $hari = $tanggal->format('d');
+            $bulan = $bulanIndonesia[$tanggal->format('n')];
+            $tahun = $tanggal->format('Y');
+        @endphp
+        <p class="text-right">Cilacap, {{ $hari }} {{ $bulan }} {{ $tahun }}</p>
         <table>
             <tr class="no-border-footer">
                 <td>Orang Tua/Wali</td>
@@ -192,9 +207,9 @@
                 <td>Wali Kelas</td>
             </tr>
             <tr class="no-border-footer">
-                <td>(_______________________)</td>
-                <td>(_______________________) <br>NIP. </td>
-                <td>(_______________________) <br>NIP. </td>
+                <td>----------------------------------------</td>
+                <td>{{ $kepsek->nama_lengkap }}<br>----------------------------------------<br>NIP. {{ $kepsek->kode_identitas }}</td>
+                <td>{{ $namaWaliKelas->nama_guru }}<br>----------------------------------------<br>NIP. {{ $kepsek->kode_identitas }}</td>
             </tr>
         </table>
     </div>

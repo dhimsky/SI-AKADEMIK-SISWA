@@ -3,16 +3,13 @@
 @section('content')
     <div class="page-content fade-in-up">
         <div class="ibox">
-            <div class="ibox-head">
-                <div class="ibox-title">Data Table Role</div>
-            </div>
             <div class="ibox-body">
                 <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>ID ROLE</th>
-                            <th>LEVEL</th>
-                            <th>AKSI</th>
+                            <th class="text-center">ID ROLE</th>
+                            <th class="text-center">LEVEL</th>
+                            <th class="text-center">AKSI</th>
                         </tr>
                     </thead>
                     <tbody>

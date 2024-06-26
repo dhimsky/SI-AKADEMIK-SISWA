@@ -3,40 +3,38 @@
 @section('content')
 <div class="page-content fade-in-up">
     <div class="ibox">
-        <div class="ibox-head">
-            <div class="ibox-title">Data Table Siswa</div>
-            <div class="col-md-9 mt-4 text-right">
-                <form action="" method="GET">
-                    <div class="row mb-3">
-                        <div class="col-md-1">
-                            <button id="btnFilter" class="btn btn-whatsapp"><i class="fa fa-search"></i></button>
-                        </div>
+        <div class="row">
+            @foreach ($kelas as $k)
+            <div class="col-lg-3 col-md-6 mt-3 ml-3">
+                <div class="ibox bg-success color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ $k->nama_kelas }}</h2>
+                        <div class="m-b-3">{{ $k->jurusan->nama_jurusan }}</div><a href="" data-toggle="modal" data-target=".tambahAbsen"
+                        title="Tambah Absensi" class="ti-arrow-right text-light widget-stat-icon"></a>
+                        <div><i ></i><small></small></div>
                     </div>
-                </form>
+                </div>
             </div>
-            <div class="col-md-1 text-right ">
-                <a href="" class="btn btn-info"
-                    title="Tambah Absensi">
-                    <i class="fa fa-plus"></i></a>
-            </div>
+            @endforeach
         </div>
         <div class="ibox-body">
             <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0"
                 width="100%">
                 <thead>
                     <tr class="text-center">
-                        <th>NIS</th>
+                        <th>NO</th>
                         <th class="text-center">NAMA SISWA</th>
-                        <th class="text-center">MAPEL</th>
                         <th class="text-center">KELAS</th>
-                        <th class="text-center">TANGGAL</th>
                         <th class="text-center">STATUS ABSEN</th>
-                        <th class="text-center">AKSI</th>
+                        <th class="text-center">TANGGAL ABSEN</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="text-center">
-                        
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
 
                     {{-- VALIDASI DELETE --}}
@@ -65,6 +63,83 @@
                     </script>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade tambahAbsen" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Absensi Siswa</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group col-md-3" id="date_1">
+                        <label class="font-normal">Tanggal</label>
+                        <div class="input-group date">
+                            <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                            <input class="form-control" type="text" id="tanggal_absensi" name="tanggal_absensi">
+                        </div>
+                        @error('tanggal_absensi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            var today = new Date().toISOString().split('T')[0];
+                            document.getElementById('tanggal_absensi').value = today;
+                        });
+                    </script>
+                    <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="text-center">
+                                <th class="text-center">No</th>
+                                <th class="text-center">Nama</th>
+                                <th class="text-center">Masuk</th>
+                                <th class="text-center">Izin</th>
+                                <th class="text-center">Sakit</th>
+                                <th class="text-center">Alpa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td  class="text-center">1</td>
+                                <td>Dibyo Anjay Mabar</td>
+                                <td class="text-center">
+                                    <label class="ui-radio ui-radio-success">
+                                        <input type="radio" name="test2">
+                                        <span class="input-span"></span></label>
+                                </td>
+                                <td class="text-center">
+                                    <label class="ui-radio ui-radio-info">
+                                        <input type="radio" name="test2">
+                                        <span class="input-span"></span></label>
+                                </td>
+                                <td class="text-center">
+                                    <label class="ui-radio ui-radio-info">
+                                        <input type="radio" name="test2">
+                                        <span class="input-span"></span></label>
+                                </td>
+                                <td class="text-center">
+                                    <label class="ui-radio ui-radio-danger">
+                                        <input type="radio" name="test2">
+                                    <span class="input-span"></span></label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

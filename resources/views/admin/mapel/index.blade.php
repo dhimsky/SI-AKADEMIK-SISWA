@@ -4,8 +4,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Data Table Mapel</div>
-                <div class="col-md-2 text-right ">
+                <div class="col-md-12 text-right ">
                     <a href="" data-toggle="modal" data-target=".tambahMapel" class="btn btn-info"
                         title="Tambah Mapel">
                         <i class="fa fa-plus"></i></a>
@@ -16,16 +15,16 @@
                     width="100%">
                     <thead>
                         <tr>
-                            <th>KODE MAPEL</th>
-                            <th>NAMA MAPEL</th>
-                            <th>JURUSAN</th>
-                            <th>AKSI</th>
+                            <th class="text-center">KODE MAPEL</th>
+                            <th class="text-center">NAMA MAPEL</th>
+                            <th class="text-center">JURUSAN</th>
+                            <th class="text-center">AKSI</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($mapel as $item)
-                            <tr class="text-center">
-                                <td>{{ $item->kode_mapel }}</td>
+                            <tr>
+                                <td class="text-center">{{ $item->kode_mapel }}</td>
                                 <td>{{ $item->nama_mapel }}</td>
                                 <td>
                                     @if ($item->jurusan)

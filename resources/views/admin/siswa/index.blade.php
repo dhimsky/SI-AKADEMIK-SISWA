@@ -4,11 +4,10 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Data Table Siswa</div>
                 <div class="col-md-7 mt-4 text-right">
                     <form action="" method="GET">
                         <div class="row mb-3">
-                            <div class="col-md-3 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <select id="kelas_id" name="kelas_id" class="form-control">
                                     <option selected value="">Semua Kelas</option>
                                     @foreach ($kelas as $k)
@@ -16,7 +15,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <select id="angkatan_id" name="angkatan_id" class="form-control">
                                     <option selected value="">Semua Angkatan</option>
                                     @foreach ($angkatans as $a)
@@ -45,29 +44,27 @@
                     width="100%">
                     <thead>
                         <tr>
-                            <th>NIS</th>
-                            <th>NISN</th>
-                            <th>NAMA LENGKAP</th>
-                            <th>KELAS</th>
-                            <th>JURUSAN</th>
-                            <th>SEMESTER</th>
-                            <th>ANGKATAN</th>
-                            <th>TAHUN PELAJARAN</th>
-                            <th>STATUS</th>
-                            <th>AKSI</th>
+                            <th class="text-center">NO</th>
+                            <th class="text-center">NIS</th>
+                            <th class="text-center">NAMA LENGKAP</th>
+                            <th class="text-center">KELAS</th>
+                            <th class="text-center">JURUSAN</th>
+                            <th class="text-center">SEMESTER</th>
+                            <th class="text-center">ANGKATAN</th>
+                            <th class="text-center">STATUS</th>
+                            <th class="text-center">AKSI</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($siswas as $s)
                         <tr class="text-center">
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $s->nis }}</td>
-                            <td>{{ $s->nisn }}</td>
-                            <td>{{ $s->nama_siswa }}</td>
+                            <td class="text-left">{{ $s->nama_siswa }}</td>
                             <td>{{ $s->kelas_id }}</td>
-                            <td>{{ $s->kelas->jurusan->nama_jurusan }}</td>
+                            <td class="text-left">{{ $s->kelas->jurusan->nama_jurusan }}</td>
                             <td>{{ $s->semester }}</td>
                             <td>{{ $s->angkatan->tahun_angkatan}}</td>
-                            <td>{{ $s->tahunpelajaran->tahun_pelajaran }}</td>
                             <td>{{ $s->status_siswa}}</td>
                             <td class="d-flex justify-content-center">
                                 <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
@@ -212,17 +209,6 @@
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="required-label faded-label" for="email">Email</label>
-                                                        <input type="email" name="email" value="{{ $s->user->email }}" class="form-control @error('email') is-invalid @enderror" placeholder="Masukan Email baru">
-                                                        @error('email')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label class="required-label faded-label" for="password">Password</label>
@@ -404,17 +390,6 @@
                                         <option value="6" @if(old('semester') == '6') selected @endif>6</option>
                                     </select>
                                     @error('semester')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label class="required-label faded-label" for="email">Email</label>
-                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukan Email baru">
-                                    @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

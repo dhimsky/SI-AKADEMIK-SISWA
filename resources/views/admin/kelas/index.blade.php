@@ -4,8 +4,7 @@
 <div class="page-content fade-in-up">
     <div class="ibox">
         <div class="ibox-head">
-            <div class="ibox-title">Data Table Kelas</div>
-            <div class="col-md-2 text-right ">
+            <div class="col-md-12 text-right ">
                 <a href="" data-toggle="modal" data-target=".tambahKelas" class="btn btn-info" title="Tambah Kelas">
                 <i class="fa fa-plus"></i></a>
             </div>
@@ -14,11 +13,11 @@
             <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>NAMA KELAS</th>
-                        <th>TINGKAT</th>
-                        <th>JURUSAN</th>
-                        <th>ROMBEL</th>
-                        <th>AKSI</th>
+                        <th class="text-center">NAMA KELAS</th>
+                        <th class="text-center">TINGKAT</th>
+                        <th class="text-center">JURUSAN</th>
+                        <th class="text-center">ROMBEL</th>
+                        <th class="text-center">AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +25,7 @@
                         <tr class="text-center">
                             <td>{{ $item->nama_kelas }}</td>
                             <td>{{ $item->tingkat }}</td>
-                            <td>{{ $item->jurusan->nama_jurusan }}</td>
+                            <td class="text-left">{{ $item->jurusan->nama_jurusan }}</td>
                             <td>{{ $item->rombel->nama_rombel }}</td>
                             <td class="d-flex justify-content-center">
                                 <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target="#editKelas{{ $item->nama_kelas }}" title="Edit Kelas"><i class="fa fa-pencil font-14"></i></button>

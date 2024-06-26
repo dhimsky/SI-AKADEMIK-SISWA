@@ -4,8 +4,7 @@
 <div class="page-content fade-in-up">
     <div class="ibox">
         <div class="ibox-head">
-            <div class="ibox-title">Data Table Rombel</div>
-            <div class="col-md-2 text-right ">
+            <div class="col-md-12 text-right ">
                 <a href="" data-toggle="modal" data-target=".tambahRombel" class="btn btn-info" title="Tambah Rombel">
                 <i class="fa fa-plus"></i></a>
             </div>
@@ -14,9 +13,9 @@
             <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>KODE ROMBEL</th>
-                        <th>NAMA ROMBEL</th>
-                        <th>AKSI</th>
+                        <th class="text-center">KODE ROMBEL</th>
+                        <th class="text-center">NAMA ROMBEL</th>
+                        <th class="text-center">AKSI</th>
                     </tr>
                 </thead>
                 <tbody>

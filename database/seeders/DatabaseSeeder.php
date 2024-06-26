@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Kelas;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
             TahunPelajaranSeeder::class,
             MapelSeeder::class,
             RombelSeeder::class,
+            KelasSeeder::class,
         ]);
     }
 }

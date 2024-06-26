@@ -30,8 +30,6 @@ class GuruController extends Controller
             'nama_guru' => 'required',
             'mapel_kode' => 'required',
             'kelas_id' => 'required',
-            // 'email' => 'required|unique:users,email',
-            'password' => 'required',
         ];
         $messages = [
             'nip.required' => 'NIP tidak boleh kosong!',
@@ -39,9 +37,6 @@ class GuruController extends Controller
             'nama_guru.required' => 'Nama Lengkap tidak boleh kosong!',
             'mapel_kode.required' => 'Mapel tidak boleh kosong!',
             'kelas_id.required' => 'Sebagai Wali Kelas tidak boleh kosong!',
-            // 'email.required' => 'Email tidak boleh kosong!',
-            // 'email.unique' => 'Email sudah digunakan!',
-            'password.required' => 'Password tidak boleh kosong!',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -56,8 +51,7 @@ class GuruController extends Controller
         $user->kode_identitas = $request->nip;
         $user->nama_lengkap = $request->nama_guru;
         $user->role_id = 2;
-        // $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make('123');
         $user->save();
 
         //insert data wali kelas ke table Guru
@@ -66,7 +60,6 @@ class GuruController extends Controller
         $guru->nama_guru = $request->nama_guru;
         $guru->mapel_kode = $request->mapel_kode;
         $guru->kelas_id = $request->kelas_id;
-        // $guru->email = $request->email;
         $guru->save();
 
         return redirect()->back()->with('success', 'Guru Kelas berhasil ditambahkan');
@@ -96,8 +89,7 @@ class GuruController extends Controller
             'nama_guru.required' => 'Nama Lengkap tidak boleh kosong!',
             'mapel_kode.required' => 'Mapel tidak boleh kosong!',
             'kelas_id.required' => 'Sebagai Wali Kelas tidak boleh kosong!',
-            'password.required' => 'Password tidak boleh kosong!',
-        ];
+            ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {

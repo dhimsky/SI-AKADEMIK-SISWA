@@ -16,7 +16,6 @@ class Guru extends Model
         'nama_guru',
         'kelas_id',
         'mapel_kode',
-        // 'password',
     ];
     protected $casts = [
         'nip' => 'string',
@@ -27,7 +26,7 @@ class Guru extends Model
         return $this->belongsTo(Kelas::class, 'kelas_id', 'nama_kelas');
     }
     public function mapel(){
-        return $this->belongsTo(Kelas::class, 'mapel_kode', 'kode_mapel');
+        return $this->belongsTo(Mapel::class, 'mapel_kode', 'kode_mapel');
     }
     public function User()
     {

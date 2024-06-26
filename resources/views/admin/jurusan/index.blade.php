@@ -4,8 +4,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Data Table Jurusan</div>
-                <div class="col-md-2 text-right ">
+                <div class="col-md-12 text-right ">
                     <a href="" data-toggle="modal" data-target=".tambahJurusan" class="btn btn-info"
                         title="Tambah Jurusan">
                         <i class="fa fa-plus"></i></a>
@@ -16,15 +15,17 @@
                     width="100%">
                     <thead>
                         <tr>
-                            <th>KODE JURUSAN</th>
-                            <th>NAMA JURUSAN</th>
-                            <th>AKSI</th>
+                            <th class="text-center">NO</th>
+                            <th class="text-center">KODE JURUSAN</th>
+                            <th class="text-center">NAMA JURUSAN</th>
+                            <th class="text-center">AKSI</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($jurusan as $item)
-                            <tr class="text-center">
-                                <td>{{ $item->kode_jurusan }}</td>
+                            <tr>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ $item->kode_jurusan }}</td>
                                 <td>{{ $item->nama_jurusan }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"

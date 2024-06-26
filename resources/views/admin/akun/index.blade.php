@@ -4,8 +4,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Data Table Akun</div>
-                <div class="col-md-2 text-right ">
+                <div class="col-md-12 text-right ">
                     <a href="" data-toggle="modal" data-target=".tambahAkun" class="btn btn-info" title="Tambah Akun">
                         <i class="fa fa-plus"></i></a>
                 </div>
@@ -15,18 +14,18 @@
                     width="100%">
                     <thead>
                         <tr>
-                            <th>Kode Identitas</th>
-                            <th>NAMA LENGKAP</th>
-                            <th>ROLE</th>
-                            <th>AKSI</th>
+                            <th class="text-center">Kode Identitas</th>
+                            <th class="text-center">NAMA LENGKAP</th>
+                            <th class="text-center">ROLE</th>
+                            <th class="text-center">AKSI</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($akun as $item)
                             <tr class="text-center">
                                 <td>{{ $item->kode_identitas }}</td>
-                                <td>{{ $item->nama_lengkap }}</td>
-                                <td>{{ $item->Role->level }}</td>
+                                <td class="text-left">{{ $item->nama_lengkap }}</td>
+                                <td class="text-left">{{ $item->Role->level }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target="#editAkun{{ $item->kode_identitas }}" title="Edit rombel"><i class="fa fa-pencil font-14"></i></button>
                                     <form id="deleteForm{{ $item->kode_identitas }}" action="{{ route('admin.delete-akun', ['id' => $item->kode_identitas]) }}" method="POST">
@@ -65,6 +64,18 @@
                                                     <input type="text" name="nama_lengkap"
                                                         class="form-control @error('nama_lengkap') is-invalid @enderror" value="{{ $item->nama_lengkap }}" placeholder="Masukan nama role">
                                                     @error('nama_lengkap')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label class="required-label faded-label" for="role_id">Pilih Role</label>
+                                                    <select class="form-control input-sm" name="role_id">
+                                                        <option value="1" {{ $item->role_id === 1 ? 'selected' : '' }}>Admin</option>
+                                                        <option value="4" {{ $item->role_id === 4 ? 'selected' : '' }}>Kepala Sekolah</option>
+                                                    </select>
+                                                    @error('role_id')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -129,41 +140,42 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
+                <form action="{{ route('admin.store-akun') }}" method="POST">
                 <div class="modal-body">
-                    <form action="{{ route('admin.store-akun') }}" method="POST">
-                        @csrf
-                        <div class="form-group mb-3">
-                            <label class="required-label faded-label" for="kode_identitas">Kode Identitas</label>
-                            <input type="kode_identitas" name="kode_identitas" class="form-control @error('kode_identitas') is-invalid @enderror"
-                                placeholder="Masukan Kode Identitas">
-                            @error('kode_identitas')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="required-label faded-label" for="nama_lengkap">Nama Lengkap</label>
-                            <input type="text" name="nama_lengkap"
-                                class="form-control @error('nama_lengkap') is-invalid @enderror"
-                                placeholder="Masukan nama role">
-                            @error('nama_lengkap')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="required-label faded-label" for="password">Password</label>
-                            <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                placeholder="Masukan Password">
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                    @csrf
+                    <div class="form-group mb-3">
+                        <label class="required-label faded-label" for="kode_identitas">Kode Identitas</label>
+                        <input type="kode_identitas" name="kode_identitas" class="form-control @error('kode_identitas') is-invalid @enderror"
+                            placeholder="Masukan Kode Identitas">
+                        @error('kode_identitas')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="required-label faded-label" for="nama_lengkap">Nama Lengkap</label>
+                        <input type="text" name="nama_lengkap"
+                            class="form-control @error('nama_lengkap') is-invalid @enderror"
+                            placeholder="Masukan nama role">
+                        @error('nama_lengkap')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="required-label faded-label" for="role_id">Pilih Role</label>
+                        <select class="form-control input-sm" name="role_id">
+                            <option value="1">Admin</option>
+                            <option value="4">Kepala Sekolah</option>
+                        </select>
+                        @error('role_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>

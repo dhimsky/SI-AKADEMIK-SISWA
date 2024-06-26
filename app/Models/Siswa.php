@@ -31,8 +31,6 @@ class Siswa extends Model
         'kelas_id' => 'required|exists:kelas,nama_kelas',
         'angkatan_id' => 'required|exists:angkatan,kode_angkatan',
         'status_siswa' => 'required',
-        'password' => 'required',
-        'email' => 'required|email',
     ];
     
     public static $messages = [
@@ -46,9 +44,6 @@ class Siswa extends Model
         'angkatan_id.required' => 'Angkatan tidak boleh kosong!',
         'angkatan_id.exists' => 'Angkatan yang dipilih tidak valid!',
         'status_siswa.required' => 'Status siswa tidak boleh kosong!',
-        'password.required' => 'Password tidak boleh kosong!',
-        'email.required' => 'Email tidak boleh kosong!',
-        'email.email' => 'Email harus falid',
     ];
 
     public function kelas()

@@ -4,8 +4,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
-                <div class="ibox-title">Data Table Wali Kelas</div>
-                <div class="col-md-2 text-right ">
+                <div class="col-md-12 text-right ">
                     <a href="" data-toggle="modal" data-target=".tambahguru" class="btn btn-info"
                         title="Tambah Wali Kelas">
                         <i class="fa fa-plus"></i></a>
@@ -16,19 +15,19 @@
                     width="100%">
                     <thead>
                         <tr>
-                            <th>NIP</th>
-                            <th>NAMA LENGKAP</th>
-                            <th>MATA PELAJARAN</th>
-                            <th>SEBAGAI WALI KELAS</th>
-                            <th>AKSI</th>
+                            <th class="text-center">NIP</th>
+                            <th class="text-center">NAMA LENGKAP</th>
+                            <th class="text-center">MATA PELAJARAN</th>
+                            <th class="text-center">SEBAGAI WALI KELAS</th>
+                            <th class="text-center">AKSI</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($guru as $item)
                             <tr class="text-center">
                                 <td>{{ $item->nip }}</td>
-                                <td>{{ $item->nama_guru }}</td>
-                                <td>{{ $item->mapel_kode }}</td>
+                                <td class="text-left">{{ $item->nama_guru }}</td>
+                                <td class="text-left">{{ $item->mapel->nama_mapel }}</td>
                                 <td>{{ $item->kelas_id }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
@@ -80,7 +79,7 @@
                                                 <label class="required-label faded-label" for="mapel_kode">Mata Pelajaran</label>
                                                 <select class="form-control input-sm" name="mapel_kode">
                                                     @foreach ($mapel as $m)
-                                                        <option @if ($m->kode_mapel == $item->mapel_kode) selected @endif value="{{ $m->kode_mapel }}">{{ $m->kode_mapel }}</option>
+                                                        <option @if ($m->kode_mapel == $item->mapel_kode) selected @endif value="{{ $m->kode_mapel }}">{{ $m->nama_mapel }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('mapel_kode')
@@ -217,27 +216,6 @@
                                 @endforeach
                             </select>
                             @error('kelas_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        {{-- Masuk ke database user (Nama Lengkap Juga) --}}
-                        {{-- <div class="form-group mb-3">
-                            <label class="required-label faded-label" for="email">Email</label>
-                            <input type="email" name="email"
-                                class="form-control @error('email') is-invalid @enderror" placeholder="Masukan email">
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div> --}}
-                        <div class="form-group mb-3">
-                            <label class="required-label faded-label" for="password">Password</label>
-                            <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror"  placeholder="Masukan password baru">
-                            @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

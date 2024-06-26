@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Angkatan;
+use App\Models\Kelas;
 use App\Models\Mapel;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
@@ -15,7 +17,9 @@ class NilaiController extends Controller
         $siswa = Siswa::all();
         $nilai = Nilai::all();
         $mapel = Mapel::all();
-        return view('admin.nilai.index', compact('siswa', 'nilai', 'mapel'));
+        $kelas = Kelas::all();
+        $angkatans = Angkatan::all();
+        return view('admin.nilai.index', compact('siswa', 'nilai', 'mapel', 'kelas', 'angkatans'));
     }
     public function tambah_nilai(){
         $siswa = Siswa::all();

@@ -87,15 +87,15 @@
         <table class="no-border">
             <tr class="no-border">
                 <td>Nama</td>
-                <td>: Ahmad</td>
+                <td>: {{ $siswa->nama_siswa }}</td>
             </tr>
             <tr class="no-border">
                 <td>NIS</td>
-                <td>: 112412</td>
+                <td>: {{ $siswa->nis }}</td>
             </tr>
             <tr class="no-border">
                 <td>Kopetensi Keahlian</td>
-                <td>: SMK Negeri 1 Cilacap</td>
+                <td>: {{ $siswa->kelas->jurusan->nama_jurusan }}</td>
             </tr>
         </table>
         
@@ -120,143 +120,70 @@
                 <tr>
                     <td class="sub-text" colspan="9"><strong>A. Kelompok Mata Pelajaran Umum</strong></td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Pendidikan Agama dan Budi Pekerti</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Pendidikan Pancasila</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Bahasa Indonesia</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Sejarah</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Pendidikan Jasmani, Olahraga dan Kesehatan</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Bahasa Jawa</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Matematika</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Bahasa Inggris</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($mapelumum as $index => $mapel)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td class="text-left">{{ $index }}</td>
+                        @for ($semester = 1; $semester <= 6; $semester++)
+                            @php
+                                $nilai = $mapel->firstWhere('semester', $semester);
+                            @endphp
+                            <td>{{ $nilai ? $nilai->nilai_akhir : 0 }}</td>
+                        @endfor
+                        <td>{{ $mapel->first()->nilai_psaj ?? 0 }}</td>
+                    </tr>
+                @endforeach
                 <tr>
                     <td class="sub-text" colspan="9"><strong>B. Kelompok Mata Pelajaran Kejuruan</strong></td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Manajemen Perkantoran</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Proyek Kreatif dan Kewirausahaan</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Front Office</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($mapelkejuruan as $index => $mapel)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td class="text-left">{{ $index }}</td>
+                        @for ($semester = 1; $semester <= 6; $semester++)
+                            @php
+                                $nilai = $mapel->firstWhere('semester', $semester);
+                            @endphp
+                            <td>{{ $nilai ? $nilai->nilai_akhir : 0 }}</td>
+                        @endfor
+                        <td>{{ $mapel->first()->nilai_psaj ?? 0 }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 
     <div class="keterangan">
         <div><strong>Keterangan:</strong></div>
-        <div>Rata-rata Nilai Semester I-VI : 86,75</div>
-        <div>Rata-rata Nilai PSAJ : 82,79</div>
-        <div>Rata-rata : </div>
+        <div>Rata-rata Nilai Semester I-VI : {{ number_format($rataRataNilaiSemester, 2) }}</div>
+        <div>Rata-rata Nilai PSAJ : {{ number_format($rataRataNilaiPSAJ, 2) }}</div>
+        <div>Rata-rata : {{ number_format(($rataRataNilaiSemester + $rataRataNilaiPSAJ) / 2, 2) }}</div>
     </div>
 
     <div class="footer">
-        <p class="text-right">Cilacap, 21 Juni 2023</p>
+        @php
+            $bulanIndonesia = [
+                1 => 'Januari',
+                2 => 'Februari',
+                3 => 'Maret',
+                4 => 'April',
+                5 => 'Mei',
+                6 => 'Juni',
+                7 => 'Juli',
+                8 => 'Agustus',
+                9 => 'September',
+                10 => 'Oktober',
+                11 => 'November',
+                12 => 'Desember',
+            ];
+        @endphp
+        @php
+            $tanggal = \Carbon\Carbon::now();
+            $hari = $tanggal->format('d');
+            $bulan = $bulanIndonesia[$tanggal->format('n')];
+            $tahun = $tanggal->format('Y');
+        @endphp
+        <p class="text-right">Cilacap, {{ $hari }} {{ $bulan }} {{ $tahun }}</p>
         <table>
             <tr class="no-border-footer">
                 <td>Kepala Sekolah</td>

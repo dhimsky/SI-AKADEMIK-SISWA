@@ -22,13 +22,13 @@ class AkunController extends Controller
         $rules = [
             'kode_identitas' => 'required|unique:users,kode_identitas',
             'nama_lengkap' => 'required',
-            'password' => 'required',
+            'role_id' => 'required',
         ];
         $messages = [
             'kode_identitas.required' => 'Kode Identitas tidak boleh kosong!',
             'kode_identitas.unique' => 'Kode Identitas sudah digunakan!',
             'nama_lengkap.required' => 'Nama Lengkap tidak boleh kosong!',
-            'password.required' => 'Password tidak boleh kosong!',
+            'role_id.required' => 'Role tidak boleh kosong!',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -40,9 +40,9 @@ class AkunController extends Controller
 
         $akun = new User();
         $akun->kode_identitas = $request->kode_identitas;
-        $akun->role_id = 1;
+        $akun->role_id = $request->role_id;
         $akun->nama_lengkap = $request->nama_lengkap;
-        $akun->password = Hash::make($request->password);
+        $akun->password = Hash::make('abcd1234');
         $akun->save();
 
         return redirect()->back()->with('success', 'Akun berhasil ditambahkan');
@@ -51,19 +51,19 @@ class AkunController extends Controller
     public function update_akun(Request $request, $id)
     {
         $akun = User::findOrFail($id);
-        
-        // Definisikan aturan validasi
         $rules = [
             'kode_identitas' => [
                 'required',
                 Rule::unique('users')->ignore($akun->kode_identitas, 'kode_identitas'),
             ],
             'nama_lengkap' => 'required',
+            'role_id' => 'required',
         ];
         $messages = [
             'kode_identitas.required' => 'Kode Identitas tidak boleh kosong!',
             'kode_identitas.unique' => 'Kode Identitas sudah digunakan!',
             'nama_lengkap.required' => 'Nama Lengkap tidak boleh kosong!',
+            'role_id.required' => 'Role tidak boleh kosong!',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -73,9 +73,8 @@ class AkunController extends Controller
                     ->withInput();
         }
 
-        
-        $akun->email = $request->email;
         $akun->nama_lengkap = $request->nama_lengkap;
+        $akun->role_id = $request->role_id;
         if (!empty($request->password_display)) {
             $akun->password = hash::make($request->password_display);
         }else {
@@ -93,6 +92,4 @@ class AkunController extends Controller
 
         return redirect()->back()->with('success', 'Akun berhasil dihapus');
     }
-
-
 }

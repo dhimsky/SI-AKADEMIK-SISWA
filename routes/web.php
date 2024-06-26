@@ -120,7 +120,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('absensi', [AdminAbsensiController::class, 'index'])->name('absensi');
         // ============================== TRANSKRIP NILAI ===========================================
         Route::get('transkipnilai', [AdminTranskipNilaiController::class, 'index'])->name('transkipnilai');
-        Route::get('/siswa/transkipnilai-pdf', [TranskipPdfController::class, 'generatePdf'])->name('transkip_pdf');
+        Route::get('/siswa/{id}/transkipnilai-pdf', [TranskipPdfController::class, 'generatePdf'])->name('transkip_pdf');
     });
     
     // Route prefix untuk walikelas
@@ -129,6 +129,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard', [GuruDashboardController::class, 'index'])->name('dashboard');
         // ============================== NILAI ===========================================
         Route::get('nilai', [GuruNilaiController::class, 'index'])->name('nilai');
+        Route::get('tambah-nilai', [GuruNilaiController::class, 'tambah_nilai'])->name('tambah-nilai');
         // ============================== DASHBOARD ===========================================
         Route::get('absensi', [GuruAbsensiController::class, 'index'])->name('absensi');
     });

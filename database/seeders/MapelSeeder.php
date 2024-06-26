@@ -14,19 +14,44 @@ class MapelSeeder extends Seeder
     public function run(): void
     {
         Mapel::create([
+            'kode_mapel' => 'PABP',
+            'nama_mapel' => 'Pendidikan Agama dan Budi Pekerti',
+            'jurusan_kode' => null,
+        ]);
+        Mapel::create([
+            'kode_mapel' => 'PKN',
+            'nama_mapel' => 'Pendidikan Pancasila',
+            'jurusan_kode' => null,
+        ]);
+        Mapel::create([
+            'kode_mapel' => 'BIN',
+            'nama_mapel' => 'Bahasa Indonesia',
+            'jurusan_kode' => null,
+        ]);
+        Mapel::create([
+            'kode_mapel' => 'SJ',
+            'nama_mapel' => 'Sejarah',
+            'jurusan_kode' => null,
+        ]);
+        Mapel::create([
+            'kode_mapel' => 'PJOK',
+            'nama_mapel' => 'Pendidikan Jasmani, Olahraga dan Kesehatan',
+            'jurusan_kode' => null,
+        ]);
+        Mapel::create([
+            'kode_mapel' => 'BJ',
+            'nama_mapel' => 'Bahasa Jawa',
+            'jurusan_kode' => null,
+        ]);
+        Mapel::create([
             'kode_mapel' => 'MTK',
             'nama_mapel' => 'Matematika',
-            'jurusan_kode' => 'TM',
+            'jurusan_kode' => null,
         ]);
         Mapel::create([
-            'kode_mapel' => 'IPA',
-            'nama_mapel' => 'Ilmu Pengetahuan Alam',
-            'jurusan_kode' => 'TE',
-        ]);
-        Mapel::create([
-            'kode_mapel' => 'IPS',
-            'nama_mapel' => 'Ilmu Pengetahuan Sosial',
-            'jurusan_kode' => 'TKJ',
+            'kode_mapel' => 'BI',
+            'nama_mapel' => 'Bahasa Inggris',
+            'jurusan_kode' => null,
         ]);
     }
 }
