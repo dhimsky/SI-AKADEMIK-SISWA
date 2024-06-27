@@ -209,7 +209,7 @@
             <tr class="no-border-footer">
                 <td>----------------------------------------</td>
                 <td>{{ $kepsek->nama_lengkap }}<br>----------------------------------------<br>NIP. {{ $kepsek->kode_identitas }}</td>
-                <td>{{ $namaWaliKelas->nama_guru }}<br>----------------------------------------<br>NIP. {{ $kepsek->kode_identitas }}</td>
+                <td>{{ $namaWaliKelas->nama_guru }}<br>----------------------------------------<br>NIP. {{ $namaWaliKelas->nip }}</td>
             </tr>
         </table>
     </div>

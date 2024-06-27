@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('uts')->nullable();
             $table->integer('uas')->nullable();
             $table->integer('nilai_akhir')->nullable();
+            $table->integer('psaj')->nullable();
             $table->timestamps();
             $table->foreign('nis_id')->references('nis')->on('siswa')->onDelete('cascade');
             $table->foreign('mapel_kode')->references('kode_mapel')->on('mapel')->onDelete('cascade');

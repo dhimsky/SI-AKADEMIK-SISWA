@@ -19,7 +19,7 @@ class TranskipPdfController extends Controller
             ->where('nilai.nis_id', '=', $id);
         })
         ->whereNull('mapel.jurusan_kode')
-        ->select('mapel.nama_mapel', 'nilai.nilai_akhir', 'nilai.semester')
+        ->select('mapel.nama_mapel', 'nilai.nilai_akhir', 'nilai.semester', 'nilai.psaj')
         ->get()
         ->groupBy('nama_mapel');
         
@@ -31,7 +31,7 @@ class TranskipPdfController extends Controller
         ->join('siswa', 'siswa.nis', '=', 'nilai.nis_id')
         ->join('kelas', 'kelas.nama_kelas', '=', 'siswa.kelas_id')
         ->whereColumn('mapel.jurusan_kode', 'kelas.jurusan_kode')
-        ->select('mapel.nama_mapel', 'nilai.nilai_akhir', 'nilai.semester')
+        ->select('mapel.nama_mapel', 'nilai.nilai_akhir', 'nilai.semester', 'nilai.psaj')
         ->get()
         ->groupBy('nama_mapel');
 
@@ -55,19 +55,18 @@ class TranskipPdfController extends Controller
         }
         $rataRataNilaiSemester = $totalSemester > 0 ? $totalNilaiSemester / $totalSemester : 0;
     
-        // Menghitung rata-rata nilai PSAJ
-        $totalNilaiPSAJ = 0;
-        $totalPSAJ = 0;
-        foreach ($mapelkejuruan as $mapel) {
-            foreach ($mapel as $nilai) {
-                if ($nilai->nilai_psaj !== null) {
-                    $totalNilaiPSAJ += $nilai->nilai_psaj;
-                    $totalPSAJ++;
-                }
-            }
+// Hitung rata-rata nilai PSAJ
+$totalNilaiPSAJ = 0;
+$totalPSAJ = 0;
+foreach ($mapelkejuruan as $mapel) {
+    foreach ($mapel as $nilai) {
+        if (isset($nilai->psaj) && $nilai->psaj !== null) {
+            $totalNilaiPSAJ += $nilai->psaj;
+            $totalPSAJ++;
         }
-        $rataRataNilaiPSAJ = $totalPSAJ > 0 ? $totalNilaiPSAJ / $totalPSAJ : 0;
-
+    }
+}
+$rataRataNilaiPSAJ = $totalPSAJ > 0 ? $totalNilaiPSAJ / $totalPSAJ : 0;
 
         $pdf = PDF::loadView('admin.transkipnilai.transkipnilai', compact('siswa', 'mapelumum', 'mapelkejuruan', 'rataRataNilaiSemester', 'rataRataNilaiPSAJ'));
         return $pdf->stream('transkip_nilai.pdf');

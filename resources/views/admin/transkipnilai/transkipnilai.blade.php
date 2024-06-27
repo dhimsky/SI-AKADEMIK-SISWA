@@ -128,9 +128,14 @@
                             @php
                                 $nilai = $mapel->firstWhere('semester', $semester);
                             @endphp
-                            <td>{{ $nilai ? $nilai->nilai_akhir : 0 }}</td>
-                        @endfor
-                        <td>{{ $mapel->first()->nilai_psaj ?? 0 }}</td>
+                            <td>{{ $nilai ? $nilai->nilai_akhir : '-' }}</td>
+                            @endfor
+                            <td>
+                                @php
+                                    $psaj = $mapel->firstWhere('psaj');
+                                @endphp
+                                {{ $psaj ? $psaj->psaj : '-' }}
+                            </td>
                     </tr>
                 @endforeach
                 <tr>
@@ -144,9 +149,9 @@
                             @php
                                 $nilai = $mapel->firstWhere('semester', $semester);
                             @endphp
-                            <td>{{ $nilai ? $nilai->nilai_akhir : 0 }}</td>
+                            <td>{{ $nilai ? $nilai->nilai_akhir : '-' }}</td>
                         @endfor
-                        <td>{{ $mapel->first()->nilai_psaj ?? 0 }}</td>
+                        <td>{{ $mapel->first()->nilai_psaj ?? '-' }}</td>
                     </tr>
                 @endforeach
             </tbody>

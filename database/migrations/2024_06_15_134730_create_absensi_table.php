@@ -17,7 +17,6 @@ return new class extends Migration
             $table->date('tanggal_absensi');
             $table->string('status_absensi');
             $table->integer('semester');
-            $table->string('kelas', 10);
             $table->string('tahun_pelajaran', 15);
             $table->timestamps();
         });

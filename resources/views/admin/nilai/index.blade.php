@@ -29,6 +29,70 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="ibox-body">
+                <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0"
+                    width="100%">
+                    <thead>
+                        <tr class="text-center">
+                            <th class="text-center">NO</th>
+                            <th class="text-center">NIS</th>
+                            <th class="text-center">NAMA SISWA</th>
+                            <th class="text-center">KELAS</th>
+                            <th class="text-center">AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            @foreach ($siswa as $n)
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ $n->nis }}</td>                           
+                            <td class="text-left">{{ $n->nama_siswa }}</td>                           
+                            <td class="text-center">{{ $n->kelas->nama_kelas }}</td>                           
+                            <td class="d-flex justify-content-center">
+                                <a href="{{ route('admin.siswa.nilai', ['id' => $n->nis]) }}">Detail</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@include('validasi.validasi-edit')
+@include('validasi.notifikasi-berhasil')
+@endsection
+{{-- @extends('layouts.app')
+@section('tittle', 'Tabel Nilai Siswa')
+@section('content')
+    <div class="page-content fade-in-up">
+        <div class="ibox">
+            <div class="ibox-head">
+                <div class="col-md-9 mt-4 text-right">
+                    <form action="" method="GET">
+                        <div class="row mb-3">
+                            <div class="col-md-4 mb-2">
+                                <select id="kelas_id" name="kelas_id" class="form-control">
+                                    <option selected value="">Semua Kelas</option>
+                                    @foreach ($kelas as $k)
+                                    <option value="{{ $k->nama_kelas }}">{{ $k->nama_kelas }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <select id="angkatan_id" name="angkatan_id" class="form-control">
+                                    <option selected value="">Semua Angkatan</option>
+                                    @foreach ($angkatans as $a)
+                                    <option value="{{ $a->kode_angkatan }}">{{ $a->tahun_angkatan }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <button id="btnFilter" class="btn btn-whatsapp"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="col-md-1 text-right ">
                     <a href="{{ route('admin.tambah-nilai') }}" class="btn btn-info"
                         title="Tambah Nilai">
@@ -85,7 +149,7 @@
                         </tr>
 
                         {{-- MODAL EDIT --}}
-                        <div class="modal fade editNilai{{ $n->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                        {{-- <div class="modal fade editNilai{{ $n->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -154,10 +218,10 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- VALIDASI DELETE --}}
-                        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+                        {{-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
                         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                         <script>
                             $(document).ready(function(){
@@ -188,4 +252,4 @@
     </div>
 @include('validasi.validasi-edit')
 @include('validasi.notifikasi-berhasil')
-@endsection
+@endsection --}}

@@ -18,6 +18,7 @@ class NilaiAkhirPdfController extends Controller
         $namaWaliKelas = $siswa->kelas->guru->first();
         $mapel = Mapel::all();
         $kepsek = User::where('role_id', 4)->first();
+        
         $mapelumum = DB::table('mapel')
         ->leftJoin('nilai', function($join) use ($id) {
             $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
@@ -27,16 +28,41 @@ class NilaiAkhirPdfController extends Controller
         ->select('mapel.nama_mapel', 'nilai.nilai_akhir')
         ->get();
 
-        $mapelkejuruan = DB::table('mapel')
-            ->leftJoin('nilai', function($join) use ($id) {
-                $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
-                    ->where('nilai.nis_id', '=', $id);
-            })
-            ->join('siswa', 'siswa.nis', '=', 'nilai.nis_id')
-            ->join('kelas', 'kelas.nama_kelas', '=', 'siswa.kelas_id')
-            ->whereColumn('mapel.jurusan_kode', 'kelas.jurusan_kode')
-            ->select('mapel.nama_mapel', 'nilai.nilai_akhir')
-            ->get();
+        // $mapelkejuruan = DB::table('mapel')
+        //     ->leftJoin('nilai', function($join) use ($id) {
+        //         $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
+        //             ->where('nilai.nis_id', '=', $id);
+        //     })
+        //     ->join('siswa', 'siswa.nis', '=', 'nilai.nis_id')
+        //     ->join('kelas', 'kelas.nama_kelas', '=', 'siswa.kelas_id')
+        //     ->whereColumn('mapel.jurusan_kode', 'kelas.jurusan_kode')
+        //     ->select('mapel.nama_mapel', 'nilai.nilai_akhir')
+        //     ->get();
+
+        $queryWithNilai = DB::table('mapel')
+        ->leftJoin('nilai', function($join) use ($id) {
+            $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
+                ->where('nilai.nis_id', '=', $id);
+        })
+        ->join('siswa', 'siswa.nis', '=', 'nilai.nis_id')
+        ->join('kelas', 'kelas.nama_kelas', '=', 'siswa.kelas_id')
+        ->where('mapel.jurusan_kode', '=', $siswa->kelas->jurusan_kode)
+        ->select('mapel.nama_mapel', 'nilai.nilai_akhir');
+
+        $queryWithoutNilai = DB::table('mapel')
+        ->leftJoin('nilai', function($join) use ($id) {
+            $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
+                ->where('nilai.nis_id', '=', $id);
+        })
+        ->whereNull('nilai.nilai_akhir') // Filter untuk nilai yang null (mapel tanpa nilai)
+        ->where('mapel.jurusan_kode', '=', $siswa->kelas->jurusan_kode)
+        ->select('mapel.nama_mapel', DB::raw('NULL AS nilai_akhir'));
+
+        $mapelkejuruan = DB::table(DB::raw("({$queryWithNilai->toSql()}) as mapel_with_nilai"))
+        ->mergeBindings($queryWithNilai)
+        ->union($queryWithoutNilai)
+        ->get();
+
 
         $pdf = PDF::loadView('admin.nilai.nilaiakhir', compact('siswa', 'mapelumum', 'mapelkejuruan', 'kepsek', 'namaWaliKelas'));
         return $pdf->stream('penilaian_siswa.pdf');

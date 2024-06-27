@@ -21,6 +21,20 @@ class NilaiController extends Controller
         $angkatans = Angkatan::all();
         return view('admin.nilai.index', compact('siswa', 'nilai', 'mapel', 'kelas', 'angkatans'));
     }
+    public function show($id)
+    {
+        // Mengambil data siswa beserta nilai-nilainya berdasarkan nis_id
+        $idSiswa = $id;
+        $siswa = Siswa::with(['nilai' => function($query) {
+            $query->select('nis_id', 'nilai_akhir', 'ulangan_harian', 'uts', 'uas', 'tahun_pelajaran', 'kelas');
+        }, 'kelas'])->findOrFail($id);
+
+        // Mengambil nilai-nilai siswa yang sesuai dengan nis_id
+        $nilai = Nilai::where('nis_id', $siswa->nis)->get();
+        $mapel = Mapel::all();
+
+        return view('admin.nilai.detail-nilai-siswa', compact('siswa', 'nilai', 'mapel', 'idSiswa'));
+    }
     public function tambah_nilai(){
         $siswa = Siswa::all();
         $nilai = Nilai::all();
@@ -30,18 +44,18 @@ class NilaiController extends Controller
     public function store_nilai(Request $request){
         // dd($request);
         $rules = [
-            'nis_id' => 'required',
             'mapel_kode' => 'required',
             'ulangan_harian' => 'required',
             'uts' => 'required',
             'uas' => 'required',
+            'psaj' => 'required',
         ];
         $messages = [
-            'nis_id.required' => 'Nama Siswa tidak boleh kosong',
             'mapel_kode.required' => 'Mata Pelajaran tidak boleh kosong',
             'ulangan_harian.required' => 'Ulangan Harian tidak boleh kosong',
             'uts.required' => 'UTS tidak boleh kosong',
             'uas.required' => 'UAS tidak boleh kosong',
+            'psaj.required' => 'PSAJ tidak boleh kosong',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -49,11 +63,9 @@ class NilaiController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-
-        $siswa = Siswa::findOrFail($request->nis_id);
-        
+        $siswa = Siswa::findOrFail($request->idSiswa);
         $nilai = new Nilai();
-        $nilai->nis_id = $request->nis_id;
+        $nilai->nis_id = $siswa->nis;
         $nilai->mapel_kode = $request->mapel_kode;
         $nilai->semester = $siswa->semester;
         $nilai->tahun_pelajaran = $siswa->tahunpelajaran->tahun_pelajaran;
@@ -61,6 +73,7 @@ class NilaiController extends Controller
         $nilai->ulangan_harian = $request->ulangan_harian;
         $nilai->uts = $request->uts;
         $nilai->uas = $request->uas;
+        $nilai->psaj = $request->psaj;
         // Mengambil data dari request dan menghitung nilai total
         $nilaiUlanganHarian = $request->ulangan_harian * 0.4;
         $nilaiUts = $request->uts * 0.3;
@@ -91,7 +104,7 @@ class NilaiController extends Controller
                     ->withInput();
         }
 
-        $nilai = Nilai::findOrFail($id);
+        $nilai = Nilai::findOrFail($request->idSiswa);
         // Mengambil data dari request dan menghitung nilai total
         $nilaiUlanganHarian = $request->ulangan_harian * 0.4;
         $nilaiUts = $request->uts * 0.3;
