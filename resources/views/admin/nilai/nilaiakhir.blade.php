@@ -133,7 +133,7 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td class="text-left">{{ $m->nama_mapel }}</td>
-                            <td>{{ isset($m->nilai_akhir) ? $m->nilai_akhir : 0 }}</td>
+                            <td>{{ isset($m->nilai_akhir) ? $m->nilai_akhir : '-' }}</td>
                         </tr>
                     @endforeach
                     <tr>
@@ -143,7 +143,7 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td  class="text-left">{{ $m->nama_mapel }}</td>
-                        <td>{{ isset($m->nilai_akhir) ? $m->nilai_akhir : 0 }}</td>
+                        <td>{{ isset($m->nilai_akhir) ? $m->nilai_akhir : '-' }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -161,15 +161,15 @@
                 <tbody>
                     <tr>
                         <td>Sakit</td>
-                        <td>0</td>
+                        <td>-</td>
                     </tr>
                     <tr>
                         <td>Izin</td>
-                        <td>0</td>
+                        <td>-</td>
                     </tr>
                     <tr>
                         <td>Sakit</td>
-                        <td>0</td>
+                        <td>-</td>
                     </tr>
                 </tbody>
             </table>
@@ -208,8 +208,16 @@
             </tr>
             <tr class="no-border-footer">
                 <td>----------------------------------------</td>
+                @if ($kepsek)
                 <td>{{ $kepsek->nama_lengkap }}<br>----------------------------------------<br>NIP. {{ $kepsek->kode_identitas }}</td>
+                @else
+                <td><br>----------------------------------------<br>NIP. </td>
+                @endif
+                @if ($namaWaliKelas)
                 <td>{{ $namaWaliKelas->nama_guru }}<br>----------------------------------------<br>NIP. {{ $namaWaliKelas->nip }}</td>
+                @else
+                <td><br>----------------------------------------<br>NIP. </td>
+                @endif
             </tr>
         </table>
     </div>

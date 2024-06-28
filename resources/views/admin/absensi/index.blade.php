@@ -5,7 +5,7 @@
     <div class="ibox">
         <div class="row">
             @foreach ($kelas as $k)
-            <div class="col-lg-3 col-md-6 mt-3 ml-3">
+            <div class="col-lg-4 col-md-4 mt-3">
                 <div class="ibox bg-success color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">{{ $k->nama_kelas }}</h2>
@@ -22,7 +22,7 @@
                 width="100%">
                 <thead>
                     <tr class="text-center">
-                        <th>NO</th>
+                        <th class="text-center">NO</th>
                         <th class="text-center">NAMA SISWA</th>
                         <th class="text-center">KELAS</th>
                         <th class="text-center">STATUS ABSEN</th>
