@@ -51,7 +51,7 @@ class GuruController extends Controller
         $user->kode_identitas = $request->nip;
         $user->nama_lengkap = $request->nama_guru;
         $user->role_id = 2;
-        $user->password = Hash::make('123');
+        $user->password = Hash::make('abcd1234');
         $user->save();
 
         //insert data wali kelas ke table Guru

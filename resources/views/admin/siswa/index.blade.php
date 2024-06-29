@@ -396,17 +396,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label class="required-label faded-label" for="password">Password</label>
-                                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukan password baru">
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
                         </div>
                     </div>
                 <div class="modal-footer">

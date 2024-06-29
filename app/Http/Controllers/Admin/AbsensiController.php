@@ -14,4 +14,7 @@ class AbsensiController extends Controller
         $kelas = Kelas::all();
         return view('admin.absensi.index', compact('siswa', 'kelas'));
     }
+    public function show(){
+        return view('admin.absensi.absensi-perkelas');
+    }
 }

@@ -111,12 +111,17 @@
                 </a>
             </li>
             <li>
-                    <a class="active" href=""><i class="sidebar-item-icon fa fa-th-large"></i>
-                    <span class="nav-label">Nilai</span>
+                    <a class="active" href="{{ route('siswa.nilai-akhir') }}"><i class="sidebar-item-icon fa fa-star"></i>
+                    <span class="nav-label">Nilai Akhir</span>
                 </a>
             </li>
             <li>
-                    <a class="active" href=""><i class="sidebar-item-icon fa fa-th-large"></i>
+                    <a class="active" href=""><i class="sidebar-item-icon fa fa-certificate"></i>
+                    <span class="nav-label">Transkip Nilai</span>
+                </a>
+            </li>
+            <li>
+                    <a class="active" href=""><i class="sidebar-item-icon fa fa-check"></i>
                     <span class="nav-label">Absensi</span>
                 </a>
             </li>

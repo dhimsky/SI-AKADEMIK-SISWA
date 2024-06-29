@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Facades\Hash;
 
 class UserImport implements ToModel, WithHeadingRow
 {
@@ -16,7 +17,7 @@ class UserImport implements ToModel, WithHeadingRow
             'kode_identitas' => $row['nis'],
             'nama_lengkap' => $row['nama_siswa'],
             'role_id' => '3',
-            'password' => $row['nis'],
+            'password' => Hash::make('abcd1234'),
         ]);
     }
 }

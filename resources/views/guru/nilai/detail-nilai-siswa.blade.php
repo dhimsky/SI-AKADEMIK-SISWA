@@ -1,12 +1,15 @@
 @extends('layouts.app')
-@section('tittle', 'Detail Nilai Siswa')
+@section('title', 'Detail Nilai Siswa')
 @section('content')
 <div class="page-content fade-in-up">
     <div class="ibox">
+        <div class="ibox-head">
+            <div class="ibox-title">Detail Nilai Siswa</div>
+        </div>
         <div class="ibox-body">
             <div class="row">
                 <div class="col-md-12 mb-3 text-right">
-                    <a href="{{ route('admin.nilaiakhir_pdf', ['id' => $siswa->nis]) }}" class="btn btn-warning"
+                    <a href="" class="btn btn-warning"
                         title="Cetak Nilai" target="_blank">
                         <i class="fa fa-print"></i> Cetak</a>
                     <a href="" class="btn btn-info"
@@ -72,7 +75,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('admin.update-nilai', ['id' => $n->id]) }}" method="POST">
+                                        <form action="" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="row">
@@ -157,7 +160,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.store-nilai') }}" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">

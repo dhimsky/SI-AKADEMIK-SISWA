@@ -8,6 +8,7 @@
                 <div class="ibox-body" style="">
                     <form action="{{ route('update-profile') }}" method="post" class="form-horizontal">
                         @csrf
+                        @method('PUT')
                         @foreach ($user as $u)
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kode Identitas</label>

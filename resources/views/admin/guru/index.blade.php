@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('tittle', 'Tabel Wali Kelas')
+@section('tittle', 'Tabel Guru')
 @section('content')
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-head">
                 <div class="col-md-12 text-right ">
                     <a href="" data-toggle="modal" data-target=".tambahguru" class="btn btn-info"
-                        title="Tambah Wali Kelas">
+                        title="Tambah Guru">
                         <i class="fa fa-plus"></i></a>
                 </div>
             </div>
