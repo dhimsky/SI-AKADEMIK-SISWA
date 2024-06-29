@@ -16,6 +16,7 @@ class NilaiController extends Controller
     public function index(){
         $siswa = Siswa::all();
         $nilai = Nilai::all();
+
         $mapel = Mapel::all();
         $kelas = Kelas::all();
         $angkatans = Angkatan::all();
@@ -74,6 +75,7 @@ class NilaiController extends Controller
         $nilai->uts = $request->uts;
         $nilai->uas = $request->uas;
         $nilai->psaj = $request->psaj;
+        $nilai->status = 'Tertunda';
         // Mengambil data dari request dan menghitung nilai total
         $nilaiUlanganHarian = $request->ulangan_harian * 0.4;
         $nilaiUts = $request->uts * 0.3;
@@ -87,6 +89,7 @@ class NilaiController extends Controller
 
     public function update_nilai(Request $request, $id)
     {
+        // dd($request);
         $rules = [
             'ulangan_harian' => 'required',
             'uts' => 'required',
@@ -104,7 +107,13 @@ class NilaiController extends Controller
                     ->withInput();
         }
 
-        $nilai = Nilai::findOrFail($request->idSiswa);
+        $nilai = Nilai::where('nis_id' ,$request->idSiswa)->first();
+        // $nilaia = Nilai::findOrFail('2');
+        // dd($request);
+        $nilai->ulangan_harian = $request->ulangan_harian;
+        $nilai->uts = $request->uts;
+        $nilai->uas = $request->uas;
+        $nilai->psaj = $request->psaj;
         // Mengambil data dari request dan menghitung nilai total
         $nilaiUlanganHarian = $request->ulangan_harian * 0.4;
         $nilaiUts = $request->uts * 0.3;
@@ -114,6 +123,15 @@ class NilaiController extends Controller
         $nilai->save();
 
         return redirect()->back()->with('success', 'Nilai berhasil diperbarui');
+    }
+
+    public function publish_nilai($id)
+    {
+        $nilai = Nilai::findOrFail($id);
+        $nilai->status = 'Diterbitkan';
+        $nilai->save();
+
+        return redirect()->back()->with('success', 'Nilai berhasil diterbitkan');
     }
 
     public function delete_nilai($id)

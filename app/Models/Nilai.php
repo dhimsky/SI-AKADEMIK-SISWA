@@ -20,6 +20,7 @@ class Nilai extends Model
         'uts',
         'uas',
         'nilai_akhir',
+        'status',
     ];
     public function siswa()
     {

@@ -5,6 +5,9 @@
     <div class="ibox">
         <div class="ibox-head">
             <div class="ibox-title">Detail Nilai Siswa</div>
+            <div class="col-md-9 mt-4 text-right">
+                
+            </div>
         </div>
         <div class="ibox-body">
             <div class="row">
@@ -32,6 +35,7 @@
                         <th>UAS</th>
                         <th>NILAI AKHIR</th>
                         <th>PSAJ</th>
+                        <th>STATUS</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
@@ -54,6 +58,13 @@
                             </td>
                             <td>{{ $n->psaj }}</td>
                             <td>
+                                @if ($n->status == 'Tertunda')
+                                    <span class="badge badge-danger">{{ $n->status }}</span>
+                                @else
+                                <span class="badge badge-primary">{{ $n->status }}</span>
+                                @endif
+                            </td>
+                            <td class="">
                                 <button class="btn btn-default btn-xs" data-toggle="modal" data-target=".editNilai{{ $n->id }}">
                                     <i class="fa fa-pencil"></i>
                                 </button>
@@ -64,6 +75,15 @@
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
+                                @if ($n->status != 'Diterbitkan')
+                                    <form action="{{ route('admin.publish-nilai', ['id' => $n->id]) }}" method="post" style="display:inline;">
+                                        @csrf
+                                        @method('put')
+                                        <button type="submit" class="btn btn-default btn-xs">
+                                            <i class="fa fa-upload"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
 
@@ -78,13 +98,14 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('admin.update-nilai', ['id' => $n->id]) }}" method="POST">
+                                        <form id="updateForm{{ $n->id }}" action="{{ route('admin.update-nilai', ['id' => $n->id]) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label class="form-control-label">Nama Siswa</label>
+                                                        <input type="hidden" name="idSiswa" value="{{ $idSiswa }}" id="">
                                                         <input disabled type="text" class="form-control" value="{{ $n->siswa->nama_siswa }}">
                                                     </div>
                                                 </div>
@@ -117,7 +138,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" id="editButton{{ $n->id }}" class="btn btn-primary">Update</button>
                                     </div>
                                 </div>
                             </div>
@@ -153,6 +174,27 @@
         @endforeach
     });
 </script>
+<script>
+    $(document).ready(function() {
+    @foreach ($nilai as $n)
+        $('#editButton{{ $n->id }}').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda ingin mengubah nilai?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, ubah saja!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#updateForm{{ $n->id }}').submit();
+                }
+            });
+        });
+    @endforeach
+});
+</script>
 
 <div class="modal fade tambahNilai" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -163,7 +205,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.store-nilai') }}" method="POST" enctype="multipart/form-data">
+                <form id="tambahForm" action="{{ route('admin.store-nilai') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
@@ -234,13 +276,32 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button id="tambahButton" type="submit" class="btn btn-primary">Tambah</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+    $('#tambahButton').click(function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Apakah Anda ingin menambah nilai?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Iya'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#tambahForm').submit();
+            }
+        });
+    });
+});
+</script>
 @include('validasi.validasi-edit')
 @include('validasi.notifikasi-berhasil')
 @endsection
