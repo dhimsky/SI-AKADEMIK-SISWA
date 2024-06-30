@@ -39,15 +39,15 @@
     <table class="no-border">
     <tr class="no-border">
         <td>Kelas</td>
-        <td>: </td>
+        <td>: {{ $kelas_id }}</td>
     </tr>
     <tr class="no-border">
         <td>Semester</td>
-        <td>: </td>
+        <td>: {{ $semester }}</td>
     </tr>
     <tr class="no-border">
         <td>Bulan</td>
-        <td>: </td>
+        <td>: {{ $bulan }}</td>
     </tr>
 </table>
 
@@ -57,7 +57,7 @@
             <th>No</th>
             <th>NIS</th>
             <th>Nama</th>
-            @for ($i = 1; $i <= 31; $i++)
+            @for ($i = 1; $i <= $daysInMonth; $i++)
                 <th>{{ $i }}</th>
             @endfor
             <th>M</th>
@@ -67,17 +67,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($absensi as $a)
+        @foreach ($absensiData as $nis_id => $data)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $a->nis_id }}</td>
-                <td class="text-left">{{ $a->siswa->nama_siswa }}</td>
+                <td>{{ $nis_id }}</td>
+                <td class="text-left">{{ $data['nama'] }}</td>
                 @php
-                    $absenArray = explode(',', $a->status_absensi);
-                    $countValues = array_count_values($absenArray);
+                    $countValues = array_count_values($data['status'] ?? []);
                 @endphp
-                @for ($i = 0; $i < 31; $i++)
-                    <td>{{ $absenArray[$i] ?? '-' }}</td>
+                @for ($i = 1; $i <= $daysInMonth; $i++)
+                    <td>{{ $data['status'][$i] ?? '-' }}</td>
                 @endfor
                 <td>{{ $countValues['M'] ?? 0 }}</td>
                 <td>{{ $countValues['S'] ?? 0 }}</td>
@@ -85,7 +84,7 @@
                 <td>{{ $countValues['A'] ?? 0 }}</td>
             </tr>
         @endforeach
-    </tbody>    
+    </tbody>
 </table>
 </body>
 </html>
