@@ -145,13 +145,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('siswa')->name('siswa.')->middleware('CekUserLogin:3')->group(function () {
         // ============================== DASHBOARD ===========================================
         Route::get('dashboard', [SiswaDashboardController::class, 'index'])->name('dashboard');
-<<<<<<< HEAD
 
-=======
         // ============================== NILAI ===========================================
         Route::get('nilai-akhir', [SiswaNilaiController::class, 'nilai_akhir'])->name('nilai-akhir');
         // ============================== ABSENSI ===========================================
         Route::get('absensi', [SiswaAbsensiController::class, 'index'])->name('absensi');
->>>>>>> 606b629f337d1035abf6809a09fad08a35312444
     });
 });
