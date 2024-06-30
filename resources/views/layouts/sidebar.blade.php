@@ -121,7 +121,7 @@
                 </a>
             </li>
             <li>
-                    <a class="active" href=""><i class="sidebar-item-icon fa fa-check"></i>
+                    <a class="active" href="{{ route('siswa.absensi') }}"><i class="sidebar-item-icon fa fa-check"></i>
                     <span class="nav-label">Absensi</span>
                 </a>
             </li>
@@ -134,22 +134,22 @@
 
             @if (Auth::user()->role_id == '4')
             <li>
-                <a class="active" href=""><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active" href="{{ route('kepsek.dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                 <span class="nav-label">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a class="active" href=""><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active" href="{{ route('kepsek.siswa') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                 <span class="nav-label">Siswa</span>
                 </a>
             </li>
             <li>
-                <a class="active" href=""><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active" href="{{ route('kepsek.guru') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                 <span class="nav-label">Guru</span>
                 </a>
             </li>
             <li>
-                <a class="active" href=""><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active" href="{{ route('kepsek.nilai') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                 <span class="nav-label">Nilai</span>
                 </a>
             </li>

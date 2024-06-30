@@ -32,6 +32,12 @@ use App\Http\Controllers\Siswa\DashboardController as SiswaDashboardController;
 use App\Http\Controllers\Siswa\NilaiController as SiswaNilaiController;
 use App\Http\Controllers\Siswa\AbsensiController as SiswaAbsensiController;
 
+//KEPSEK
+use App\Http\Controllers\Kepsek\DashboardController as KepsekDashboardController;
+use App\Http\Controllers\Kepsek\GuruController as KepsekGuruController;
+use App\Http\Controllers\Kepsek\NilaiController as KepsekNilaiController;
+use App\Http\Controllers\Kepsek\SiswaController as KepsekSiswaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -154,5 +160,17 @@ Route::middleware(['auth'])->group(function () {
         // ============================== TRANKIP NILAI ===========================================
         Route::get('transkip-nilai', [SiswaNilaiController::class, 'transkip_nilai'])->name('transkip-nilai');
         Route::get('/{id}/transkipnilai-pdf', [TranskipPdfController::class, 'generatePdf'])->name('transkip_pdf');
+    });
+
+    //Route prefix untuk kepsek
+    Route::prefix('kepsek')->name('kepsek.')->middleware('CekUserLogin:4')->group(function () {
+        // ============================== DASHBOARD ===========================================
+        Route::get('dashboard', [KepsekDashboardController::class, 'index'])->name('dashboard');
+        // ============================== GURU ===========================================
+        Route::get('guru', [KepsekGuruController::class, 'index'])->name('guru');
+        // ============================== SISWA ===========================================
+        Route::get('siswa', [KepsekSiswaController::class, 'index'])->name('siswa');
+        // ============================== NILAI ===========================================
+        Route::get('nilai', [KepsekNilaiController::class, 'index'])->name('nilai');
     });
 });
