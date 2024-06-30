@@ -55,18 +55,17 @@ class TranskipPdfController extends Controller
         }
         $rataRataNilaiSemester = $totalSemester > 0 ? $totalNilaiSemester / $totalSemester : 0;
     
-// Hitung rata-rata nilai PSAJ
-$totalNilaiPSAJ = 0;
-$totalPSAJ = 0;
-foreach ($mapelkejuruan as $mapel) {
-    foreach ($mapel as $nilai) {
-        if (isset($nilai->psaj) && $nilai->psaj !== null) {
-            $totalNilaiPSAJ += $nilai->psaj;
-            $totalPSAJ++;
+        $totalNilaiPSAJ = 0;
+        $totalPSAJ = 0;
+        foreach ($mapelkejuruan as $mapel) {
+            foreach ($mapel as $nilai) {
+                if (isset($nilai->psaj) && $nilai->psaj !== null) {
+                    $totalNilaiPSAJ += $nilai->psaj;
+                    $totalPSAJ++;
+                }
+            }
         }
-    }
-}
-$rataRataNilaiPSAJ = $totalPSAJ > 0 ? $totalNilaiPSAJ / $totalPSAJ : 0;
+        $rataRataNilaiPSAJ = $totalPSAJ > 0 ? $totalNilaiPSAJ / $totalPSAJ : 0;
 
         $pdf = PDF::loadView('admin.transkipnilai.transkipnilai', compact('siswa', 'mapelumum', 'mapelkejuruan', 'rataRataNilaiSemester', 'rataRataNilaiPSAJ'));
         return $pdf->stream('transkip_nilai.pdf');

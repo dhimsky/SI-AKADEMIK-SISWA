@@ -116,7 +116,7 @@
                 </a>
             </li>
             <li>
-                    <a class="active" href=""><i class="sidebar-item-icon fa fa-certificate"></i>
+                    <a class="active" href="{{ route('siswa.transkip-nilai') }}"><i class="sidebar-item-icon fa fa-certificate"></i>
                     <span class="nav-label">Transkip Nilai</span>
                 </a>
             </li>

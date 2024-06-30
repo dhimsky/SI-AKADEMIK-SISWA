@@ -17,8 +17,7 @@
                 </div>
                 @endforeach
             </div>
-            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0"
-                width="100%">
+            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
                 <thead>
                     <tr class="text-center">
                         <th class="text-center">NO</th>
@@ -30,6 +29,7 @@
                 </thead>
                 <tbody>
                     <tr class="text-center">
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

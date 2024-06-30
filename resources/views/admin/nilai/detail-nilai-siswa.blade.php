@@ -3,19 +3,9 @@
 @section('content')
 <div class="page-content fade-in-up">
     <div class="ibox">
-        <div class="ibox-head">
-            <div class="ibox-title">Detail Nilai Siswa</div>
-            <div class="col-md-9 mt-4 text-right">
-                
-            </div>
-        </div>
         <div class="ibox-body">
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <a href="{{ route('admin.nilai') }}" class="btn btn-secondary text-right">Kembali</a>
-                </div>
-                <div class="col-md-6 mb-3 text-right">
-                    <form action="{{ route('admin.nilaiakhir_pdf', ['id' => $siswa->nis]) }}" method="post" class="form-inline d-inline">
+                <div class="col-md-12 mb-3 text-right">
+                    <form action="{{ route('admin.nilaiakhir_pdf', ['id' => $siswa->nis]) }}" target="_blank" method="post" class="form-inline d-inline">
                         @csrf
                         <select id="semesterFilter" name="semester" class="form-control">
                             <option selected value="">Semua Semester</option>
@@ -34,21 +24,21 @@
                         title="Tambah Nilai" data-toggle="modal" data-target=".tambahNilai">
                         <i class="fa fa-plus"></i> Tambah</a>
                 </div>
-            </div>
-            <table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
                 <thead>
                     <tr class="text-center">
-                        <th>NO</th>
-                        <th>NAMA SISWA</th>
-                        <th>MAPEL</th>
-                        <th>SEMESTER</th>
-                        <th>UH</th>
-                        <th>UTS</th>
-                        <th>UAS</th>
-                        <th>NILAI AKHIR</th>
-                        <th>PSAJ</th>
-                        <th>STATUS</th>
-                        <th>AKSI</th>
+                        <th class="text-center">NO</th>
+                        <th class="text-center">NAMA SISWA</th>
+                        <th class="text-center">MAPEL</th>
+                        <th class="text-center">SEMESTER</th>
+                        <th class="text-center">TAHUN PELAJARAN</th>
+                        <th class="text-center">UH</th>
+                        <th class="text-center">UTS</th>
+                        <th class="text-center">UAS</th>
+                        <th class="text-center">NILAI AKHIR</th>
+                        <th class="text-center">PSAJ</th>
+                        <th class="text-center">STATUS</th>
+                        <th class="text-center">AKSI</th>
                     </tr>
                 </thead>
                 <tbody id="nilaiTable">
@@ -57,7 +47,12 @@
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-left">{{ $n->siswa->nama_siswa }}</td>
                             <td class="text-left">{{ $n->mapel->nama_mapel }}</td>
-                            <td>{{ $n->semester }}</td>
+                            @if ($n->semester % 2 == 0)
+                                <td>Genap</td>
+                            @else
+                                <td>Ganjil</td>
+                            @endif
+                            <td>{{ $n->tahun_pelajaran }}</td>
                             <td>{{ $n->ulangan_harian }}</td>
                             <td>{{ $n->uts }}</td>
                             <td>{{ $n->uas }}</td>
@@ -68,7 +63,13 @@
                                 <span class="badge badge-warning">{{ $n->nilai_akhir }}</span>
                                 @endif
                             </td>
-                            <td>{{ $n->psaj }}</td>
+                            <td>
+                                @if ($n->psaj >= 75)
+                                <span class="badge badge-success">{{ $n->psaj }}</span>
+                                @else
+                                <span class="badge badge-warning">{{ $n->psaj }}</span>
+                                @endif
+                            </td>
                             <td>
                                 @if ($n->status == 'Tertunda')
                                     <span class="badge badge-danger">{{ $n->status }}</span>
@@ -150,7 +151,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                                        <button type="submit" id="editButton{{ $n->id }}" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-primary">Update</button>
                                     </div>
                                 </div>
                             </div>
@@ -354,7 +355,7 @@
                                             @endforeach
                                         </select>
                                         @error('nis_id')
-                                            <span class="invalid-f/eedback" role="alert">
+                                            <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror

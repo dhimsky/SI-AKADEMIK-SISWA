@@ -1,13 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Detail Nilai Siswa')
+@section('tittle', 'Detail Nilai Siswa')
 @section('content')
 <div class="page-content fade-in-up">
     <div class="ibox">
-        <div class="ibox-head">
-            <div class="ibox-title">Detail Nilai Siswa</div>
-        </div>
         <div class="ibox-body">
-            <div class="row">
                 <div class="col-md-12 mb-3 text-right">
                     <a href="" class="btn btn-warning"
                         title="Cetak Nilai" target="_blank">
@@ -16,20 +12,20 @@
                         title="Tambah Nilai" data-toggle="modal" data-target=".tambahNilai">
                         <i class="fa fa-plus"></i> Tambah</a>
                 </div>
-            </div>
-            <table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
                 <thead>
                     <tr class="text-center">
-                        <th>NO</th>
-                        <th>NAMA SISWA</th>
-                        <th>MAPEL</th>
-                        <th>SEMESTER</th>
-                        <th>UH</th>
-                        <th>UTS</th>
-                        <th>UAS</th>
-                        <th>NILAI AKHIR</th>
-                        <th>PSAJ</th>
-                        <th>AKSI</th>
+                        <th class="text-center">NO</th>
+                        <th class="text-center">NAMA SISWA</th>
+                        <th class="text-center">MAPEL</th>
+                        <th class="text-center">SEMESTER</th>
+                        <th class="text-center">TAHUN PELAJARAN</th>
+                        <th class="text-center">UH</th>
+                        <th class="text-center">UTS</th>
+                        <th class="text-center">UAS</th>
+                        <th class="text-center">NILAI AKHIR</th>
+                        <th class="text-center">PSAJ</th>
+                        <th class="text-center">AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +34,12 @@
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-left">{{ $n->siswa->nama_siswa }}</td>
                             <td class="text-left">{{ $n->mapel->nama_mapel }}</td>
-                            <td>{{ $n->semester }}</td>
+                            <td>{{ $n->tahun_pelajaran }}</td>
+                            @if ($n->semester % 2 == 0)
+                                <td>Genap</td>
+                            @else
+                                <td>Ganjil</td>
+                            @endif
                             <td>{{ $n->ulangan_harian }}</td>
                             <td>{{ $n->uts }}</td>
                             <td>{{ $n->uas }}</td>
@@ -49,7 +50,13 @@
                                 <span class="badge badge-warning">{{ $n->nilai_akhir }}</span>
                                 @endif
                             </td>
-                            <td>{{ $n->psaj }}</td>
+                            <td>
+                                @if ($n->psaj >= 75)
+                                <span class="badge badge-success">{{ $n->psaj }}</span>
+                                @else
+                                <span class="badge badge-warning">{{ $n->psaj }}</span>
+                                @endif
+                            </td>
                             <td>
                                 <button class="btn btn-default btn-xs" data-toggle="modal" data-target=".editNilai{{ $n->id }}">
                                     <i class="fa fa-pencil"></i>
@@ -241,99 +248,3 @@
 @include('validasi.validasi-edit')
 @include('validasi.notifikasi-berhasil')
 @endsection
-
-
-
-{{-- @extends('layouts.app')
-@section('tittle', 'Tambah Nilai Siswa')
-@section('content')
-    <div class="page-content fade-in-up">
-        <div class="ibox">
-            <div class="ibox-body">
-                <form action="{{ route('admin.store-nilai') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label class="form-control-label">Nama Siswa</label>
-                                        <select class="form-control select2_demo_2" name="nis_id">
-                                            <option value="">--Pilih Siswa--</option>
-                                            @foreach ($siswa as $m)
-                                                <option value="{{ $m->nis }}">{{ $m->nama_siswa }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('nis_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label class="form-control-label">Mata Pelajaran</label>
-                                        <select class="form-control select2_demo_2" name="mapel_kode">
-                                            <option value="">--Pilih Mapel--</option>
-                                            @foreach ($mapel as $m)
-                                                <option value="{{ $m->kode_mapel }}">{{ $m->nama_mapel }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('mapel_kode')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label class="required-label faded-label" for="ulangan_harian">Ulangan Harian</label>
-                                        <input type="number" name="ulangan_harian"
-                                            class="form-control @error('ulangan_harian') is-invalid @enderror" value="{{ old('ulangan_harian') }}" placeholder="Masukan Nilai">
-                                        @error('ulangan_harian')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label class="required-label faded-label" for="uts">UTS</label>
-                                        <input type="number" name="uts"
-                                            class="form-control @error('uts') is-invalid @enderror" value="{{ old('uts') }}" placeholder="Masukan Nilai">
-                                        @error('uts')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label class="required-label faded-label" for="uas">UAS</label>
-                                        <input type="number" name="uas"
-                                            class="form-control @error('uas') is-invalid @enderror" value="{{ old('uas') }}" placeholder="Masukan Nilai">
-                                        @error('uas')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <div class="modal-footer">
-                        <div class="d-flex w-100">
-                            <a href="{{ route('admin.nilai') }}" class="btn btn-secondary mr-auto">Kembali</a>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-@include('validasi.validasi-edit')
-@include('validasi.notifikasi-berhasil')
-@endsection --}}

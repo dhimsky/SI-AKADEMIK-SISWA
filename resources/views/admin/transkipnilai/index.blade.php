@@ -4,8 +4,7 @@
     <div class="page-content fade-in-up">
         <div class="ibox">
             <div class="ibox-body">
-                <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0"
-                    width="100%">
+                <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
                     <thead>
                         <tr class="text-center">
                             <th class="text-center">NIS</th>
@@ -16,8 +15,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($siswa as $n)
                         <tr>
-                            @foreach ($siswa as $n)
                             <td class="text-center">{{ $n->nis }}</td>
                             <td>{{ $n->nama_siswa }}</td>
                             <td class="text-center">{{ $n->kelas_id }}</td>
