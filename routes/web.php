@@ -124,7 +124,7 @@ Route::middleware(['auth'])->group(function () {
         // ============================== ABSENSI ===========================================
         Route::get('absensi', [AdminAbsensiController::class, 'index'])->name('absensi');
         Route::get('absensi-perkelas', [AdminAbsensiController::class, 'show'])->name('absensi-perkelas');
-        Route::get('/siswa/absensi', [AbsensiPdfController::class, 'generatePdf'])->name('absensi');
+        Route::get('/siswa/absensi/pdf', [AbsensiPdfController::class, 'generatePdf'])->name('absensi-pdf');
         // ============================== TRANSKRIP NILAI ===========================================
         Route::get('transkipnilai', [AdminTranskipNilaiController::class, 'index'])->name('transkipnilai');
         Route::get('/siswa/{id}/transkipnilai-pdf', [TranskipPdfController::class, 'generatePdf'])->name('transkip_pdf');

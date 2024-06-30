@@ -6,7 +6,7 @@
         <div class="ibox-body">
             <div class="row">
                 <div class="col-md-12 mb-3 text-right">
-                    <a href="{{ route('admin.absensi') }}" class="btn btn-warning"
+                    <a href="{{ route('admin.absensi-pdf') }}" class="btn btn-warning"
                         title="Cetak Absensi" target="_blank">
                         <i class="fa fa-print"></i> Cetak</a>
                     <a href="" class="btn btn-info"
