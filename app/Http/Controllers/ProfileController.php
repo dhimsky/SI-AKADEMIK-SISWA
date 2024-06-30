@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\Role;
 use App\Models\Siswa;
 use App\Models\User;
@@ -31,12 +32,11 @@ class ProfileController extends Controller
         }
 
         $user = User::findOrFail(Auth::user()->kode_identitas);
-        $siswa = Siswa::findOrFail(Auth::user()->kode_identitas);
+        $siswa = Guru::findOrFail(Auth::user()->kode_identitas);
         $user->nama_lengkap = $request->nama_lengkap;
-        $siswa->nama_siswa = $request->nama_lengkap;
+        $siswa->nama_guru = $request->nama_lengkap;
         $user->save();
         $siswa->save();
-
         return redirect()->back()->with('success', 'Nama Lengkap berhasil diperbarui');
     }
 

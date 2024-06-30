@@ -1,35 +1,17 @@
 @extends('layouts.app')
-@section('tittle', 'Detail Nilai Siswa')
+@section('title', 'Detail Nilai Siswa')
 @section('content')
 <div class="page-content fade-in-up">
     <div class="ibox">
         <div class="ibox-head">
             <div class="ibox-title">Detail Nilai Siswa</div>
-            <div class="col-md-9 mt-4 text-right">
-                
-            </div>
         </div>
         <div class="ibox-body">
             <div class="row">
-                <div class="col-md-6 mb-3">
-                    <a href="{{ route('admin.nilai') }}" class="btn btn-secondary text-right">Kembali</a>
-                </div>
-                <div class="col-md-6 mb-3 text-right">
-                    <form action="{{ route('admin.nilaiakhir_pdf', ['id' => $siswa->nis]) }}" method="post" class="form-inline d-inline">
-                        @csrf
-                        <select id="semesterFilter" name="semester" class="form-control">
-                            <option selected value="">Semua Semester</option>
-                            <option value="1">Satu (1)</option>
-                            <option value="2">Dua (2)</option>
-                            <option value="3">Tiga (3)</option>
-                            <option value="4">Empat (4)</option>
-                            <option value="5">Lima (5)</option>
-                            <option value="6">Enam (6)</option>
-                        </select>
-                        <button type="submit" class="btn btn-warning" onclick="openNewPage()"
-                            title="Cetak Nilai" target="_blank">
-                            <i class="fa fa-print"></i> Cetak</button>
-                    </form>
+                <div class="col-md-12 mb-3 text-right">
+                    <a href="" class="btn btn-warning"
+                        title="Cetak Nilai" target="_blank">
+                        <i class="fa fa-print"></i> Cetak</a>
                     <a href="" class="btn btn-info"
                         title="Tambah Nilai" data-toggle="modal" data-target=".tambahNilai">
                         <i class="fa fa-plus"></i> Tambah</a>
@@ -47,13 +29,12 @@
                         <th>UAS</th>
                         <th>NILAI AKHIR</th>
                         <th>PSAJ</th>
-                        <th>STATUS</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
-                <tbody id="nilaiTable">
+                <tbody>
                     @foreach ($nilai as $n)
-                        <tr class="text-center nilai-row" data-semester="{{ $n->semester }}">
+                        <tr class="text-center">
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-left">{{ $n->siswa->nama_siswa }}</td>
                             <td class="text-left">{{ $n->mapel->nama_mapel }}</td>
@@ -70,13 +51,6 @@
                             </td>
                             <td>{{ $n->psaj }}</td>
                             <td>
-                                @if ($n->status == 'Tertunda')
-                                    <span class="badge badge-danger">{{ $n->status }}</span>
-                                @else
-                                <span class="badge badge-primary">{{ $n->status }}</span>
-                                @endif
-                            </td>
-                            <td class="">
                                 <button class="btn btn-default btn-xs" data-toggle="modal" data-target=".editNilai{{ $n->id }}">
                                     <i class="fa fa-pencil"></i>
                                 </button>
@@ -87,15 +61,6 @@
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
-                                @if ($n->status != 'Diterbitkan')
-                                    <form action="{{ route('admin.publish-nilai', ['id' => $n->id]) }}" method="post" style="display:inline;">
-                                        @csrf
-                                        @method('put')
-                                        <button type="submit" class="btn btn-default btn-xs">
-                                            <i class="fa fa-upload"></i>
-                                        </button>
-                                    </form>
-                                @endif
                             </td>
                         </tr>
 
@@ -110,14 +75,13 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="updateForm{{ $n->id }}" action="{{ route('admin.update-nilai', ['id' => $n->id]) }}" method="POST">
+                                        <form action="" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label class="form-control-label">Nama Siswa</label>
-                                                        <input type="hidden" name="idSiswa" value="{{ $idSiswa }}" id="">
                                                         <input disabled type="text" class="form-control" value="{{ $n->siswa->nama_siswa }}">
                                                     </div>
                                                 </div>
@@ -150,7 +114,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                                        <button type="submit" id="editButton{{ $n->id }}" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-primary">Update</button>
                                     </div>
                                 </div>
                             </div>
@@ -186,27 +150,6 @@
         @endforeach
     });
 </script>
-<script>
-    $(document).ready(function() {
-    @foreach ($nilai as $n)
-        $('#editButton{{ $n->id }}').click(function(e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Apakah Anda ingin mengubah nilai?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, ubah saja!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#updateForm{{ $n->id }}').submit();
-                }
-            });
-        });
-    @endforeach
-});
-</script>
 
 <div class="modal fade tambahNilai" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -217,7 +160,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="tambahForm" action="{{ route('admin.store-nilai') }}" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
@@ -288,46 +231,13 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                        <button id="tambahButton" type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<script>
-    document.getElementById('semesterFilter').addEventListener('change', function() {
-        var semester = this.value;
-        console.log(semester);
-        var rows = document.querySelectorAll('.nilai-row');
-        rows.forEach(function(row) {
-            if (semester === "" || row.dataset.semester === semester) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    });
-    </script>
-<script>
-    $(document).ready(function() {
-    $('#tambahButton').click(function(e) {
-        e.preventDefault();
-        Swal.fire({
-            title: 'Apakah Anda ingin menambah nilai?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Iya'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $('#tambahForm').submit();
-            }
-        });
-    });
-});
-</script>
 @include('validasi.validasi-edit')
 @include('validasi.notifikasi-berhasil')
 @endsection
@@ -354,7 +264,7 @@
                                             @endforeach
                                         </select>
                                         @error('nis_id')
-                                            <span class="invalid-f/eedback" role="alert">
+                                            <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror

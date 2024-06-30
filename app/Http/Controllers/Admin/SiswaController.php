@@ -41,7 +41,7 @@ class SiswaController extends Controller
         $akun->kode_identitas = $request->nis;
         $akun->nama_lengkap = $request->nama_siswa;
         $akun->role_id = 3;
-        $akun->password = Hash::make($request->password);
+        $akun->password = Hash::make('abcd1234');
         $akun->save();
 
         $siswa = new Siswa();

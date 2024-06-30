@@ -28,6 +28,8 @@ use App\Http\Controllers\Guru\NilaiController as GuruNilaiController;
 use App\Http\Controllers\Guru\AbsensiController as GuruAbsensiController;
 //SISWA
 use App\Http\Controllers\Siswa\DashboardController as SiswaDashboardController;
+use App\Http\Controllers\Siswa\NilaiController as SiswaNilaiController;
+use App\Http\Controllers\Siswa\AbsensiController as SiswaAbsensiController;
 
 
 /*
@@ -53,7 +55,7 @@ Route::delete('/logoutsession', [AuthController::class, 'logout'])->name('action
 Route::middleware(['auth'])->group(function () {
     // ============================== PROFILE ===========================================
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
-    Route::post('update-profile', [ProfileController::class, 'update'])->name('update-profile');
+    Route::put('update-profile', [ProfileController::class, 'update'])->name('update-profile');
     Route::post('update-password', [ProfileController::class, 'update_password'])->name('update-password');
     // Route prefix untuk admin
     Route::prefix('admin')->name('admin.')->middleware('CekUserLogin:1')->group(function () {
@@ -120,6 +122,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete-tahunpelajaran/{id}', [AdminTahunPelajaranController::class, 'delete'])->name('delete-tahunpelajaran');
         // ============================== ABSENSI ===========================================
         Route::get('absensi', [AdminAbsensiController::class, 'index'])->name('absensi');
+        Route::get('absensi-perkelas', [AdminAbsensiController::class, 'show'])->name('absensi-perkelas');
         // ============================== TRANSKRIP NILAI ===========================================
         Route::get('transkipnilai', [AdminTranskipNilaiController::class, 'index'])->name('transkipnilai');
         Route::get('/siswa/{id}/transkipnilai-pdf', [TranskipPdfController::class, 'generatePdf'])->name('transkip_pdf');
@@ -131,15 +134,24 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard', [GuruDashboardController::class, 'index'])->name('dashboard');
         // ============================== NILAI ===========================================
         Route::get('nilai', [GuruNilaiController::class, 'index'])->name('nilai');
-        Route::get('tambah-nilai', [GuruNilaiController::class, 'tambah_nilai'])->name('tambah-nilai');
+        Route::get('siswa-perkelas', [GuruNilaiController::class, 'siswa_perkelas'])->name('siswa-perkelas');
+        Route::get('{id}/nilai', [GuruNilaiController::class, 'show'])->name('siswa.nilai');
         // ============================== DASHBOARD ===========================================
         Route::get('absensi', [GuruAbsensiController::class, 'index'])->name('absensi');
+        Route::get('absensi-perkelas', [GuruAbsensiController::class, 'show'])->name('absensi-perkelas');
     });
     
     //Route prefix untuk siswa
     Route::prefix('siswa')->name('siswa.')->middleware('CekUserLogin:3')->group(function () {
         // ============================== DASHBOARD ===========================================
         Route::get('dashboard', [SiswaDashboardController::class, 'index'])->name('dashboard');
+<<<<<<< HEAD
 
+=======
+        // ============================== NILAI ===========================================
+        Route::get('nilai-akhir', [SiswaNilaiController::class, 'nilai_akhir'])->name('nilai-akhir');
+        // ============================== ABSENSI ===========================================
+        Route::get('absensi', [SiswaAbsensiController::class, 'index'])->name('absensi');
+>>>>>>> 606b629f337d1035abf6809a09fad08a35312444
     });
 });
