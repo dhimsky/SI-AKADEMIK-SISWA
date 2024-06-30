@@ -5,9 +5,21 @@
     <div class="ibox">
         <div class="ibox-body">
                 <div class="col-md-12 mb-3 text-right">
-                    <a href="" class="btn btn-warning"
-                        title="Cetak Nilai" target="_blank">
-                        <i class="fa fa-print"></i> Cetak</a>
+                    <form action="" target="_blank" method="post" class="form-inline d-inline">
+                        @csrf
+                        <select id="semesterFilter" name="semester" class="form-control">
+                            <option selected value="">Semua Semester</option>
+                            <option value="1">Satu (1)</option>
+                            <option value="2">Dua (2)</option>
+                            <option value="3">Tiga (3)</option>
+                            <option value="4">Empat (4)</option>
+                            <option value="5">Lima (5)</option>
+                            <option value="6">Enam (6)</option>
+                        </select>
+                        <button type="submit" class="btn btn-warning" onclick="openNewPage()"
+                            title="Cetak Nilai" target="_blank">
+                            <i class="fa fa-print"></i> Cetak</button>
+                    </form>
                     <a href="" class="btn btn-info"
                         title="Tambah Nilai" data-toggle="modal" data-target=".tambahNilai">
                         <i class="fa fa-plus"></i> Tambah</a>

@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\AbsensiController as AdminAbsensiController;
 use App\Http\Controllers\Admin\TranskipNilaiController as AdminTranskipNilaiController;
 use App\Http\Controllers\Export\NilaiAkhirPdfController as NilaiAkhirPdfController;
 use App\Http\Controllers\Export\TranskipPdfController as TranskipPdfController;
+use App\Http\Controllers\Export\AbsensiPdfController as AbsensiPdfController;
 
 //GURU
 use App\Http\Controllers\Guru\DashboardController as GuruDashboardController;
@@ -123,6 +124,7 @@ Route::middleware(['auth'])->group(function () {
         // ============================== ABSENSI ===========================================
         Route::get('absensi', [AdminAbsensiController::class, 'index'])->name('absensi');
         Route::get('absensi-perkelas', [AdminAbsensiController::class, 'show'])->name('absensi-perkelas');
+        Route::get('/siswa/absensi', [AbsensiPdfController::class, 'generatePdf'])->name('absensi');
         // ============================== TRANSKRIP NILAI ===========================================
         Route::get('transkipnilai', [AdminTranskipNilaiController::class, 'index'])->name('transkipnilai');
         Route::get('/siswa/{id}/transkipnilai-pdf', [TranskipPdfController::class, 'generatePdf'])->name('transkip_pdf');

@@ -18,4 +18,13 @@ class Absensi extends Model
         'kelas',
         'tahun_pelajaran',
     ];
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'id', 'nama_kelas');
+    }
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'nis_id', 'nis');
+    }
 }
