@@ -15,9 +15,21 @@
                     <a href="{{ route('admin.nilai') }}" class="btn btn-secondary text-right">Kembali</a>
                 </div>
                 <div class="col-md-6 mb-3 text-right">
-                    <a href="{{ route('admin.nilaiakhir_pdf', ['id' => $siswa->nis]) }}" class="btn btn-warning"
-                        title="Cetak Nilai" target="_blank">
-                        <i class="fa fa-print"></i> Cetak</a>
+                    <form action="{{ route('admin.nilaiakhir_pdf', ['id' => $siswa->nis]) }}" method="post" class="form-inline d-inline">
+                        @csrf
+                        <select id="semesterFilter" name="semester" class="form-control">
+                            <option selected value="">Semua Semester</option>
+                            <option value="1">Satu (1)</option>
+                            <option value="2">Dua (2)</option>
+                            <option value="3">Tiga (3)</option>
+                            <option value="4">Empat (4)</option>
+                            <option value="5">Lima (5)</option>
+                            <option value="6">Enam (6)</option>
+                        </select>
+                        <button type="submit" class="btn btn-warning" onclick="openNewPage()"
+                            title="Cetak Nilai" target="_blank">
+                            <i class="fa fa-print"></i> Cetak</button>
+                    </form>
                     <a href="" class="btn btn-info"
                         title="Tambah Nilai" data-toggle="modal" data-target=".tambahNilai">
                         <i class="fa fa-plus"></i> Tambah</a>
@@ -39,9 +51,9 @@
                         <th>AKSI</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="nilaiTable">
                     @foreach ($nilai as $n)
-                        <tr class="text-center">
+                        <tr class="text-center nilai-row" data-semester="{{ $n->semester }}">
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-left">{{ $n->siswa->nama_siswa }}</td>
                             <td class="text-left">{{ $n->mapel->nama_mapel }}</td>
@@ -284,6 +296,20 @@
     </div>
 </div>
 <script>
+    document.getElementById('semesterFilter').addEventListener('change', function() {
+        var semester = this.value;
+        console.log(semester);
+        var rows = document.querySelectorAll('.nilai-row');
+        rows.forEach(function(row) {
+            if (semester === "" || row.dataset.semester === semester) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+    </script>
+<script>
     $(document).ready(function() {
     $('#tambahButton').click(function(e) {
         e.preventDefault();
@@ -328,7 +354,7 @@
                                             @endforeach
                                         </select>
                                         @error('nis_id')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-f/eedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror

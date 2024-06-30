@@ -112,7 +112,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete-nilai/{id}', [AdminNilaiController::class, 'delete_nilai'])->name('delete-nilai');
         Route::put('publish-nilai/{id}', [AdminNilaiController::class, 'publish_nilai'])->name('publish-nilai');
         // Route::get('/siswa/{id}/export-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('export_pdf');
-        Route::get('/siswa/{id}/nilaiakhir-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('nilaiakhir_pdf');
+        Route::post('/siswa/{id}/nilaiakhir-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('nilaiakhir_pdf');
         // ============================== TAHUN PELAJARAN ===========================================
         Route::get('tahunpelajaran', [AdminTahunPelajaranController::class, 'index'])->name('tahunpelajaran');
         Route::post('store-tahunpelajaran', [AdminTahunPelajaranController::class, 'store'])->name('store-tahunpelajaran');
