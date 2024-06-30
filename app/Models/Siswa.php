@@ -66,4 +66,8 @@ class Siswa extends Model
     {
         return $this->belongsTo(User::class, 'nis', 'kode_identitas');
     }
+    public function absensi()
+    {
+        return $this->belongsTo(Absensi::class, 'nis_id', 'nis');
+    }
 }

@@ -123,8 +123,9 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete-tahunpelajaran/{id}', [AdminTahunPelajaranController::class, 'delete'])->name('delete-tahunpelajaran');
         // ============================== ABSENSI ===========================================
         Route::get('absensi', [AdminAbsensiController::class, 'index'])->name('absensi');
-        Route::get('absensi-perkelas', [AdminAbsensiController::class, 'show'])->name('absensi-perkelas');
-        Route::get('/siswa/absensi/pdf', [AbsensiPdfController::class, 'generatePdf'])->name('absensi-pdf');
+        Route::get('absensi-perkelas/{kelas_id}', [AdminAbsensiController::class, 'show'])->name('absensi-perkelas');
+        Route::post('store-absensi-perkelas', [AdminAbsensiController::class, 'store'])->name('store-absensi-perkelas');
+        Route::post('/siswa/absensi/{kelas_id}/pdf', [AbsensiPdfController::class, 'generatePdf'])->name('absensi-pdf');
         // ============================== TRANSKRIP NILAI ===========================================
         Route::get('transkipnilai', [AdminTranskipNilaiController::class, 'index'])->name('transkipnilai');
         Route::get('/siswa/{id}/transkipnilai-pdf', [TranskipPdfController::class, 'generatePdf'])->name('transkip_pdf');

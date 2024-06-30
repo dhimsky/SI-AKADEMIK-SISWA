@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('status_absensi');
             $table->integer('semester');
             $table->string('tahun_pelajaran', 15);
+            $table->string('kelas', 15);
             $table->timestamps();
+            $table->foreign('nis_id')->references('nis')->on('siswa');
         });
     }
 
