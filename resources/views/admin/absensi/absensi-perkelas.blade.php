@@ -9,7 +9,7 @@
                     <div class="col-md-12 mb-3 text-right">
                         <form target="_blank" method="post" action="{{ route('admin.absensi-pdf', ['kelas_id' => $kelas_id]) }}" class="form-inline d-inline">
                             @csrf
-                            <input type="month" name="tanggal_absensi" id="">
+                            <input type="month" name="tanggal_absensi" id="filterTanggal" required>
                             <button type="submit" class="btn btn-warning" onclick="openNewPage()"
                                 title="Cetak Nilai" target="_blank">
                                 <i class="fa fa-print"></i> Cetak</button>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0"
+            <table class="table table-striped table-bordered table-hover absensiTable" id="example-table" cellspacing="0"
                 width="100%">
                 <thead>
                     <tr class="text-center">
@@ -36,7 +36,7 @@
                     @foreach ($absensi as $index => $a)
                         <tr class="text-center">
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $a->tanggal_absensi }}</td>
+                            <td class="tanggal-absensi">{{ $a->tanggal_absensi }}</td>
                             <td>{{ $a->siswa->nama_siswa }}</td>
                             <td>{{ $a->kelas }}</td>
                             <td>
@@ -51,7 +51,7 @@
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target=".editAbsensi">
+                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target=".editAbsensi{{ $a->id }}">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                                 <form id="deleteForm" action="" method="POST" style="display:inline;">
@@ -68,62 +68,64 @@
                 </tbody>
             </table>
 
-            <div class="modal fade editAbsensi" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Edit Absensi</h5>
-                            <button type="button" class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                            </button>
+            @foreach ($absensi as $a)    
+                <div class="modal fade editAbsensi{{ $a->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Absensi</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('admin.update-absensi-perkelas', ['id' => $a->id]) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th class="text-center">Masuk</th>
+                                                <th class="text-center">Izin</th>
+                                                <th class="text-center">Sakit</th>
+                                                <th class="text-center">Alpa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <label class="ui-radio ui-radio-success">
+                                                        <input type="radio" value="M" @if ($a->status_absensi == 'M') checked @endif name="absen">
+                                                        <span class="input-span"></span></label>
+                                                </td>
+                                                <td class="text-center">
+                                                    <label class="ui-radio ui-radio-info">
+                                                        <input type="radio" value="I" @if ($a->status_absensi == 'I') checked @endif name="absen">
+                                                        <span class="input-span"></span></label>
+                                                </td>
+                                                <td class="text-center">
+                                                    <label class="ui-radio ui-radio-info">
+                                                        <input type="radio" value="S" @if ($a->status_absensi == 'S') checked @endif name="absen">
+                                                        <span class="input-span"></span></label>
+                                                </td>
+                                                <td class="text-center">
+                                                    <label class="ui-radio ui-radio-danger">
+                                                        <input type="radio" value="A" @if ($a->status_absensi == 'A') checked @endif name="absen">
+                                                    <span class="input-span"></span></label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="modal-body">
-                            <form action="" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th class="text-center">Masuk</th>
-                                            <th class="text-center">Izin</th>
-                                            <th class="text-center">Sakit</th>
-                                            <th class="text-center">Alpa</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">
-                                                <label class="ui-radio ui-radio-success">
-                                                    <input type="radio" name="test2">
-                                                    <span class="input-span"></span></label>
-                                            </td>
-                                            <td class="text-center">
-                                                <label class="ui-radio ui-radio-info">
-                                                    <input type="radio" name="test2">
-                                                    <span class="input-span"></span></label>
-                                            </td>
-                                            <td class="text-center">
-                                                <label class="ui-radio ui-radio-info">
-                                                    <input type="radio" name="test2">
-                                                    <span class="input-span"></span></label>
-                                            </td>
-                                            <td class="text-center">
-                                                <label class="ui-radio ui-radio-danger">
-                                                    <input type="radio" name="test2">
-                                                <span class="input-span"></span></label>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
@@ -236,6 +238,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#filterTanggal').on('input', function() {
+            var selectedDate = $(this).val();
+            $('.absensiTable tbody tr').each(function() {
+                var rowDate = $(this).find('.tanggal-absensi').text();
+                if (rowDate.startsWith(selectedDate)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
 @include('validasi.validasi-edit')
 @include('validasi.notifikasi-berhasil')
 @endsection

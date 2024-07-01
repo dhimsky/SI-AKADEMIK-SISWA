@@ -75,4 +75,35 @@ class AbsensiController extends Controller
 
         return redirect()->back()->with('success', 'Absen berhasil ditambahkan');
     }
+
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'absen' => 'required',
+            'absen.*' => 'in:M,I,S,A', // Memastikan bahwa setiap nilai absen adalah salah satu dari 'M', 'I', 'S', atau 'A'
+        ];
+    
+        // Pesan kesalahan opsional
+        $messages = [
+            'absen.required' => 'Absensi wajib diisi.',
+            'absen.*.in' => 'Nilai absen tidak valid.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+
+        $absensi = Absensi::findOrFail($id);
+        $absensi->status_absensi = $request->absen;
+        $absensi->save();
+        
+        return redirect()->back()->with('success', 'Absen berhasil diperbarui');
+    }
+
+    public function delete($id){
+
+    }
 }
