@@ -114,6 +114,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('update-siswa/{id}', [AdminSiswaController::class, 'update_siswa'])->name('update-siswa');
         Route::delete('delete-siswa/{id}', [AdminSiswaController::class, 'delete_siswa'])->name('delete-siswa');
         Route::post('import', [AdminSiswaController::class, 'import'])->name('import');
+        Route::post('naikkelas/baru', [AdminSiswaController::class, 'naikKelas'])->name('naikkelas.baru');
         // ============================== NILAI ===========================================
         Route::get('nilai', [AdminNilaiController::class, 'index'])->name('nilai');
         // Route::get('tambah-nilai/{id}', [AdminNilaiController::class, 'tambah_nilai'])->name('tambah-nilai');

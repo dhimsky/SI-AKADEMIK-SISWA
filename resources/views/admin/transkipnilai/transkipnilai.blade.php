@@ -41,7 +41,6 @@
             border: none !important;
             text-align: center !important;
             padding-bottom: 60px;
-            ;
         }
         .no-border-footer p {
             margin-bottom: 0px;
@@ -49,7 +48,7 @@
         .footer {
             display: flex;
             justify-content: space-between;
-            margin-left: 80%;
+            margin-left: 78%;
         }
         .footer .signature {
             text-align: left;
@@ -194,7 +193,7 @@
                 <td>Kepala Sekolah</td>
             </tr>
             <tr class="no-border-footer">
-                <td>(_______________________) <br>NIP. </td>
+                <td>( {{ $kepsek->nama_lengkap }} )<br>NIP. {{ $kepsek->kode_identitas }}</td>
             </tr>
         </table>
     </div>

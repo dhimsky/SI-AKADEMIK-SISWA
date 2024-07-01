@@ -30,6 +30,8 @@
                     </form>
                 </div>
                 <div class="col-md-5 text-right ">
+                    <a href="" data-toggle="modal" data-target=".NaikKelas" class="btn btn-primary" title="Import Siswa">
+                    <i class="fa fa-arrow-up"></i> Naik Kelas</a>
                     <a href="{{ route('admin.nonsiswa') }}" class="btn btn-danger"
                         title="Lihat data siswa tidak aktif">
                         <i class="fa fa-user"></i> Non Siswa</a>
@@ -446,6 +448,45 @@
             </div>
         </div>
     </div>
-    @include('validasi.validasi-edit')
-    @include('validasi.notifikasi-berhasil')
+
+    <div class="modal fade NaikKelas" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import Siswa</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.naikkelas.baru') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="kelas_lama">Kelas Lama</label>
+                            <select class="form-control input-sm" name="kelas_lama" id="kelas_lama" required>
+                                <option value="">Pilih Kelas Lama</option>
+                                @foreach ($kelas as $k)
+                                <option value="{{ $k->nama_kelas }}">{{ $k->nama_kelas }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="kelas_baru">Kelas Baru</label>
+                            <select class="form-control input-sm" name="kelas_baru" id="kelas_baru" required>
+                                <option value="">Pilih Kelas Baru</option>
+                                @foreach ($kelas as $k)
+                                    <option value="{{ $k->nama_kelas }}">{{ $k->nama_kelas }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@include('validasi.validasi-edit')
+@include('validasi.notifikasi-berhasil')
 @endsection

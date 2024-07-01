@@ -136,6 +136,19 @@ class SiswaController extends Controller
         return redirect()->back()->with('success', 'Siswa berhasil diperbarui');
     }
 
+    public function naikKelas(Request $request)
+    {
+        $request->validate([
+            'kelas_lama' => 'required',
+            'kelas_baru' => 'required',
+        ]);
+
+        Siswa::where('kelas_id', $request->kelas_lama)
+            ->update(['kelas_id' => $request->kelas_baru]);
+
+        return redirect()->route('admin.siswa')->with('success', 'Kelas berhasil diperbarui.');
+    }
+
     public function delete_siswa($nisn)
     {
         $siswa = Siswa::findOrFail($nisn);
