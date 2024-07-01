@@ -98,6 +98,11 @@
                 </a>
             </li>
             <li>
+                <a class="active" href="{{ route('guru.transkipnilai') }}"><i class="sidebar-item-icon fa fa-certificate"></i>
+                    <span class="nav-label">Transkip Nilai</span>
+                </a>
+            </li>
+            <li>
                 <a class="active" href="{{ route('profile') }}"><i class="sidebar-item-icon fa fa-gear"></i>
                     <span class="nav-label">Profile</span>
                 </a>
