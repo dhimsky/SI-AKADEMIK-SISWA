@@ -119,7 +119,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('store-nilai', [AdminNilaiController::class, 'store_nilai'])->name('store-nilai');
         Route::put('update-nilai/{id}', [AdminNilaiController::class, 'update_nilai'])->name('update-nilai');
         Route::delete('delete-nilai/{id}', [AdminNilaiController::class, 'delete_nilai'])->name('delete-nilai');
-        Route::put('publish-nilai/{id}', [AdminNilaiController::class, 'publish_nilai'])->name('publish-nilai');
+        // Route::put('publish-nilai/{id}', [AdminNilaiController::class, 'publish_nilai'])->name('publish-nilai');
         // Route::get('/siswa/{id}/export-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('export_pdf');
         Route::post('/siswa/{id}/nilaiakhir-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('nilaiakhir_pdf');
         // ============================== TAHUN PELAJARAN ===========================================

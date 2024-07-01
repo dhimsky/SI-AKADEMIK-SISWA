@@ -37,7 +37,6 @@
                         <th class="text-center">UAS</th>
                         <th class="text-center">NILAI AKHIR</th>
                         <th class="text-center">PSAJ</th>
-                        <th class="text-center">STATUS</th>
                         <th class="text-center">AKSI</th>
                     </tr>
                 </thead>
@@ -70,13 +69,13 @@
                                 <span class="badge badge-warning">{{ $n->psaj }}</span>
                                 @endif
                             </td>
-                            <td>
+                            {{-- <td>
                                 @if ($n->status == 'Tertunda')
                                     <span class="badge badge-danger">{{ $n->status }}</span>
                                 @else
                                 <span class="badge badge-primary">{{ $n->status }}</span>
                                 @endif
-                            </td>
+                            </td> --}}
                             <td class="">
                                 <button class="btn btn-default btn-xs" data-toggle="modal" data-target=".editNilai{{ $n->id }}">
                                     <i class="fa fa-pencil"></i>
@@ -88,7 +87,7 @@
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
-                                @if ($n->status != 'Diterbitkan')
+                                {{-- @if ($n->status != 'Diterbitkan')
                                     <form action="{{ route('admin.publish-nilai', ['id' => $n->id]) }}" method="post" style="display:inline;">
                                         @csrf
                                         @method('put')
@@ -96,7 +95,7 @@
                                             <i class="fa fa-upload"></i>
                                         </button>
                                     </form>
-                                @endif
+                                @endif --}}
                             </td>
                         </tr>
 
