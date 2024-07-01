@@ -176,5 +176,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('nonsiswa', [KepsekSiswaController::class, 'nonsiswa'])->name('nonsiswa');
         // ============================== NILAI ===========================================
         Route::get('nilai', [KepsekNilaiController::class, 'index'])->name('nilai');
+        Route::get('siswa-perkelas', [KepsekNilaiController::class, 'siswa_perkelas'])->name('siswa-perkelas');
+        Route::get('{id}/nilai', [KepsekNilaiController::class, 'show'])->name('siswa.nilai');
     });
 });
