@@ -53,5 +53,21 @@ class MapelSeeder extends Seeder
             'nama_mapel' => 'Bahasa Inggris',
             'jurusan_kode' => null,
         ]);
+
+        Mapel::create([
+            'kode_mapel' => 'MP',
+            'nama_mapel' => 'Manajemen Perkantoran',
+            'jurusan_kode' => 'MPLB',
+        ]);
+        Mapel::create([
+            'kode_mapel' => 'FO',
+            'nama_mapel' => 'Front Office',
+            'jurusan_kode' => 'MPLB',
+        ]);
+        Mapel::create([
+            'kode_mapel' => 'PKK',
+            'nama_mapel' => 'Projek Kreatif dan Kewirausahaan',
+            'jurusan_kode' => 'MPLB',
+        ]);
     }
 }

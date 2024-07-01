@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 class NilaiController extends Controller
 {
     public function index(){
-        $siswa = Siswa::all();
+        $siswa = Siswa::where('status_siswa', 'Aktif')->get();
         $nilai = Nilai::all();
 
         $mapel = Mapel::all();
@@ -37,7 +37,7 @@ class NilaiController extends Controller
         return view('admin.nilai.detail-nilai-siswa', compact('siswa', 'nilai', 'mapel', 'idSiswa'));
     }
     public function tambah_nilai(){
-        $siswa = Siswa::all();
+        $siswa = Siswa::where('status_siswa', 'Aktif')->get();
         $nilai = Nilai::all();
         $mapel = Mapel::all();
         return view('admin.nilai.tambah', compact('siswa', 'nilai', 'mapel'));

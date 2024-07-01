@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class AbsensiController extends Controller
 {
     public function index(){
-        $siswa = Siswa::all();
+        $siswa = Siswa::where('status_siswa', 'Aktif')->get();
         $kelas = Kelas::all();
         return view('admin.absensi.index', compact('siswa', 'kelas'));
     }

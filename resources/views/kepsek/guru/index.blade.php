@@ -3,13 +3,6 @@
 @section('content')
 <div class="page-content fade-in-up">
     <div class="ibox">
-        <div class="ibox-head">
-            <div class="col-md-12 text-right ">
-                <a href="" data-toggle="modal" data-target=".tambahguru" class="btn btn-info"
-                    title="Tambah Guru">
-                    <i class="fa fa-plus"></i></a>
-            </div>
-        </div>
         <div class="ibox-body">
             <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0"
                 width="100%">

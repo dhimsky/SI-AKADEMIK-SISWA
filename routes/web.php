@@ -108,6 +108,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete-guru/{id}', [AdminGuruController::class, 'delete_guru'])->name('delete-guru');
         // ============================== SISWA ===========================================
         Route::get('siswa', [AdminSiswaController::class, 'index'])->name('siswa');
+        Route::get('nonsiswa', [AdminSiswaController::class, 'nonsiswa'])->name('nonsiswa');
         Route::post('tambah-siswa', [AdminSiswaController::class, 'store_siswa'])->name('store-siswa');
         Route::put('update-siswa/{id}', [AdminSiswaController::class, 'update_siswa'])->name('update-siswa');
         Route::delete('delete-siswa/{id}', [AdminSiswaController::class, 'delete_siswa'])->name('delete-siswa');
@@ -172,6 +173,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('guru', [KepsekGuruController::class, 'index'])->name('guru');
         // ============================== SISWA ===========================================
         Route::get('siswa', [KepsekSiswaController::class, 'index'])->name('siswa');
+        Route::get('nonsiswa', [KepsekSiswaController::class, 'nonsiswa'])->name('nonsiswa');
         // ============================== NILAI ===========================================
         Route::get('nilai', [KepsekNilaiController::class, 'index'])->name('nilai');
     });

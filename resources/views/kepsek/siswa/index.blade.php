@@ -29,6 +29,11 @@
                     </div>
                 </form>
             </div>
+            <div class="col-md-5 text-right ">
+                <a href="{{ route('kepsek.nonsiswa') }}" class="btn btn-danger"
+                    title="Lihat data siswa tidak aktif">
+                    <i class="fa fa-user"></i> Non Siswa</a>
+            </div>
         </div>
         <div class="ibox-body">
             <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0"
@@ -55,7 +60,13 @@
                         <td class="text-left">{{ $s->kelas->jurusan->nama_jurusan }}</td>
                         <td>{{ $s->semester }}</td>
                         <td>{{ $s->angkatan->tahun_angkatan}}</td>
-                        <td>{{ $s->status_siswa}}</td>
+                        <td>
+                            @if ($s->status_siswa == 'Aktif')
+                            <span class="badge badge-success">{{ $s->status_siswa }}</span>
+                            @else
+                            <span class="badge badge-danger">{{ $s->status_siswa }}</span>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

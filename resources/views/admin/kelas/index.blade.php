@@ -53,9 +53,9 @@
                                             <label class="required-label faded-label" for="tingkat" >Tingkat</label>
                                             <select class="form-control input-sm" name="tingkat">
                                                 <option value="">-- Pilih Tingkat --</option>
+                                                <option value="10" @if ($item->tingkat == '10') selected @endif>10</option>
                                                 <option value="11" @if ($item->tingkat == '11') selected @endif>11</option>
                                                 <option value="12" @if ($item->tingkat == '12') selected @endif>12</option>
-                                                <option value="13" @if ($item->tingkat == '13') selected @endif>13</option>
                                             </select>
                                             @error('tingkat')
                                             <span class="invalid-feedback" role="alert">
@@ -147,9 +147,9 @@
                 <label class="required-label faded-label" for="tingkat" >Tingkat</label>
                 <select class="form-control input-sm" name="tingkat">
                     <option value="">-- Pilih Tingkat --</option>
+                    <option value="10">10</option>
                     <option value="11">11</option>
                     <option value="12">12</option>
-                    <option value="13">13</option>
                 </select>
                 @error('tingkat')
                 <span class="invalid-feedback" role="alert">
