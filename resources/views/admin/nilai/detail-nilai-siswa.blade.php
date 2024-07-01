@@ -46,11 +46,12 @@
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-left">{{ $n->siswa->nama_siswa }}</td>
                             <td class="text-left">{{ $n->mapel->nama_mapel }}</td>
-                            @if ($n->semester % 2 == 0)
+                            {{-- @if ($n->semester % 2 == 0)
                                 <td>Genap</td>
                             @else
                                 <td>Ganjil</td>
-                            @endif
+                            @endif --}}
+                            <td>{{ $n->semester }}</td>
                             <td>{{ $n->tahun_pelajaran }}</td>
                             <td>{{ $n->ulangan_harian }}</td>
                             <td>{{ $n->uts }}</td>
@@ -150,7 +151,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" id="editButton{{ $n->id }}" class="btn btn-primary">Update</button>
                                     </div>
                                 </div>
                             </div>

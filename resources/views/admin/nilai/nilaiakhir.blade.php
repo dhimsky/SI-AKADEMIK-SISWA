@@ -188,15 +188,15 @@
                 <tbody>
                     <tr>
                         <td>Sakit</td>
-                        <td>-</td>
+                        <td>{{ $sakit }}</td>
                     </tr>
                     <tr>
                         <td>Izin</td>
-                        <td>-</td>
+                        <td>{{ $izin }}</td>
                     </tr>
                     <tr>
-                        <td>Sakit</td>
-                        <td>-</td>
+                        <td>Alpa</td>
+                        <td>{{ $alpa }}</td>
                     </tr>
                 </tbody>
             </table>

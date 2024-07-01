@@ -103,7 +103,11 @@ class AbsensiController extends Controller
         return redirect()->back()->with('success', 'Absen berhasil diperbarui');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
+        $absensi = Absensi::findOrfail($id);
+        $absensi->delete();
 
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 }

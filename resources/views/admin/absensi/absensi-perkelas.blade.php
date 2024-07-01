@@ -54,7 +54,7 @@
                                 <button class="btn btn-default btn-xs" data-toggle="modal" data-target=".editAbsensi{{ $a->id }}">
                                     <i class="fa fa-pencil"></i>
                                 </button>
-                                <form id="deleteForm" action="" method="POST" style="display:inline;">
+                                <form id="deleteForm{{ $a->id }}" action="{{ route('admin.delete-absensi-perkelas', ['id' => $a->id]) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-default btn-xs" type="submit">
@@ -125,34 +125,35 @@
                         </div>
                     </div>
                 </div>
+                {{-- VALIDASI DELETE --}}
+                <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script>
+                    $(document).ready(function(){
+                        $('#deleteForm{{ $a->id }}').submit(function(e){
+                            e.preventDefault();
+                            Swal.fire({
+                                title: 'Apakah Anda yakin?',
+                                text: "Anda tidak akan dapat mengembalikan ini!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Ya, hapus saja!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Submit form manually
+                                    this.submit();
+                                }
+                            });
+                        });
+                    });
+                </script>
             @endforeach
         </div>
     </div>
 </div>
-{{-- VALIDASI DELETE --}}
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    $(document).ready(function(){
-        $('#deleteForm').submit(function(e){
-            e.preventDefault();
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Anda tidak akan dapat mengembalikan ini!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus saja!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Submit form manually
-                    this.submit();
-                }
-            });
-        });
-    });
-</script>
+
 <div class="modal fade tambahAbsen" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

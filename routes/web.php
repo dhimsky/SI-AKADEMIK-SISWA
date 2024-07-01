@@ -134,6 +134,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('absensi-perkelas/{kelas_id}', [AdminAbsensiController::class, 'show'])->name('absensi-perkelas');
         Route::post('store-absensi-perkelas', [AdminAbsensiController::class, 'store'])->name('store-absensi-perkelas');
         Route::put('update-absensi-perkelas/{id}', [AdminAbsensiController::class, 'update'])->name('update-absensi-perkelas');
+        Route::delete('delete-absensi-perkelas/{id}', [AdminAbsensiController::class, 'delete'])->name('delete-absensi-perkelas');
         Route::post('/siswa/absensi/{kelas_id}/pdf', [AbsensiPdfController::class, 'generatePdf'])->name('absensi-pdf');
         // ============================== TRANSKRIP NILAI ===========================================
         Route::get('transkipnilai', [AdminTranskipNilaiController::class, 'index'])->name('transkipnilai');
