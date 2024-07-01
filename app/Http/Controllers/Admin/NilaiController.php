@@ -75,7 +75,6 @@ class NilaiController extends Controller
         $nilai->uts = $request->uts;
         $nilai->uas = $request->uas;
         $nilai->psaj = $request->psaj;
-        $nilai->status = 'Tertunda';
         // Mengambil data dari request dan menghitung nilai total
         $nilaiUlanganHarian = $request->ulangan_harian * 0.4;
         $nilaiUts = $request->uts * 0.3;
@@ -125,14 +124,14 @@ class NilaiController extends Controller
         return redirect()->back()->with('success', 'Nilai berhasil diperbarui');
     }
 
-    public function publish_nilai($id)
-    {
-        $nilai = Nilai::findOrFail($id);
-        $nilai->status = 'Diterbitkan';
-        $nilai->save();
+    // public function publish_nilai($id)
+    // {
+    //     $nilai = Nilai::findOrFail($id);
+    //     $nilai->status = 'Diterbitkan';
+    //     $nilai->save();
 
-        return redirect()->back()->with('success', 'Nilai berhasil diterbitkan');
-    }
+    //     return redirect()->back()->with('success', 'Nilai berhasil diterbitkan');
+    // }
 
     public function delete_nilai($id)
     {
