@@ -309,7 +309,7 @@
             }
         });
     });
-    </script>
+</script>
 <script>
     $(document).ready(function() {
     $('#tambahButton').click(function(e) {

@@ -10,7 +10,7 @@
                     <div class="ibox bg-success color-white widget-stat">
                         <div class="ibox-body">
                             <h2 class="m-b-5 font-strong">{{ $k->nama_kelas }}</h2>
-                            <div class="m-b-3 mr-3">{{ $k->jurusan->nama_jurusan }}</div><a href="{{ route('guru.absensi-perkelas') }}" class="ti-arrow-right text-light widget-stat-icon"></a>
+                            <div class="m-b-3 mr-3">{{ $k->jurusan->nama_jurusan }}</div><a href="{{ route('guru.absensi-perkelas', ['kelas_id' => $k->nama_kelas]) }}" class="ti-arrow-right text-light widget-stat-icon"></a>
                             <div><i ></i><small></small></div>
                         </div>
                     </div>

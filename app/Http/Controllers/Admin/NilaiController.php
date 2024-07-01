@@ -106,7 +106,7 @@ class NilaiController extends Controller
                     ->withInput();
         }
 
-        $nilai = Nilai::where('nis_id' ,$request->idSiswa)->first();
+        $nilai = Nilai::findOrFail($id);
         // $nilaia = Nilai::findOrFail('2');
         // dd($request);
         $nilai->ulangan_harian = $request->ulangan_harian;

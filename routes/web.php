@@ -147,12 +147,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard', [GuruDashboardController::class, 'index'])->name('dashboard');
         // ============================== NILAI ===========================================
         Route::get('nilai', [GuruNilaiController::class, 'index'])->name('nilai');
-        Route::get('siswa-perkelas', [GuruNilaiController::class, 'siswa_perkelas'])->name('siswa-perkelas');
+        Route::get('siswa-perkelas/{nama_kelas}', [GuruNilaiController::class, 'siswa_perkelas'])->name('siswa-perkelas');
         Route::get('{id}/nilai', [GuruNilaiController::class, 'show'])->name('siswa.nilai');
+        Route::post('{id}/store-nilai', [GuruNilaiController::class, 'store_nilai'])->name('siswa-nilai-store');
+        Route::put('{id}/update-nilai', [GuruNilaiController::class, 'update_nilai'])->name('siswa-nilai-update');
+        Route::delete('{id}/delete-nilai', [GuruNilaiController::class, 'delete_nilai'])->name('siswa-nilai-delete');
         Route::post('/siswa/{id}/nilaiakhir-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('nilaiakhir_pdf');
-        // ============================== DASHBOARD ===========================================
+        // ============================== ABSENSI ===========================================
         Route::get('absensi', [GuruAbsensiController::class, 'index'])->name('absensi');
-        Route::get('absensi-perkelas', [GuruAbsensiController::class, 'show'])->name('absensi-perkelas');
+        Route::get('absensi-perkelas/{kelas_id}', [GuruAbsensiController::class, 'show'])->name('absensi-perkelas');
+        Route::post('store-absensi-perkelas', [GuruAbsensiController::class, 'store_absensi'])->name('siswa-absensi-store');
+        Route::put('update-absensi-perkelas/{id}', [GuruAbsensiController::class, 'update'])->name('update-absensi-perkelas');
+        Route::delete('delete-absensi-perkelas/{id}', [GuruAbsensiController::class, 'delete'])->name('delete-absensi-perkelas');
+        Route::post('/siswa/absensi/{kelas_id}/pdf', [AbsensiPdfController::class, 'generatePdf'])->name('absensi-pdf');
         // ============================== TRANSKIP NILAI ===========================================
         Route::get('transkipnilai', [GuruTranskipNilaiController::class, 'index'])->name('transkipnilai');
         Route::get('/siswa/{id}/transkipnilai-pdf', [TranskipPdfController::class, 'generatePdf'])->name('transkip_pdf');

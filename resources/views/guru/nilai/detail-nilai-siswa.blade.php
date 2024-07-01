@@ -7,7 +7,7 @@
                 <div class="col-md-12 mb-3 text-right">
                     <form action="{{ route('guru.nilaiakhir_pdf', ['id' => $siswa->nis]) }}" target="_blank" method="post" class="form-inline d-inline">
                         @csrf
-                        <select id="semesterFilter" name="semester" class="form-control">
+                        <select id="semesterFilter" name="semester" class="form-control" required>
                             <option selected value="">Semua Semester</option>
                             <option value="1">Satu (1)</option>
                             <option value="2">Dua (2)</option>
@@ -40,18 +40,18 @@
                         <th class="text-center">AKSI</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="nilaiTable">
                     @foreach ($nilai as $n)
-                        <tr class="text-center">
+                        <tr class="text-center nilai-row" data-semester="{{ $n->semester }}">
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-left">{{ $n->siswa->nama_siswa }}</td>
                             <td class="text-left">{{ $n->mapel->nama_mapel }}</td>
-                            <td>{{ $n->tahun_pelajaran }}</td>
                             @if ($n->semester % 2 == 0)
                                 <td>Genap</td>
                             @else
                                 <td>Ganjil</td>
                             @endif
+                            <td>{{ $n->tahun_pelajaran }}</td>
                             <td>{{ $n->ulangan_harian }}</td>
                             <td>{{ $n->uts }}</td>
                             <td>{{ $n->uas }}</td>
@@ -73,7 +73,7 @@
                                 <button class="btn btn-default btn-xs" data-toggle="modal" data-target=".editNilai{{ $n->id }}">
                                     <i class="fa fa-pencil"></i>
                                 </button>
-                                <form id="deleteForm{{ $n->id }}" action="{{ route('admin.delete-nilai', ['id' => $n->id]) }}" method="POST" style="display:inline;">
+                                <form id="deleteForm{{ $n->id }}" action="{{ route('guru.siswa-nilai-delete', ['id' => $n->id]) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-default btn-xs" type="submit">
@@ -94,7 +94,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="" method="POST">
+                                        <form id="updateForm{{ $n->id }}" action="{{ route('guru.siswa-nilai-update', ['id' => $n->id]) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="row">
@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">Tutup</button>
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" id="editButton{{ $n->id }}" class="btn btn-primary">Update</button>
                                     </div>
                                 </div>
                             </div>
@@ -170,6 +170,7 @@
     });
 </script>
 
+
 <div class="modal fade tambahNilai" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -179,26 +180,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('guru.siswa-nilai-store', ['id' => $n->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group mb-3">
-                                <label class="form-control-label">Mata Pelajaran</label>
-                                <input type="hidden" name="idSiswa" value="{{ $idSiswa }}" id="">
-                                <select class="form-control select2" name="mapel_kode" id="exampleSelect">
-                                    <option value="">--Pilih Mapel--</option>
-                                    @foreach ($mapel as $m)
-                                        <option value="{{ $m->kode_mapel }}">{{ $m->nama_mapel }}</option>
-                                    @endforeach
-                                </select>
-                                @error('mapel_kode')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        <input type="hidden" name="idSiswa" value="{{ $idSiswa }}" id="">
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label class="required-label faded-label" for="ulangan_harian">Ulangan Harian</label>
@@ -257,6 +242,41 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('semesterFilter').addEventListener('change', function() {
+        var semester = this.value;
+        console.log(semester);
+        var rows = document.querySelectorAll('.nilai-row');
+        rows.forEach(function(row) {
+            if (semester === "" || row.dataset.semester === semester) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+    @foreach ($nilai as $n)
+        $('#editButton{{ $n->id }}').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda ingin mengubah nilai?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, ubah saja!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#updateForm{{ $n->id }}').submit();
+                }
+            });
+        });
+    @endforeach
+    });
+</script>
 @include('validasi.validasi-edit')
 @include('validasi.notifikasi-berhasil')
 @endsection

@@ -22,8 +22,8 @@ class AbsensiController extends Controller
         $siswa = Siswa::where('kelas_id', $kelas_id)
                 ->orderBy('nama_siswa')
                 ->get();
+                $absensi = Absensi::where('kelas', $kelas_id)->get();
                 
-        $absensi = Absensi::all();
         return view('admin.absensi.absensi-perkelas', compact('siswa', 'absensi', 'kelas_id'));
     }
 
