@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Export;
 
 use App\Http\Controllers\Controller;
+use App\Models\Absensi;
 use App\Models\Mapel;
 use App\Models\Siswa;
 use App\Models\User;
@@ -19,6 +20,18 @@ class NilaiAkhirPdfController extends Controller
         $mapel = Mapel::all();
         $kepsek = User::where('role_id', 4)->first();
         $semester = $request->semester;
+        $sakit = Absensi::where('nis_id', $id)
+                        ->where('semester', $semester)
+                        ->where('status_absensi', 'S')
+                        ->select('status_absensi')->count();
+        $izin = Absensi::where('nis_id', $id)
+                        ->where('semester', $semester)
+                        ->where('status_absensi', 'I')
+                        ->select('status_absensi')->count();
+        $alpa = Absensi::where('nis_id', $id)
+                        ->where('semester', $semester)
+                        ->where('status_absensi', 'A')
+                        ->select('status_absensi')->count();
 
         if ($semester == NULL) {
             // dd('asd');
@@ -65,7 +78,7 @@ class NilaiAkhirPdfController extends Controller
         }
 
 
-        $pdf = PDF::loadView('admin.nilai.nilaiakhir', compact('siswa', 'mapelumum', 'mapelkejuruan', 'kepsek', 'namaWaliKelas'));
+        $pdf = PDF::loadView('admin.nilai.nilaiakhir', compact('siswa', 'mapelumum', 'mapelkejuruan', 'kepsek', 'namaWaliKelas', 'sakit', 'izin', 'alpa'));
         return $pdf->stream('penilaian_siswa.pdf');
 
         // $mapelkejuruan = DB::table('mapel')
