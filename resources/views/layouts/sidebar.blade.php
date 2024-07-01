@@ -139,17 +139,17 @@
                 </a>
             </li>
             <li>
-                <a class="active" href="{{ route('kepsek.siswa') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active" href="{{ route('kepsek.siswa') }}"><i class="sidebar-item-icon fa fa-user"></i>
                 <span class="nav-label">Siswa</span>
                 </a>
             </li>
             <li>
-                <a class="active" href="{{ route('kepsek.guru') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active" href="{{ route('kepsek.guru') }}"><i class="sidebar-item-icon fa fa-user-circle"></i>
                 <span class="nav-label">Guru</span>
                 </a>
             </li>
             <li>
-                <a class="active" href="{{ route('kepsek.nilai') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active" href="{{ route('kepsek.nilai') }}"><i class="sidebar-item-icon fa fa-star"></i>
                 <span class="nav-label">Nilai</span>
                 </a>
             </li>

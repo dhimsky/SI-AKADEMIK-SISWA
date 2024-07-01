@@ -28,6 +28,16 @@ class SiswaController extends Controller
         return view('admin.siswa.index', compact('kelas', 'siswas', 'nonsiswas', 'angkatans', 'tahunpelajaran'));
     }
 
+    public function nonsiswa()
+    {
+        $kelas = Kelas::all();
+        $siswas = Siswa::where('status_siswa', 'Aktif')->get();
+        $nonsiswas = Siswa::where('status_siswa', 'Tidak Aktif')->get();
+        $angkatans = Angkatan::all();
+        $tahunpelajaran = TahunPelajaran::all();
+        return view('admin.siswa.tidak-aktif', compact('kelas', 'siswas', 'nonsiswas', 'angkatans', 'tahunpelajaran'));
+    }
+
     public function store_siswa(Request $request)
     {
         $validator = Validator::make($request->all(), Siswa::$rules, Siswa::$messages);
