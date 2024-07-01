@@ -15,15 +15,15 @@ class RombelSeeder extends Seeder
     {
         Rombel::create([
             'kode_rombel' => '1',
-            'nama_rombel' => 'A',
+            'nama_rombel' => '1',
         ]);
         Rombel::create([
             'kode_rombel' => '2',
-            'nama_rombel' => 'B',
+            'nama_rombel' => '2',
         ]);
         Rombel::create([
             'kode_rombel' => '3',
-            'nama_rombel' => 'C',
+            'nama_rombel' => '2',
         ]);
     }
 }

@@ -69,5 +69,21 @@ class MapelSeeder extends Seeder
             'nama_mapel' => 'Projek Kreatif dan Kewirausahaan',
             'jurusan_kode' => 'MPLB',
         ]);
+        
+        Mapel::create([
+            'kode_mapel' => 'ASJ',
+            'nama_mapel' => 'Administrasi Sistem Jaringan',
+            'jurusan_kode' => 'TKJ',
+        ]);
+        Mapel::create([
+            'kode_mapel' => 'TJKN',
+            'nama_mapel' => 'Tek Jaringan Kabel dan Nirkabel',
+            'jurusan_kode' => 'TKJ',
+        ]);
+        Mapel::create([
+            'kode_mapel' => 'KJ',
+            'nama_mapel' => 'Keamanan Jaringan',
+            'jurusan_kode' => 'TKJ',
+        ]);
     }
 }

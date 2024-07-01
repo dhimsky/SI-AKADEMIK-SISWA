@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mapel', function (Blueprint $table) {
-            $table->string('kode_mapel')->primary();
-            $table->string('jurusan_kode')->nullable();
+            $table->string('kode_mapel', 10)->primary();
+            $table->string('jurusan_kode', 10)->nullable();
             $table->string('nama_mapel', 100);
             $table->foreign('jurusan_kode')->references('kode_jurusan')->on('jurusan')->onDelete('cascade');
             $table->timestamps();

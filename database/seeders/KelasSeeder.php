@@ -14,22 +14,22 @@ class KelasSeeder extends Seeder
     public function run(): void
     {
         Kelas::create([
-            'nama_kelas' => '11-DKV-1',
-            'jurusan_kode' => 'DKV',
+            'nama_kelas' => '10-TKJ-1',
+            'jurusan_kode' => 'TKJ',
             'rombel_kode' => '1',
-            'tingkat' => '11',
+            'tingkat' => '10',
         ]);
         Kelas::create([
-            'nama_kelas' => '11-DKV-2',
-            'jurusan_kode' => 'DKV',
+            'nama_kelas' => '10-TKJ-2',
+            'jurusan_kode' => 'TKJ',
             'rombel_kode' => '1',
-            'tingkat' => '11',
+            'tingkat' => '10',
         ]);
         Kelas::create([
-            'nama_kelas' => '11-DKV-3',
-            'jurusan_kode' => 'DKV',
+            'nama_kelas' => '10-TKJ-3',
+            'jurusan_kode' => 'TKJ',
             'rombel_kode' => '1',
-            'tingkat' => '11',
+            'tingkat' => '10',
         ]);
 
         Kelas::create([

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('nilai', function (Blueprint $table) {
             $table->id();
-            $table->string('nis_id');
-            $table->string('mapel_kode');
+            $table->string('nis_id', 10);
+            $table->string('mapel_kode', 10);
             $table->integer('semester');
             $table->string('tahun_pelajaran', 15);
             $table->string('kelas', 10);

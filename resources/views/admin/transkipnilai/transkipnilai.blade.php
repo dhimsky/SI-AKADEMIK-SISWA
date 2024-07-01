@@ -151,7 +151,7 @@
                             @endphp
                             <td>{{ $nilai ? $nilai->nilai_akhir : '-' }}</td>
                         @endfor
-                        <td>{{ $mapel->first()->nilai_psaj ?? '-' }}</td>
+                        <td>{{ $mapel->first()->psaj ?? '-' }}</td>
                     </tr>
                 @endforeach
             </tbody>

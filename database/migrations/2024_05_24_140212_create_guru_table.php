@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('guru', function (Blueprint $table) {
-            $table->string('nip')->primary();
-            $table->string('nama_guru', 45);
-            $table->string('kelas_id');
-            $table->string('mapel_kode');
+            $table->string('nip', 25)->primary();
+            $table->string('nama_guru', 50);
+            $table->string('kelas_id', 10)->nullable();
+            $table->string('mapel_kode', 10)->nullable();
             // $table->string('email', 35);
             $table->timestamps();
             $table->foreign('kelas_id')->references('nama_kelas')->on('kelas')->onDelete('cascade');

@@ -48,7 +48,7 @@
         .footer {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
+            margin-top: 3px;
         }
         .footer .signature {
             text-align: left;
@@ -146,6 +146,33 @@
                         <td>{{ isset($m->nilai_akhir) ? $m->nilai_akhir : '-' }}</td>
                     </tr>
                     @endforeach
+                    <tr>
+                        @php
+                            $totalNilaiUmum = 0;
+                            $countNilaiUmum = 0;
+                            foreach ($mapelumum as $m) {
+                                if (isset($m->nilai_akhir)) {
+                                    $totalNilaiUmum += $m->nilai_akhir;
+                                    $countNilaiUmum++;
+                                }
+                            }
+                            $rataRataUmum = $countNilaiUmum > 0 ? $totalNilaiUmum / $countNilaiUmum : 0;
+                            $totalNilaiKejuruan = 0;
+                            $countNilaiKejuruan = 0;
+                            foreach ($mapelkejuruan as $m) {
+                                if (isset($m->nilai_akhir)) {
+                                    $totalNilaiKejuruan += $m->nilai_akhir;
+                                    $countNilaiKejuruan++;
+                                }
+                            }
+                            $rataRataKejuruan = $countNilaiKejuruan > 0 ? $totalNilaiKejuruan / $countNilaiKejuruan : 0;
+                            $totalNilaiKeseluruhan = $totalNilaiUmum + $totalNilaiKejuruan;
+                            $countNilaiKeseluruhan = $countNilaiUmum + $countNilaiKejuruan;
+                            $rataRataKeseluruhan = $countNilaiKeseluruhan > 0 ? $totalNilaiKeseluruhan / $countNilaiKeseluruhan : 0;
+                        @endphp
+                        <td colspan="2" class="text-center"><b>Rata-Rata Nilai Akhir</b></td>
+                        <td>{{ number_format($rataRataKeseluruhan, 2) }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

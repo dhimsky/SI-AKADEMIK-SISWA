@@ -28,7 +28,7 @@
                                 <td>{{ $item->nip }}</td>
                                 <td class="text-left">{{ $item->nama_guru }}</td>
                                 <td class="text-left">{{ $item->mapel->nama_mapel }}</td>
-                                <td>{{ $item->kelas_id }}</td>
+                                <td>{{ $item->kelas_id ?? '-' }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-default btn-xs m-r-5" data-toggle="modal"
                                         data-target="#editguru{{ $item->nip }}" title="Edit Wali Kelas"><i
