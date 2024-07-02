@@ -46,7 +46,7 @@
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Edit Wali Kelas</h5>
+                                        <h5 class="modal-title">Edit Guru</h5>
                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                         </button>
                                     </div>
@@ -91,6 +91,7 @@
                                             <div class="form-group mb-3">
                                                 <label class="required-label faded-label" for="kelas_id">Sebagai Wali Kelas</label>
                                                 <select class="form-control input-sm" name="kelas_id">
+                                                    <option value="">Tidak Sebagai Wali Kelas</option>
                                                     @foreach ($kelas as $k)
                                                         <option @if ($k->nama_kelas == $item->kelas_id) selected @endif value="{{ $k->nama_kelas }}">{{ $k->nama_kelas }}</option>
                                                     @endforeach
@@ -167,7 +168,7 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Wali Kelas</h5>
+                    <h5 class="modal-title">Tambah Guru</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
@@ -211,6 +212,7 @@
                         <div class="form-group mb-3">
                             <label class="required-label faded-label" for="kelas_id">Sebagai Wali Kelas</label>
                             <select class="form-control input-sm" name="kelas_id">
+                                <option value="">Tidak Sebagai Wali Kelas</option>
                                 @foreach ($kelas as $item)
                                     <option value="{{ $item->nama_kelas }}">{{ $item->nama_kelas }}</option>
                                 @endforeach
