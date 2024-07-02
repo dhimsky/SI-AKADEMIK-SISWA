@@ -150,7 +150,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('nilai', [GuruNilaiController::class, 'index'])->name('nilai');
         Route::get('siswa-perkelas/{nama_kelas}', [GuruNilaiController::class, 'siswa_perkelas'])->name('siswa-perkelas');
         Route::get('{id}/nilai', [GuruNilaiController::class, 'show'])->name('siswa.nilai');
-        Route::post('{id}/store-nilai', [GuruNilaiController::class, 'store_nilai'])->name('siswa-nilai-store');
+        Route::post('/store-nilai', [GuruNilaiController::class, 'store_nilai'])->name('siswa-nilai-store');
         Route::put('{id}/update-nilai', [GuruNilaiController::class, 'update_nilai'])->name('siswa-nilai-update');
         Route::delete('{id}/delete-nilai', [GuruNilaiController::class, 'delete_nilai'])->name('siswa-nilai-delete');
         Route::post('/siswa/{id}/nilaiakhir-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('nilaiakhir_pdf');

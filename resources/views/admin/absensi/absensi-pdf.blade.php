@@ -84,7 +84,7 @@
                 <td>{{ $countValues['A'] ?? 0 }}</td>
             </tr>
         @endforeach
-    </tbody>
+    </tbody>    
 </table>
 </body>
 </html>

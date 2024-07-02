@@ -180,7 +180,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('guru.siswa-nilai-store', ['id' => $n->id]) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('guru.siswa-nilai-store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <input type="hidden" name="idSiswa" value="{{ $idSiswa }}" id="">
