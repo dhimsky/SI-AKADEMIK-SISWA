@@ -18,8 +18,11 @@
 
 <body class="bg-silver-300">
     <div class="content">
+        <div class="text-center">
+            <img class="mt-5" src="{{ asset('/') }}assets/images/logo.png" style="width: 100px; height: 100px;" >
+        </div>
         <div class="brand">
-            <a class="link" href="index.html">SIAKAD</a>
+            <h3 class="text-dark" href="index.html">SIAKAD</h3>
         </div>
         @if (session('failed'))
             <div class="alert alert-danger">
@@ -41,12 +44,6 @@
                     <input class="form-control" type="password" name="password" placeholder="Password">
                 </div>
             </div>
-            {{-- <div class="form-group d-flex justify-content-between">
-                <label class="ui-checkbox ui-checkbox-info">
-                    <input type="checkbox">
-                    <span class="input-span"></span>Remember me</label>
-                <a href="forgot_password.html">Forgot password?</a>
-            </div> --}}
             <div class="form-group">
                 <button class="btn btn-info btn-block" type="submit">Login</button>
             </div>
