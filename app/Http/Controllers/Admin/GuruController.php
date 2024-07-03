@@ -29,14 +29,12 @@ class GuruController extends Controller
             'nip' => 'required|unique:users,kode_identitas',
             'nama_guru' => 'required',
             'mapel_kode' => 'required',
-            'kelas_id' => 'required',
         ];
         $messages = [
             'nip.required' => 'NIP tidak boleh kosong!',
             'nip.unique' => 'NIP sudah digunakan!',
             'nama_guru.required' => 'Nama Lengkap tidak boleh kosong!',
             'mapel_kode.required' => 'Mapel tidak boleh kosong!',
-            'kelas_id.required' => 'Sebagai Wali Kelas tidak boleh kosong!',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -82,13 +80,11 @@ class GuruController extends Controller
             // ],
             'nama_guru' => 'required',
             'mapel_kode' => 'required',
-            'kelas_id' => 'required',
         ];
 
         $messages = [
             'nama_guru.required' => 'Nama Lengkap tidak boleh kosong!',
             'mapel_kode.required' => 'Mapel tidak boleh kosong!',
-            'kelas_id.required' => 'Sebagai Wali Kelas tidak boleh kosong!',
             ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -124,6 +120,6 @@ class GuruController extends Controller
         $guru = Guru::findOrFail($id);
         $guru->delete();
 
-        return redirect()->back()->with('success', 'Guru Kelas berhasil dihapus');
+        return redirect()->route('admin.guru')->with('success', 'Guru Kelas berhasil dihapus');
     }
 }
