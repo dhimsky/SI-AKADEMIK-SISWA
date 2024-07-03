@@ -59,30 +59,39 @@ class NilaiController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-        // dd($request);
-        $siswa = Siswa::findOrFail($request->idSiswa);
-        $nilai = new Nilai();
-        $userId = Auth::user()->kode_identitas;
-        $mapelGuru = Guru::where('nip', $userId)->first();
-        
-        $nilai->nis_id = $siswa->nis;
-        $nilai->mapel_kode = $mapelGuru->mapel_kode;
-        $nilai->semester = $siswa->semester;
-        $nilai->tahun_pelajaran = $siswa->tahunpelajaran->tahun_pelajaran;
-        $nilai->kelas = $siswa->kelas->nama_kelas;
-        $nilai->ulangan_harian = $request->ulangan_harian;
-        $nilai->uts = $request->uts;
-        $nilai->uas = $request->uas;
-        $nilai->psaj = $request->psaj;
-        // Mengambil data dari request dan menghitung nilai total
-        $nilaiUlanganHarian = $request->ulangan_harian * 0.4;
-        $nilaiUts = $request->uts * 0.3;
-        $nilaiUas = $request->uas * 0.3;
-        // Menjumlahkan nilai-nilai yang sudah dihitung
-        $nilai->nilai_akhir = $nilaiUlanganHarian + $nilaiUts + $nilaiUas;
-        $nilai->save();
 
-        return redirect()->back()->with('success', 'Nilai berhasil ditambahkan');
+        $siswa = Siswa::findOrFail($request->idSiswa);
+        $cekSemester = Nilai::where('semester', $siswa->semester)
+                        ->where('nis_id', $siswa->nis)
+                        ->get();
+        // dd($cekSemester);
+        if (!empty($cekSemester)) {
+            return redirect()->back()->with('error', 'Nilai Sudah di Inputkan!');
+        }
+        else {
+            $nilai = new Nilai();
+            $userId = Auth::user()->kode_identitas;
+            $mapelGuru = Guru::where('nip', $userId)->first();
+            
+            $nilai->nis_id = $siswa->nis;
+            $nilai->mapel_kode = $mapelGuru->mapel_kode;
+            $nilai->semester = $siswa->semester;
+            $nilai->tahun_pelajaran = $siswa->tahunpelajaran->tahun_pelajaran;
+            $nilai->kelas = $siswa->kelas->nama_kelas;
+            $nilai->ulangan_harian = $request->ulangan_harian;
+            $nilai->uts = $request->uts;
+            $nilai->uas = $request->uas;
+            $nilai->psaj = $request->psaj;
+            // Mengambil data dari request dan menghitung nilai total
+            $nilaiUlanganHarian = $request->ulangan_harian * 0.4;
+            $nilaiUts = $request->uts * 0.3;
+            $nilaiUas = $request->uas * 0.3;
+            // Menjumlahkan nilai-nilai yang sudah dihitung
+            $nilai->nilai_akhir = $nilaiUlanganHarian + $nilaiUts + $nilaiUas;
+            $nilai->save();
+
+            return redirect()->back()->with('success', 'Nilai berhasil ditambahkan');
+        }
     }
 
     public function update_nilai(Request $request, $id)

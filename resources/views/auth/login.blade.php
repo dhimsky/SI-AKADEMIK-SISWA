@@ -67,6 +67,19 @@
     </script>
     <!-- CORE SCRIPTS-->
     <script src="{{ asset('/') }}assets/js/app.js" type="text/javascript"></script>
+    {{-- SWEATALERT --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'danger',
+                title: 'Gagal',
+                text: '{{ session('error') }}',
+            });
+        });
+    </script>
+@endif  
     <!-- PAGE LEVEL SCRIPTS-->
     <script type="text/javascript">
         $(function() {

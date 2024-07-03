@@ -12,7 +12,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
-                icon: 'danger',
+                icon: 'error',
                 title: 'Gagal',
                 text: '{{ session('error') }}',
             });

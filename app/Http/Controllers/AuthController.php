@@ -55,7 +55,7 @@ class AuthController extends Controller
                 return redirect()->route('kepsek.dashboard');
             }
         }
-        return redirect('/');
+        return redirect('/')->with('error', 'Kode Identitas atau password salah!');
     }
     public function logout(Request $request) {
         Auth::logout();
