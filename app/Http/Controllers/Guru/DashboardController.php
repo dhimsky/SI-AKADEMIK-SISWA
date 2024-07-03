@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index(){
-        return view('Guru.dashboard.index');
+        $siswa = Siswa::count();
+        return view('Guru.dashboard.index', compact('siswa'));
     }
 }

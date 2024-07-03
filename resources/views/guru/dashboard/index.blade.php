@@ -6,9 +6,8 @@
         <div class="col-lg-3 col-md-6">
             <div class="ibox bg-success color-white widget-stat">
                 <div class="ibox-body">
-                    <h2 class="m-b-5 font-strong">201</h2>
-                    <div class="m-b-5">JUMLAH SISWA</div><i class="ti-shopping-cart widget-stat-icon"></i>
-                    <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div>
+                    <h2 class="m-b-5 font-strong">{{ $siswa }}</h2>
+                    <div class="m-b-5">JUMLAH SISWA</div><i class="fa fa-graduation-cap widget-stat-icon"></i>
                 </div>
             </div>
         </div>

@@ -31,8 +31,8 @@
             <h2 class="login-title">Log in</h2>
             <div class="form-group">
                 <div class="input-group-icon right">
-                    <div class="input-icon"><i class="fa fa-envelope"></i></div>
-                    <input class="form-control" type="number" name="kode_identitas" placeholder="Kode Identitas" autocomplete="off">
+                    <div class="input-icon"><i class="fa fa-id-badge"></i></div>
+                    <input value="{{ old('kode_identitas') }}" class="form-control" type="number" name="kode_identitas" placeholder="Kode Identitas" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
