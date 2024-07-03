@@ -60,18 +60,21 @@ class NilaiController extends Controller
                     ->withInput();
         }
 
+        $nilai = new Nilai();
+        $userId = Auth::user()->kode_identitas;
+        $mapelGuru = Guru::where('nip', $userId)->first();
+        
         $siswa = Siswa::findOrFail($request->idSiswa);
         $cekSemester = Nilai::where('semester', $siswa->semester)
                         ->where('nis_id', $siswa->nis)
+                        ->where('mapel_kode', $mapelGuru->mapel_kode)
                         ->get();
-        // dd($cekSemester);
-        if (!empty($cekSemester)) {
+                        
+        if (!$cekSemester->isEmpty()) {
+            // dd($cekSemester);
             return redirect()->back()->with('error', 'Nilai Sudah di Inputkan!');
         }
         else {
-            $nilai = new Nilai();
-            $userId = Auth::user()->kode_identitas;
-            $mapelGuru = Guru::where('nip', $userId)->first();
             
             $nilai->nis_id = $siswa->nis;
             $nilai->mapel_kode = $mapelGuru->mapel_kode;
