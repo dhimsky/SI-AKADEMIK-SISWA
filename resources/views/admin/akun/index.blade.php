@@ -74,6 +74,7 @@
                                                     <select class="form-control input-sm" name="role_id">
                                                         <option value="1" {{ $item->role_id === 1 ? 'selected' : '' }}>Admin</option>
                                                         <option value="4" {{ $item->role_id === 4 ? 'selected' : '' }}>Kepala Sekolah</option>
+                                                        <option value="3" {{ $item->role_id === 3 ? 'selected' : '' }}>Siswa</option>
                                                     </select>
                                                     @error('role_id')
                                                         <span class="invalid-feedback" role="alert">

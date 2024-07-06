@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Guru;
 use App\Models\Jurusan;
 use App\Models\Kelas;
 use App\Models\Rombel;
@@ -70,14 +71,26 @@ class KelasController extends Controller
                     ->withInput();
         }
 
-        $kelas = Kelas::findOrFail($nama_kelas);
-        $kelas->nama_kelas = $request->tingkat . '-' . $request->jurusan_kode . '-' . $request->rombel_kode;
-        $kelas->tingkat = $request->tingkat;
-        $kelas->jurusan_kode = $request->jurusan_kode;
-        $kelas->rombel_kode = $request->rombel_kode;
-        $kelas->save();
+        $cekGuru = Guru::where('kelas_id', $request->nama_kelas)->first();
+        if ($cekGuru) {
+            // dd($cekGuru);
+            return redirect()->back()->with('error', 'Kelas ' . $request->nama_kelas . ' sedang digunakan pada tabel lain');
+        }
+        else {
+            $cekNamaKelas = Kelas::where('nama_kelas', $request->tingkat . '-' . $request->jurusan_kode . '-' . $request->rombel_kode)->first();
+            if ($cekNamaKelas) {
+                return redirect()->back()->with('error', 'Kelas ' . $cekNamaKelas->nama_kelas . ' Sudah ada');
+            }
 
-        return redirect()->back()->with('success', 'Kelas berhasil diperbarui');
+            $kelas = Kelas::findOrFail($nama_kelas);
+            $kelas->nama_kelas = $request->tingkat . '-' . $request->jurusan_kode . '-' . $request->rombel_kode;
+            $kelas->tingkat = $request->tingkat;
+            $kelas->jurusan_kode = $request->jurusan_kode;
+            $kelas->rombel_kode = $request->rombel_kode;
+            $kelas->save();
+
+            return redirect()->back()->with('success', 'Kelas berhasil diperbarui');
+        }
     }
 
     public function delete_kelas($nama_kelas)

@@ -16,15 +16,15 @@ class CekUserLogin
      */
     public function handle(Request $request, Closure $next, ...$role)
     {
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect('/');
-    }
+        }
 
-    $user = Auth::user();
-    if (in_array($user->role_id, $role)) {
-        return $next($request);
-    }
-    
-    return redirect('/')->with('error',"Kamu tidak ada akses");
+        $user = Auth::user();
+        if (in_array($user->role_id, $role)) {
+            return $next($request);
+        }
+
+        return redirect('/')->with('error', "Kamu tidak ada akses");
     }
 }

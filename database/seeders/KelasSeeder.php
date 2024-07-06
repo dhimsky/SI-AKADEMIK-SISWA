@@ -22,13 +22,13 @@ class KelasSeeder extends Seeder
         Kelas::create([
             'nama_kelas' => '10-TKJ-2',
             'jurusan_kode' => 'TKJ',
-            'rombel_kode' => '1',
+            'rombel_kode' => '2',
             'tingkat' => '10',
         ]);
         Kelas::create([
             'nama_kelas' => '10-TKJ-3',
             'jurusan_kode' => 'TKJ',
-            'rombel_kode' => '1',
+            'rombel_kode' => '3',
             'tingkat' => '10',
         ]);
 
@@ -41,13 +41,13 @@ class KelasSeeder extends Seeder
         Kelas::create([
             'nama_kelas' => '10-MPLB-2',
             'jurusan_kode' => 'MPLB',
-            'rombel_kode' => '1',
+            'rombel_kode' => '2',
             'tingkat' => '10',
         ]);
         Kelas::create([
             'nama_kelas' => '10-MPLB-3',
             'jurusan_kode' => 'MPLB',
-            'rombel_kode' => '1',
+            'rombel_kode' => '3',
             'tingkat' => '10',
         ]);
     }
