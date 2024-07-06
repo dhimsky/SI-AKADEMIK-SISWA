@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Jurusan;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -69,9 +70,14 @@ class JurusanController extends Controller
 
     public function delete_jurusan($kode_jurusan)
     {
-        $jurusan = Jurusan::findOrFail($kode_jurusan);
-        $jurusan->delete();
-
-        return redirect()->back()->with('success', 'Jurusan berhasil dihapus');
+        $kelas = Kelas::where('jurusan_kode', $kode_jurusan)->first();
+        
+        if (!$kelas){
+            $jurusan = Jurusan::find($kode_jurusan);
+            $jurusan->delete();
+            return redirect()->back()->with('success', 'Jurusan berhasil dihapus.');
+        }else{
+            return redirect()->back()->with('error','Tidak dapat menghapus!, Jurusan sedang digunakan pada tabel Kelas.');        
+        }
     }
 }

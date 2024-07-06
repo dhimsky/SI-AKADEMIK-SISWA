@@ -17,6 +17,11 @@ class SiswaImport implements ToModel, WithValidation, WithHeadingRow
     public function model(array $row)
     {   
         Log::info('Row Data:', $row);
+
+        if (!$row['nis'] || !$row['nisn'] || !$row['nama_siswa'] || !$row['kelas'] || !$row['semester'] || !$row['angkatan'] || !$row['tahun_pelajaran']) {
+            return null;
+        }
+        
         $angkatan = Angkatan::where('tahun_angkatan', $row['angkatan'])->first();
         $kode_angkatan = $angkatan ? $angkatan->kode_angkatan : null;
         
@@ -40,6 +45,11 @@ class SiswaImport implements ToModel, WithValidation, WithHeadingRow
         return [
             'nis' => 'required|unique:siswa,nis',
             'nisn' => 'required|unique:siswa,nisn',
+            'nama_siswa' => 'required|string',
+            'kelas' => 'required',
+            'semester' => 'required|integer',
+            'angkatan' => 'required',
+            'tahun_pelajaran' => 'required',
         ];
     }
 }

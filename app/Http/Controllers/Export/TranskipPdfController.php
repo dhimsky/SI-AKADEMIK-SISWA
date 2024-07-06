@@ -15,6 +15,7 @@ class TranskipPdfController extends Controller
     {
         $siswa = Siswa::findOrFail($id);
         $kepsek = User::where('role_id', 4)->first();
+        
         $mapelumum = DB::table('mapel')
         ->leftJoin('nilai', function($join) use ($id) {
             $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
@@ -25,17 +26,26 @@ class TranskipPdfController extends Controller
         ->get()
         ->groupBy('nama_mapel');
         
-        $mapelkejuruan = DB::table('mapel')
-        ->leftJoin('nilai', function($join) use ($id) {
-            $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
-                ->where('nilai.nis_id', '=', $id);
-        })
-        ->join('siswa', 'siswa.nis', '=', 'nilai.nis_id')
-        ->join('kelas', 'kelas.nama_kelas', '=', 'siswa.kelas_id')
-        ->whereColumn('mapel.jurusan_kode', 'kelas.jurusan_kode')
-        ->select('mapel.nama_mapel', 'nilai.nilai_akhir', 'nilai.semester', 'nilai.psaj')
-        ->get()
-        ->groupBy('nama_mapel');
+        $queryWithNilai = DB::table('mapel')
+            ->leftJoin('nilai', function ($join) use ($id) {
+                $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
+                    ->where('nilai.nis_id', '=', $id);
+            })
+            ->join('siswa', 'siswa.nis', '=', 'nilai.nis_id')
+            ->join('kelas', 'kelas.nama_kelas', '=', 'siswa.kelas_id')
+            ->where('mapel.jurusan_kode', '=', $siswa->kelas->jurusan_kode)
+            ->select('mapel.nama_mapel', 'nilai.nilai_akhir');
+
+        $queryWithoutNilai = DB::table('mapel')
+            ->leftJoin('nilai', function ($join) use ($id) {
+                $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
+                    ->where('nilai.nis_id', '=', $id);
+            })
+            ->whereNull('nilai.nilai_akhir')
+            ->where('mapel.jurusan_kode', '=', $siswa->kelas->jurusan_kode)
+            ->select('mapel.nama_mapel', DB::raw('NULL AS nilai_akhir'));
+
+        $mapelkejuruan = $queryWithNilai->union($queryWithoutNilai)->get()->groupBy('nama_mapel');
 
         $totalNilaiSemester = 0;
         $totalSemester = 0;

@@ -23,7 +23,7 @@ class RombelSeeder extends Seeder
         ]);
         Rombel::create([
             'kode_rombel' => '3',
-            'nama_rombel' => '2',
+            'nama_rombel' => '3',
         ]);
     }
 }

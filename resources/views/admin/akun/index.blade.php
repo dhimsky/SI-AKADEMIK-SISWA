@@ -25,7 +25,7 @@
                             <tr class="text-center">
                                 <td>{{ $item->kode_identitas }}</td>
                                 <td class="text-left">{{ $item->nama_lengkap }}</td>
-                                <td class="text-left">{{ $item->Role->level }}</td>
+                                <td class="text-center">{{ $item->Role->level }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-default btn-xs m-r-5" data-toggle="modal" data-target="#editAkun{{ $item->kode_identitas }}" title="Edit rombel"><i class="fa fa-pencil font-14"></i></button>
                                     <form id="deleteForm{{ $item->kode_identitas }}" action="{{ route('admin.delete-akun', ['id' => $item->kode_identitas]) }}" method="POST">
@@ -51,7 +51,7 @@
                                                 @method('PUT')
                                                 <div class="form-group mb-3">
                                                     <label class="required-label faded-label" for="kode_identitas">Kode Identitas</label>
-                                                    <input type="kode_identitas" name="kode_identitas" value="{{ $item->kode_identitas }}" class="form-control @error('kode_identitas') is-invalid @enderror"
+                                                    <input readonly type="kode_identitas" name="kode_identitas" value="{{ $item->kode_identitas }}" class="form-control @error('kode_identitas') is-invalid @enderror"
                                                         placeholder="Masukan kode_identitas">
                                                     @error('kode_identitas')
                                                         <span class="invalid-feedback" role="alert">

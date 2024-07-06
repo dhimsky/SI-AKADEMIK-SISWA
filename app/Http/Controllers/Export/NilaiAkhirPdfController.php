@@ -67,7 +67,7 @@ class NilaiAkhirPdfController extends Controller
                 $join->on('mapel.kode_mapel', '=', 'nilai.mapel_kode')
                     ->where('nilai.nis_id', '=', $id);
             })
-            ->whereNull('nilai.nilai_akhir') // Filter untuk nilai yang null (mapel tanpa nilai)
+            ->whereNull('nilai.nilai_akhir')
             ->where('mapel.jurusan_kode', '=', $siswa->kelas->jurusan_kode)
             ->select('mapel.nama_mapel', DB::raw('NULL AS nilai_akhir'));
     

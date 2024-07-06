@@ -31,7 +31,7 @@
             </li>
             <li>
                 <a href="javascript:;"><i class="sidebar-item-icon fa fa-building"></i>
-                    <span class="nav-label">Master</span><i class="fa fa-angle-left arrow"></i></a>
+                    <span class="nav-label">Akademik</span><i class="fa fa-angle-left arrow"></i></a>
                 <ul class="nav-2-level collapse">
                     <li>
                         <a href="{{ route('admin.jurusan') }}">Jurusan</a>
