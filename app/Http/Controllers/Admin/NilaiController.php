@@ -22,6 +22,18 @@ class NilaiController extends Controller
         $angkatans = Angkatan::all();
         return view('admin.nilai.index', compact('siswa', 'nilai', 'mapel', 'kelas', 'angkatans'));
     }
+
+    public function nilai_perkelas($kelas_id)
+    {
+        $siswa = Siswa::where('status_siswa', 'Aktif')->where('kelas_id', $kelas_id)->get();
+        $nilai = Nilai::where('kelas', $kelas_id)->get();
+        
+        $mapel = Mapel::all();
+        $kelas = Kelas::all();
+        $angkatans = Angkatan::all();
+        return view('admin.nilai.nilai-perkelas', compact('siswa', 'nilai', 'mapel', 'kelas', 'angkatans'));
+    }
+
     public function show($id)
     {
         // Mengambil data siswa beserta nilai-nilainya berdasarkan nis_id
@@ -29,7 +41,7 @@ class NilaiController extends Controller
         $siswa = Siswa::with(['nilai' => function($query) {
             $query->select('nis_id', 'nilai_akhir', 'ulangan_harian', 'uts', 'uas', 'tahun_pelajaran', 'kelas');
         }, 'kelas'])->findOrFail($id);
-
+        // dd($siswa);
         // Mengambil nilai-nilai siswa yang sesuai dengan nis_id
         $nilai = Nilai::where('nis_id', $siswa->nis)->get();
         $mapel = Mapel::all();
@@ -43,7 +55,6 @@ class NilaiController extends Controller
         return view('admin.nilai.tambah', compact('siswa', 'nilai', 'mapel'));
     }
     public function store_nilai(Request $request){
-        // dd($request);
         $rules = [
             'mapel_kode' => 'required',
             'ulangan_harian' => 'required|array',
@@ -87,48 +98,47 @@ class NilaiController extends Controller
                     ->withErrors($validator)
                     ->withInput();
         }
-
-        $siswa = Siswa::findOrFail($request->idSiswa);
-        $cekSemester = Nilai::where('semester', $siswa->semester)
-                        ->where('nis_id', $siswa->nis)
-                        ->where('mapel_kode', $request->mapel_kode)
-                        ->get();
-                        
-        if (!$cekSemester->isEmpty()) {
-            // dd($cekSemester);
-            return redirect()->back()->with('error', 'Nilai Sudah di Inputkan!');
-        }
-        else {
-            foreach ($request->nama_siswa as $index => $nama_siswa) {
-                $siswa = Siswa::where('nama_siswa', $nama_siswa)->firstOrFail();
-    
-                $nilai = new Nilai();
-                $nilai->nis_id = $siswa->nis;
-                $nilai->mapel_kode = $request->mapel_kode;
-                $nilai->semester = $siswa->semester;
-                $nilai->tahun_pelajaran = $siswa->tahunpelajaran->tahun_pelajaran;
-                $nilai->kelas = $siswa->kelas->nama_kelas;
-                $nilai->ulangan_harian = $request->ulangan_harian[$index];
-                $nilai->uts = $request->UTS[$index];
-                $nilai->uas = $request->UAS[$index];
-                $nilai->psaj = $request->PSAJ[$index];
-    
-                // Menghitung nilai akhir
-                $nilaiUlanganHarian = $request->ulangan_harian[$index] * 0.4;
-                $nilaiUts = $request->UTS[$index] * 0.3;
-                $nilaiUas = $request->UAS[$index] * 0.3;
-                $nilai->nilai_akhir = $nilaiUlanganHarian + $nilaiUts + $nilaiUas;
-    
-                $nilai->save();
+        
+        foreach ($request->nis as $index => $nis) {
+            
+            $siswa = Siswa::findOrFail($nis);
+            $cekNilai = Nilai::where('semester', $siswa->semester)
+                            ->where('nis_id', $siswa->nis)
+                            ->where('mapel_kode', $request->mapel_kode)
+                            ->get();
+            if (!$cekNilai->isEmpty()) {
+                return redirect()->back()->with('error', 'Nilai ' . $siswa->nama_siswa . ' Sudah di Inputkan!');
             }
-    
-            return redirect()->back()->with('success', 'Nilai berhasil ditambahkan');
         }
+
+        foreach ($request->nama_siswa as $index => $nama_siswa) {
+            $siswa = Siswa::where('nama_siswa', $nama_siswa)->firstOrFail();
+
+            $nilai = new Nilai();
+            $nilai->nis_id = $siswa->nis;
+            $nilai->mapel_kode = $request->mapel_kode;
+            $nilai->semester = $siswa->semester;
+            $nilai->tahun_pelajaran = $siswa->tahunpelajaran->tahun_pelajaran;
+            $nilai->kelas = $siswa->kelas->nama_kelas;
+            $nilai->ulangan_harian = $request->ulangan_harian[$index];
+            $nilai->uts = $request->UTS[$index];
+            $nilai->uas = $request->UAS[$index];
+            $nilai->psaj = $request->PSAJ[$index];
+
+            // Menghitung nilai akhir
+            $nilaiUlanganHarian = $request->ulangan_harian[$index] * 0.4;
+            $nilaiUts = $request->UTS[$index] * 0.3;
+            $nilaiUas = $request->UAS[$index] * 0.3;
+            $nilai->nilai_akhir = $nilaiUlanganHarian + $nilaiUts + $nilaiUas;
+
+            $nilai->save();
+    
+        }
+        return redirect()->back()->with('success', 'Nilai berhasil ditambahkan');
     }
 
     public function update_nilai(Request $request, $id)
     {
-        // dd($request);
         $rules = [
             'ulangan_harian' => 'required',
             'uts' => 'required',
@@ -163,15 +173,6 @@ class NilaiController extends Controller
 
         return redirect()->back()->with('success', 'Nilai berhasil diperbarui');
     }
-
-    // public function publish_nilai($id)
-    // {
-    //     $nilai = Nilai::findOrFail($id);
-    //     $nilai->status = 'Diterbitkan';
-    //     $nilai->save();
-
-    //     return redirect()->back()->with('success', 'Nilai berhasil diterbitkan');
-    // }
 
     public function delete_nilai($id)
     {

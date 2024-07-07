@@ -20,9 +20,9 @@
                             title="Cetak Nilai" target="_blank">
                             <i class="fa fa-print"></i> Cetak</button>
                     </form>
-                    <a href="" class="btn btn-info"
-                        title="Tambah Nilai" data-toggle="modal" data-target=".tambahNilai">
-                        <i class="fa fa-plus"></i> Tambah</a>
+                {{-- <a href="" class="btn btn-info"
+                    title="Tambah Nilai" data-toggle="modal" data-target=".tambahNilai">
+                    <i class="fa fa-plus"></i> Tambah</a> --}}
                 </div>
             <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
                 <thead>

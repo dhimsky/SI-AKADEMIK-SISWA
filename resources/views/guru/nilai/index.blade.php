@@ -11,7 +11,7 @@
                         <div class="ibox-body">
                             <h2 class="m-b-5 font-strong">{{ $k->nama_kelas }}</h2>
                             <div class="m-b-3 mr-5">{{ $k->jurusan->nama_jurusan }}</div><a href="{{ route('guru.siswa-perkelas', ['nama_kelas' => $k->nama_kelas]) }}"
-                            title="Tambah Absensi" class="ti-arrow-right text-light widget-stat-icon"></a>
+                            title="Tambah Nilai" class="ti-arrow-right text-light widget-stat-icon"></a>
                             <div><i ></i><small></small></div>
                         </div>
                     </div>

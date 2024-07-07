@@ -6,7 +6,7 @@
             <div class="ibox-head">
                 <div class="col-md-7 mt-4 text-right">
                     <form action="" method="GET">
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <div class="col-md-4 mb-2">
                                 <select id="kelas_id" name="kelas_id" class="form-control">
                                     <option selected value="">Semua Kelas</option>
@@ -26,7 +26,7 @@
                             <div class="col-md-1">
                                 <button id="btnFilter" class="btn btn-whatsapp"><i class="fa fa-search"></i></button>
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
                 <div class="col-md-5 text-right ">

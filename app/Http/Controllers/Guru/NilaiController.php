@@ -21,8 +21,9 @@ class NilaiController extends Controller
         return view('guru.nilai.index', compact('siswa', 'nilai', 'kelas'));
     }
     public function siswa_perkelas($nama_kelas){
-        $siswa = Siswa::where('kelas_id', $nama_kelas)->get();
-        return view('guru.nilai.siswa-perkelas', compact('siswa'));
+        $siswa = Siswa::where('kelas_id', $nama_kelas)->where('status_siswa', 'Aktif')->get();
+        $nilai = Nilai::where('kelas', $nama_kelas)->get();
+        return view('guru.nilai.siswa-perkelas', compact('siswa', 'nilai'));
     }
     public function show($id)
     {

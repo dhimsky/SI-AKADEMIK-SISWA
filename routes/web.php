@@ -119,6 +119,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('nilai', [AdminNilaiController::class, 'index'])->name('nilai');
         // Route::get('tambah-nilai/{id}', [AdminNilaiController::class, 'tambah_nilai'])->name('tambah-nilai');
         Route::get('{id}/nilai', [AdminNilaiController::class, 'show'])->name('siswa.nilai');
+        Route::get('nilai-perkelas/{kelas_id}', [AdminNilaiController::class, 'nilai_perkelas'])->name('nilai-perkelas');
         Route::post('store-nilai', [AdminNilaiController::class, 'store_nilai'])->name('store-nilai');
         Route::put('update-nilai/{id}', [AdminNilaiController::class, 'update_nilai'])->name('update-nilai');
         Route::delete('delete-nilai/{id}', [AdminNilaiController::class, 'delete_nilai'])->name('delete-nilai');
