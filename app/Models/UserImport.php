@@ -13,6 +13,9 @@ class UserImport implements ToModel, WithHeadingRow
     use HasFactory;
     public function model(array $row)
     {        
+        // if (!isset($row['nis']) || !isset($row['nama_siswa']) || empty($row['nis']) || empty($row['nama_siswa'])) {
+        //     return null;
+        // }
         return new User([
             'kode_identitas' => $row['nis'],
             'nama_lengkap' => $row['nama_siswa'],

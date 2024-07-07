@@ -48,7 +48,7 @@
                                         <div class="modal-body">
                                             <div class="form-group mb-3">
                                                 <label class="required-label faded-label" for="kode_rombel" >Kode Rombel</label>
-                                                <input type="text" name="kode_rombel" class="form-control @error('kode_rombel') is-invalid @enderror" value="{{ $item->kode_rombel }}">
+                                                <input readonly type="text" name="kode_rombel" class="form-control @error('kode_rombel') is-invalid @enderror" value="{{ $item->kode_rombel }}">
                                                 @error('kode_rombel')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

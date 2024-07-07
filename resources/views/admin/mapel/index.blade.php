@@ -60,7 +60,7 @@
                                                 @method('PUT')
                                                 <div class="form-group mb-3">
                                                     <label class="required-label faded-label" for="kode_mapel">Kode Mapel</label>
-                                                    <input type="text" name="kode_mapel"
+                                                    <input readonly type="text" name="kode_mapel"
                                                         class="form-control @error('kode_mapel') is-invalid @enderror" value="{{ $item->kode_mapel }}" placeholder="Masukan kode">
                                                     @error('kode_mapel')
                                                         <span class="invalid-feedback" role="alert">

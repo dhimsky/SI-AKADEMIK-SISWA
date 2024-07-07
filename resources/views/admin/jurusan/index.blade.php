@@ -54,7 +54,7 @@
                                                 @method('PUT')
                                                 <div class="form-group mb-3">
                                                     <label class="required-label faded-label" for="kode_jurusan">Kode Jurusan</label>
-                                                    <input type="text" name="kode_jurusan"
+                                                    <input readonly type="text" name="kode_jurusan"
                                                         class="form-control @error('kode_jurusan') is-invalid @enderror" value="{{ $item->kode_jurusan }}">
                                                     @error('kode_jurusan')
                                                         <span class="invalid-feedback" role="alert">
