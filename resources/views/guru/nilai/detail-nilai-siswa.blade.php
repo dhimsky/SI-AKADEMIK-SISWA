@@ -70,9 +70,18 @@
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target=".editNilai{{ $n->id }}">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
+
+                                @php
+                                    $kodeIdentitas = Auth::user()->kode_identitas;
+                                    $guru = \App\Models\Guru::where('nip', $kodeIdentitas)->first();
+                                @endphp
+
+                                @if ($guru && $guru->mapel_kode == $n->mapel_kode)
+                                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target=".editNilai{{ $n->id }}">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                @endif
+                                
                                 <form id="deleteForm{{ $n->id }}" action="{{ route('guru.siswa-nilai-delete', ['id' => $n->id]) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

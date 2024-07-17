@@ -129,4 +129,6 @@
             </div>
         </div>
     </div>
+    @include('validasi.validasi-edit')
+@include('validasi.notifikasi-berhasil')
 @endsection
