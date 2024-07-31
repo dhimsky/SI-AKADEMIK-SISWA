@@ -10,6 +10,6 @@ class DashboardController extends Controller
 {
     public function index(){
         $siswa = Siswa::count();
-        return view('Guru.dashboard.index', compact('siswa'));
+        return view('guru.dashboard.index', compact('siswa'));
     }
 }

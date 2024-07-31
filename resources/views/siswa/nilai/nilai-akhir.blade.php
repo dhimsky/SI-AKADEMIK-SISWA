@@ -5,7 +5,7 @@
     <div class="ibox">
         <div class="ibox-body">
                 <div class="col-md-12 mb-3 text-right">
-                    <form action="" target="_blank" method="post" class="form-inline d-inline">
+                    <form action="{{ route('siswa.nilaiakhir_pdf', [Auth()->user()->kode_identitas]) }}" target="_blank" method="post" class="form-inline d-inline">
                         @csrf
                         <select id="semesterFilter" name="semester" class="form-control">
                             <option selected value="">Semua Semester</option>

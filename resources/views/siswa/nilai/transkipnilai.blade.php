@@ -5,7 +5,7 @@
         <div class="ibox">
             <div class="ibox-head col-md-12">
                     <div class="col-md-12 text-right">
-                        <a href="" class="btn btn-warning" target="_blank"><i
+                        <a href="{{ route('siswa.transkip_pdf', ['id' => Auth()->user()->kode_identitas]) }}" class="btn btn-warning" target="_blank"><i
                             class="fa fa-print font-14"></i> Cetak</a>
                     </div>
             </div>

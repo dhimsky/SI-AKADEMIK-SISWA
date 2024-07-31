@@ -173,6 +173,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard', [SiswaDashboardController::class, 'index'])->name('dashboard');
         // ============================== NILAI ===========================================
         Route::get('nilai-akhir', [SiswaNilaiController::class, 'nilai_akhir'])->name('nilai-akhir');
+        Route::post('/{id}/nilaiakhir-pdf', [NilaiAkhirPdfController::class, 'generatePdf'])->name('nilaiakhir_pdf');
         // ============================== ABSENSI ===========================================
         Route::get('absensi', [SiswaAbsensiController::class, 'index'])->name('absensi');
         // ============================== TRANKIP NILAI ===========================================
